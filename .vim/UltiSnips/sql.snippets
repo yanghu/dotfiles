@@ -1,0 +1,38 @@
+snippet sqlconstraint "SQL Foreign Key Constraing" b
+    CONSTRAINT \`fk_${1:constraing_name}\`
+        FOREIGN KEY (\`${2:column_name}\`)
+        REFERENCES \`${3:table_name}\` (\`${4:source_field}\`),
+endsnippet
+
+
+snippet sqlcol "SQL column (sqlcol)" b
+\`${1:name}\` ${2:VARCHAR(255)} ${3:NOT NULL} COMMENT '${4:comment}',  -- ${5:extra comments} 
+endsnippet
+
+snippet sqldroptbl "Drop Sql table if exists" b
+DROP Table if exists \`${0:table_name}\` ;
+endsnippet
+
+snippet sql_tablecomment "comment for a table" b
+-- ------------------------------------------------------------
+-- Table \`${0:table}\`
+-- ------------------------------------------------------------
+endsnippet
+
+snippet sqltbl "Insert a table" b
+-- ------------------------------------------------------------
+-- Table \`${1:table}\`
+-- ------------------------------------------------------------
+DROP Table if exists \`$1\` ;
+
+create table \`$1\` (
+    \`id\` INT not null AUTO_INCREMENT COMMENT 'ID',
+    ${2:column},
+	PRIMARY KEY(\`id\`),
+)
+ENGINE = InnoDB
+${3:AUTO_INCREMENT = 2}
+DEFAULT CHARACTER SET = utf8;
+
+
+endsnippet
