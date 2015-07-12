@@ -76,5 +76,8 @@ git submodule foreach git submodule init
 git submodule foreach git submodule update
 
 
+touch ~/.vimrc
 mv ~/.vimrc ~/.vimrc.orig
 cp .vimrc ~/.vimrc
+mkdir -p ~/.vim/UltiSnips/
+cp ./.vim/UltiSnips/* ~/.vim/UltiSnips/
