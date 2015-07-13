@@ -28,7 +28,7 @@ DROP Table if exists \`$1\` ;
 create table \`$1\` (
     \`id\` INT not null AUTO_INCREMENT COMMENT 'ID',
     ${2:column},
-	PRIMARY KEY(\`id\`),
+	PRIMARY KEY(\`id\`)
 )
 ENGINE = InnoDB
 ${3:AUTO_INCREMENT = 2}

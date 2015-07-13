@@ -1,0 +1,61 @@
+snippet info "Creation info" b
+<?php
+/**
+*User: `echo $USER`
+*Date: `date +%m`/`date +%d`/`date +%y`
+*Time: `!v strftime("%c")`
+*/
+endsnippet
+
+
+snippet fixt "Fixture file" b
+namespace tests\codeception\common\fixtures;
+
+use yii\test\ActiveFixture;
+
+/**
+ * ${1:MyModel} fixture
+ */
+class $1Fixture extends ActiveFixture
+{
+    public $modelClass = 'backend\models\\$1';
+}
+endsnippet
+
+snippet testcase "Php test case" b
+namespace ${1:tests\codeception\backend\unit};
+
+// 
+use ${2:tests\codeception\common\fixtures\\${3:My}Fixture};
+use Yii;
+
+class $3Test extends TestCase
+{
+	use \Codeception\Specify;
+
+}
+
+endsnippet
+
+snippet funcfix "Fixtures function" b
+
+//load fixture $1
+public function fixtures()
+{
+	return [
+		'${1:model}' => [
+			'class'=> ${1/\w+\s*/\u$0/}Fixture::className(),
+			'dataFile' => '@tests/codeception/common/fixtures/data/$1.php'
+		],
+	];
+}
+endsnippet
+
+snippet specify "Test Specify block" b
+$this->specify('${1:To verify foo, we need to do this}', function() use (${2:$model}) {
+	codecept_debug("start testing ${3:foo}...");
+	${4}
+	$this->assertTrue(${5:$model->the_right_thing}, '${6:oops, model doesn't work}');
+});
+codecept_debug("end testing $3...");
+endsnippet

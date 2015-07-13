@@ -66,6 +66,7 @@ git clone https://github.com/sjl/gundo.vim
 git clone https://github.com/xolox/vim-easytags
 git clone https://github.com/xolox/vim-misc
 
+git clone https://github.com/scrooloose/nerdtree.git
 git clone https://github.com/klen/python-mode.git
 
 
