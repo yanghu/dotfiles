@@ -76,9 +76,15 @@ git submodule update
 git submodule foreach git submodule init
 git submodule foreach git submodule update
 
-
 touch ~/.vimrc
 mv ~/.vimrc ~/.vimrc.orig
-cp .vimrc ~/.vimrc
-mkdir -p ~/.vim/UltiSnips/
-cp ./.vim/UltiSnips/* ~/.vim/UltiSnips/
+ln -s `pwd`/.vimrc ~/.vimrc
+#cp .vimrc ~/.vimrc
+#mkdir -p ~/.vim/UltiSnips/
+#cp ./.vim/UltiSnips/* ~/.vim/UltiSnips/
+ln -s `pwd`/.vim/UltiSnips ~/.vim/UltiSnips
+
+# Install powerline fonts fir airline
+mkdir -p ~/tmp/
+git clone https://github.com/powerline/fonts.git ~/tmp/powerline_fonts
+~/tmp/powerline_fonts/install.sh
