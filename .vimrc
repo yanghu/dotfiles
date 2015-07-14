@@ -1,4 +1,4 @@
-let g:pathogen_disabled = ["vim-easytags"]
+let g:pathogen_disabled = ["YouCompleteMe"]
 execute pathogen#infect()
 execute pathogen#helptags()
 syntax on
@@ -12,14 +12,8 @@ set number
 set foldmethod=indent
 set foldlevel=99
 
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-    " Use filetype detection and file-based automatic indenting.
-    filetype plugin indent on
-
-    " Use actual tab chars in Makefiles.
-    autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
-endif
+" Use actual tab chars in Makefiles.
+autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
 
 " For everything else, use a tab width of 4 space chars.
 set tabstop=4       " The width of a TAB is set to 4.
@@ -67,6 +61,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
@@ -78,15 +73,14 @@ let g:ctrlp_custom_ignore = {
 \ 'link': 'some_bad_symbolic_links',
 \ }
 
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 
 nnoremap <C-]> g<C-]>
-let g:easytags_on_cursorhold = 0
-let g:easytags_auto_highlight = 0
+"let g:easytags_on_cursorhold = 0
+"let g:easytags_auto_highlight = 0
 
 if &shell =~# 'bin/fish$'
     set shell=/bin/sh

@@ -1,0 +1,11 @@
+set -x PYTHON_PATH ~/bin/python_files
+#for docker
+set -x DOCKER_HOST tcp://192.168.59.105:2375
+#set -x DOCKER_CERT_PATH /Users/huey/.boot2docker/certs/boot2docker-vm
+set -e DOCKER_TLS_VERIFY
+set -e DOCKER_CERT_PATH
+#set -x DOCKER_TLS_VERIFY 1
+
+function fish_title
+echo huey@(hostname)
+end
