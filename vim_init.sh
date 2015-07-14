@@ -19,7 +19,7 @@ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 cd ~/.vim/bundle
 #sensible
-git clone git://github.com/tpope/vim-sensible.git
+git clone https://github.com/tpope/vim-sensible.git
 #numbers.vim
 git clone https://github.com/myusuf3/numbers.vim
 #airline sattus bar. Remember to run :Helptags to generate help tags
@@ -32,9 +32,9 @@ vim -u NONE -c "helptags vim-fugitive/doc" -c q
 git clone https://github.com/airblade/vim-gitgutter
 git clone https://github.com/majutsushi/tagbar.git
 #color
-git clone git://github.com/altercation/vim-colors-solarized.git
+git clone https://github.com/altercation/vim-colors-solarized.git
 #inde guides. default toggle mapping: <leader>ig
-git clone git://github.com/nathanaelkane/vim-indent-guides.git
+git clone https://github.com/nathanaelkane/vim-indent-guides.git
 #syntax check. run :SyntasticInfo to see running checkers.
 # with "unimpared", use "[l" and "]l" to go through errors
 #lclose to close it 
@@ -53,13 +53,13 @@ git submodule update --init --recursive
 cd ~/.vim/bundle
 git clone https://github.com/SirVer/ultisnips
 git clone https://github.com/honza/vim-snippets
-git clone git://github.com/tpope/vim-surround.git
+git clone https://github.com/tpope/vim-surround.git
 git clone https://github.com/Raimondi/delimitMate
 
 git clone https://github.com/scrooloose/nerdcommenter
 vim -u NONE -c "helptags nerdcommenter/doc" -c q
 
-git clone git://github.com/tpope/vim-unimpaired.git
+git clone https://github.com/tpope/vim-unimpaired.git
 
 git clone https://github.com/sjl/gundo.vim
 
@@ -76,9 +76,15 @@ git submodule update
 git submodule foreach git submodule init
 git submodule foreach git submodule update
 
-
 touch ~/.vimrc
 mv ~/.vimrc ~/.vimrc.orig
-cp .vimrc ~/.vimrc
-mkdir -p ~/.vim/UltiSnips/
-cp ./.vim/UltiSnips/* ~/.vim/UltiSnips/
+ln -s `pwd`/.vimrc ~/.vimrc
+#cp .vimrc ~/.vimrc
+#mkdir -p ~/.vim/UltiSnips/
+#cp ./.vim/UltiSnips/* ~/.vim/UltiSnips/
+ln -s `pwd`/.vim/UltiSnips ~/.vim/UltiSnips
+
+# Install powerline fonts fir airline
+mkdir -p ~/tmp/
+git clone https://github.com/powerline/fonts.git ~/tmp/powerline_fonts
+~/tmp/powerline_fonts/install.sh
