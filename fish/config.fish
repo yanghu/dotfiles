@@ -21,7 +21,10 @@ set -e DOCKER_TLS_VERIFY
 set -e DOCKER_CERT_PATH
 #set -x DOCKER_TLS_VERIFY 1
 
+#for some vim plugin
 set -x DYLD_FORCE_FLAT_NAMESPACE 1
+
+set -x GOPATH /Users/huey/Repos/golang
 
 function fish_title
 echo huey@(hostname)

@@ -1,4 +1,4 @@
-let g:pathogen_disabled = ["YouCompleteMe"]
+"let g:pathogen_disabled = ["YouCompleteMe"]
 execute pathogen#infect()
 execute pathogen#helptags()
 syntax on
@@ -64,14 +64,28 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
 let g:ctrlp_working_path_mode = 'ra'
+"mac/ios
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  
+"windows:
+"set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
 \ 'dir':  '\v[\/]\.(git|hg|svn)$',
 \ 'file': '\v\.(exe|so|dll)$',
 \ 'link': 'some_bad_symbolic_links',
 \ }
+
+" use git's index if possible.
+let g:ctrlp_user_command = {
+            \ 'types': {
+  \ 1: ['.git', 'cd %s && git ls-files'],
+  \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+  \ },
+  \ 'fallback': 'find %s -type f' 
+  \ }
+
+"let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+"let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -86,3 +100,9 @@ if &shell =~# 'bin/fish$'
     set shell=/bin/sh
 endif
 
+nnoremap <F2> :NERDTreeToggle<CR>
+
+" ,cd to change cwd to current folder
+nnoremap ,cd :lcd %:p:h<CR>:pwd<CR>
+
+cnoremap     <C-v> <C-\>esubstitute(getline('.'), '^\s*\(' . escape(substitute(&commentstring, '%s.*$', '', ''), '*') . '\)*\s*:*' , '', '')<CR>

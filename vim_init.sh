@@ -69,6 +69,7 @@ git clone https://github.com/xolox/vim-misc
 git clone https://github.com/scrooloose/nerdtree.git
 git clone https://github.com/klen/python-mode.git
 
+git clone https://github.com/fatih/vim-go
 
 cd ~/.vim
 git submodule init
