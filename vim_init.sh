@@ -56,9 +56,9 @@ git clone https://github.com/honza/vim-snippets
 git clone https://github.com/tpope/vim-surround.git
 git clone https://github.com/Raimondi/delimitMate
 
-git clone https://github.com/scrooloose/nerdcommenter
-vim -u NONE -c "helptags nerdcommenter/doc" -c q
-
+# git clone https://github.com/scrooloose/nerdcommenter
+# vim -u NONE -c "helptags nerdcommenter/doc" -c q
+git clone https://github.com/tpope/vim-commentary.git
 git clone https://github.com/tpope/vim-unimpaired.git
 
 git clone https://github.com/sjl/gundo.vim

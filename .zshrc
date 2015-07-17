@@ -1,6 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/huey/.oh-my-zsh
 
+DEFAULT_USER=huey
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -50,7 +51,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git docker docker-compose)
 
 # User configuration
 
@@ -98,3 +99,59 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias fig="docker-compose"
+
+# copied from .bash_aliases 2001.07.19
+# -------------------------------------------------------------------
+# some alias settings, just for fun
+# -------------------------------------------------------------------
+#alias 'today=calendar -A 0 -f ~/calendar/calendar.mark | sort'
+alias 'today=calendar -A 0 -f /usr/share/calendar/calendar.mark | sort'
+alias 'dus=du -sckx * | sort -nr'
+alias 'adventure=emacs -batch -l dunnet'
+alias 'mailsize=du -hs ~/Library/mail'
+alias 'bk=cd $OLDPWD'
+alias 'ttop=top -ocpu -R -F -s 2 -n30'
+alias lh='ls -a | egrep "^\."'
+
+# -------------------------------------------------------------------
+# Git
+# -------------------------------------------------------------------
+alias ga='git add'
+alias gp='git push'
+alias gl='git log'
+alias gs='git status'
+alias gd='git diff'
+alias gm='git commit -m'
+alias gma='git commit -am'
+alias gb='git branch'
+alias gc='git checkout'
+alias gra='git remote add'
+alias grr='git remote rm'
+alias gpu='git pull'
+alias gcl='git clone'
+alias gta='git tag -a -m'
+alias gf='git reflog'
+
+# -------------------------------------------------------------------
+# Functions ported directly from .bashrc
+# -------------------------------------------------------------------
+# turn hidden files on/off in Finder
+function hiddenOn() { defaults write com.apple.Finder AppleShowAllFiles YES ; }
+function hiddenOff() { defaults write com.apple.Finder AppleShowAllFiles NO ; }
+ 
+# postgres functions
+function psqlstart() { /usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile start ; }
+function psqlstop() { /usr/local/pgsql/bin/pg_ctl stop ; }
+ 
+# view man pages in Preview
+function pman() { ps=`mktemp -t manpageXXXX`.ps ; man -t $@ > "$ps" ; open "$ps" ; }
+
+# myIP address
+function myip() {
+    ifconfig lo0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
+    ifconfig en0 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en0 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en1 | grep 'inet ' | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+    ifconfig en1 | grep 'inet6 ' | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+}
+

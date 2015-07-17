@@ -1,4 +1,4 @@
-"let g:pathogen_disabled = ["YouCompleteMe"]
+"let g:pathogen_disabled = ["nerdcommenter"]
 execute pathogen#infect()
 execute pathogen#helptags()
 syntax on
