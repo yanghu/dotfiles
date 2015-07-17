@@ -65,7 +65,7 @@ let g:airline_powerline_fonts = 1
 
 let g:ctrlp_working_path_mode = 'ra'
 "mac/ios
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc
 "windows:
 "set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
@@ -103,6 +103,7 @@ endif
 "nerdtree bookmark
 autocmd Filetype nerdtree nnoremap <buffer> <leader>b :Bookmark<space>
 let g:NERDTreeShowBookmarks=1
+let NERDTreeIgnore = ['\.pyc$']
 
 nnoremap <F2> :NERDTreeToggle<CR>
 
