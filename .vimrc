@@ -100,6 +100,10 @@ if &shell =~# 'bin/fish$'
     set shell=/bin/sh
 endif
 
+"nerdtree bookmark
+autocmd Filetype nerdtree nnoremap <buffer> <leader>b :Bookmark<space>
+let g:NERDTreeShowBookmarks=1
+
 nnoremap <F2> :NERDTreeToggle<CR>
 
 " ,cd to change cwd to current folder
