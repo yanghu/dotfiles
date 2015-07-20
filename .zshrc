@@ -61,7 +61,7 @@ export
 
 export PYTHON_PATH=~/bin/python_files
 #for docker
-export DOCKER_HOST=tcp://192.168.59.105:2375
+export DOCKER_HOST=tcp://192.168.59.103:2375
 #set -x DOCKER_CERT_PATH /Users/huey/.boot2docker/certs/boot2docker-vm
 unset DOCKER_TLS_VERIFY
 unset DOCKER_CERT_PATH
@@ -81,7 +81,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
 else
-   export EDITOR='mvim'
+   export EDITOR='vim'
 fi
 
 # Compilation flags

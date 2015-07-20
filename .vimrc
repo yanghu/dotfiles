@@ -65,13 +65,13 @@ let g:airline_powerline_fonts = 1
 
 let g:ctrlp_working_path_mode = 'ra'
 "mac/ios
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,.DS_Store,*/.metadata/*
 "windows:
 "set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
-\ 'dir':  '\v[\/]\.(git|hg|svn)$',
-\ 'file': '\v\.(exe|so|dll)$',
+\ 'dir':  '\v[\/]\.(git|hg|svn|metadata)$',
+\ 'file': '\v\.(exe|so|dll|zip|pyc|DS_Store)$',
 \ 'link': 'some_bad_symbolic_links',
 \ }
 
@@ -111,3 +111,10 @@ nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap ,cd :lcd %:p:h<CR>:pwd<CR>
 
 cnoremap     <C-v> <C-\>esubstitute(getline('.'), '^\s*\(' . escape(substitute(&commentstring, '%s.*$', '', ''), '*') . '\)*\s*:*' , '', '')<CR>
+
+"for golang
+au FileType go nmap <leader>r <Plug>(go-run)
+
+
+" close the buffer and keep window
+nnoremap <C-c> :bp\|bd #<CR>
