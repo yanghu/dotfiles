@@ -31,18 +31,13 @@ au FileType python set omnifunc=pythoncomplete#Complete
 
 
 let g:pymode_lint_sort = ['E', 'C', 'I']
-map <F7> :PymodeLint<CR>
 
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
-nnoremap <F3> :NumbersToggle<CR>
-nnoremap <F4> :NumbersOnOff<CR>
 
-nnoremap <F5> :GundoToggle<CR>
-nmap <F8> :TagbarToggle<CR>
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -105,7 +100,6 @@ autocmd Filetype nerdtree nnoremap <buffer> <leader>b :Bookmark<space>
 let g:NERDTreeShowBookmarks=1
 let NERDTreeIgnore = ['\.pyc$']
 
-nnoremap <F2> :NERDTreeToggle<CR>
 
 " ,cd to change cwd to current folder
 nnoremap ,cd :lcd %:p:h<CR>:pwd<CR>
@@ -118,3 +112,8 @@ au FileType go nmap <leader>r <Plug>(go-run)
 
 " close the buffer and keep window
 nnoremap <C-c> :bp\|bd #<CR>
+nnoremap <F2> :NERDTreeToggle<CR>
+nnoremap <F3> ::execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+nnoremap <F5> :GundoToggle<CR>
+map <F7> :PymodeLint<CR>
+nmap <F8> :TagbarToggle<CR>
