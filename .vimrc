@@ -1,4 +1,4 @@
-"let g:pathogen_disabled = ["nerdcommenter"]
+let g:pathogen_disabled = ["flake8-vim"]
 execute pathogen#infect()
 execute pathogen#helptags()
 syntax on
@@ -66,7 +66,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,.DS_Store,*/.metadata/*
 "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
 \ 'dir':  '\v[\/]\.(git|hg|svn|metadata)$',
-\ 'file': '\v\.(exe|so|dll|zip|pyc|DS_Store)$',
+\ 'file': '\v\.(exe|so|dll|zip|pyc|DS_Store|swp)$',
 \ 'link': 'some_bad_symbolic_links',
 \ }
 
@@ -82,8 +82,9 @@ let g:ctrlp_user_command = {
 "let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
 "let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
 
+let g:syntastic_loc_list_height=5
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 
@@ -108,12 +109,17 @@ cnoremap     <C-v> <C-\>esubstitute(getline('.'), '^\s*\(' . escape(substitute(&
 
 "for golang
 au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>t <Plug>(go-test)
+"use [[ and ]] to jump between methods
+au FileType go nmap [[ ?^func <CR>
+au FileType go nmap ]] /^func <CR>
 
 
 " close the buffer and keep window
 nnoremap <C-c> :bp\|bd #<CR>
 nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F3> ::execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+nnoremap <F4> :Errors<CR>
 nnoremap <F5> :GundoToggle<CR>
 map <F7> :PymodeLint<CR>
 nmap <F8> :TagbarToggle<CR>

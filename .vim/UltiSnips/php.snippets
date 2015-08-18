@@ -55,7 +55,7 @@ snippet specify "Test Specify block" b
 $this->specify('${1:To verify foo, we need to do this}', function() use (${2:$model}) {
 	codecept_debug("start testing ${3:foo}...");
 	${4}
-	$this->assertTrue(${5:$model->the_right_thing}, '${6:oops, model doesn't work}');
+	$this->assertTrue(${5:$model->the_right_thing}, '${6:oops, model does not work}');
 });
 codecept_debug("end testing $3...");
 endsnippet
