@@ -108,6 +108,8 @@ nnoremap ,cd :lcd %:p:h<CR>:pwd<CR>
 cnoremap     <C-v> <C-\>esubstitute(getline('.'), '^\s*\(' . escape(substitute(&commentstring, '%s.*$', '', ''), '*') . '\)*\s*:*' , '', '')<CR>
 
 "for golang
+let g:go_fmt_command = "goimports"
+
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>t <Plug>(go-test)
 "use [[ and ]] to jump between methods
