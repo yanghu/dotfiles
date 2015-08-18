@@ -9,7 +9,12 @@
  
 #TODO: install ctags for tagbar
 #http://majutsushi.github.io/tagbar/
-sudo apt-get install ctags
+sudo apt-get install ctags\
+    cmake\
+    python2.7\
+    python-dev\
+    build-essential
+
  
 #install flake8
 sudo pip install flake8
