@@ -47,7 +47,7 @@ git clone https://github.com/scrooloose/syntastic.git
 vim -u NONE -c "helptags syntastic/doc" -c q
 #toggle curser for insert mode
 git clone https://github.com/jszakmeister/vim-togglecursor
-
+git clone https://github.com/ervandew/supertab.git
 git clone https://github.com/Valloric/YouCompleteMe.git
 cd YouCompleteMe
 git submodule update --init --recursive
