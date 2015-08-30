@@ -48,14 +48,6 @@ vim -u NONE -c "helptags syntastic/doc" -c q
 #toggle curser for insert mode
 git clone https://github.com/jszakmeister/vim-togglecursor
 git clone https://github.com/ervandew/supertab.git
-git clone https://github.com/Valloric/YouCompleteMe.git
-cd YouCompleteMe
-git submodule update --init --recursive
-./install.sh --clang-completer --gocode-completer
-#for fish shell, do this
-#cat "set -x DYLD_FORCE_FLAT_NAMESPACE 1" >> ~/.config/fish/config.fish
-
-cd ~/.vim/bundle
 git clone https://github.com/SirVer/ultisnips
 git clone https://github.com/honza/vim-snippets
 git clone https://github.com/tpope/vim-surround.git
@@ -72,9 +64,17 @@ git clone https://github.com/xolox/vim-easytags
 git clone https://github.com/xolox/vim-misc
 
 git clone https://github.com/scrooloose/nerdtree.git
-git clone https://github.com/klen/python-mode.git
 
-git clone https://github.com/fatih/vim-go
+git clone https://github.com/Valloric/YouCompleteMe.git
+cd YouCompleteMe
+git submodule update --init --recursive
+./install.sh --clang-completer --gocode-completer
+#for fish shell, do this
+#cat "set -x DYLD_FORCE_FLAT_NAMESPACE 1" >> ~/.config/fish/config.fish
+
+######## Optional plugins
+# git clone https://github.com/klen/python-mode.git
+# git clone https://github.com/fatih/vim-go
 
 cd ~/.vim
 git submodule init
@@ -90,7 +90,7 @@ ln -s `pwd`/.vimrc ~/.vimrc
 #cp ./.vim/UltiSnips/* ~/.vim/UltiSnips/
 ln -s `pwd`/.vim/UltiSnips ~/.vim/UltiSnips
 
-# Install powerline fonts fir airline
-mkdir -p ~/tmp/
-git clone https://github.com/powerline/fonts.git ~/tmp/powerline_fonts
-~/tmp/powerline_fonts/install.sh
+# Install powerline fonts fir airline (optional)
+# mkdir -p ~/tmp/
+# git clone https://github.com/powerline/fonts.git ~/tmp/powerline_fonts
+# ~/tmp/powerline_fonts/install.sh
