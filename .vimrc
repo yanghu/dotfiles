@@ -125,3 +125,4 @@ nnoremap <F4> :Errors<CR>
 nnoremap <F5> :GundoToggle<CR>
 map <F7> :PymodeLint<CR>
 nmap <F8> :TagbarToggle<CR>
+imap jk <Esc>
