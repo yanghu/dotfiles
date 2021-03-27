@@ -1,43 +1,170 @@
-let g:pathogen_disabled = ["flake8-vim"]
-execute pathogen#infect()
-execute pathogen#helptags()
-syntax on
-filetype on
-filetype plugin indent on
-
-set background=dark
-colorscheme solarized
+let mapleader=","               " Default is \, I prefer ,.
+set backspace=indent,eol,start  " Make backspace sane.
+set backup                      " Be safe.
+set clipboard=unnamed           " Allow vim to use the X clipboard.
+set cursorline                  " Highlight the current line.
+set formatoptions=cqn1j         " See :help fo-table.
+set gdefault                    " Replace globally by default.
+set hidden                      " Allow buffer backgrounding.
+set history=1000                " Remember a lot.
+set hlsearch
+set incsearch                   " Search incrementally as I type.
+set nocompatible
+set noesckeys                   " Removes the annoying delay after ESC
 set number
+set relativenumber number       " Use relative line numbers.
+set scrolloff=3                 " Add top/bottom scroll margins.
+set shell=sh                    " I use fish-shell. Vim shouldn't.
+set showcmd                     " Show the last command.
+set smartcase                   " Be smart about when case sensitivity matters.
+set smarttab                    " Only respect shiftwidth for code indents.
+set splitbelow splitright       " Windows are created in the direction I read.
+set ttyfast lazyredraw          " Make drawing faster.
+set undofile                    " Saves undo history across sessions.
+set viewoptions=cursor,folds    " Save cursor position and folds.
+set visualbell                  " Don't make noise.
+set wildmenu                    " Enhanced completion.
+set wildmode=list:longest       " Act like shell completion.
+set cc=80                       " Marker at 80 chars for reference.
 
 set foldmethod=indent
 set foldlevel=99
+" For everything else, use a tab width of 4 space chars.
+set tabstop=2       " The display width of a TAB is set to 4.
+set shiftwidth=2    " Indents will have a width of 4.
+set softtabstop=2   " Sets the number of columns for a TAB.
+set expandtab       " Expand TABs to spaces.
+
+" Put undo dir in home folder.
+silent !mkdir -p ~/.vim/undodir
+set undodir=~/.vim/undodir
 
 " Use actual tab chars in Makefiles.
 autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
 
-" For everything else, use a tab width of 4 space chars.
-set tabstop=4       " The width of a TAB is set to 4.
-                    " Still it is a \t. It is just that
-                    " Vim will interpret it to be having
-                    " a width of 4.
-set shiftwidth=4    " Indents will have a width of 4.
-set softtabstop=4   " Sets the number of columns for a TAB.
-set expandtab       " Expand TABs to spaces.
+" inoremap <CR> --- {{{2
+" 1. when pumvisible & entry selected, which is a snippet, <CR> triggers snippet expansion,
+" 2. when pumvisible & entry selected, which is not a snippet, <CR> only closes pum
+" 3. when pumvisible & no entry selected, <CR> closes pum and inserts newline
+" 4. when pum not visible, <CR> inserts only a newline
+function! s:ExpandSnippetOrClosePumOrReturnNewline()
+    if pumvisible()
+        if !empty(v:completed_item)
+            return "\<C-y>"
+        else
+            return "\<C-y>\<CR>"
+        endif
+    else
+        return "\<CR>"
+    endif
+endfunction
+" Enter starts a new line even when popup is open, then continue with
+" completion prompt. 
 
+" close the buffer and keep window
+nnoremap <C-c> :bp\|bd #<CR>
+nnoremap <F3> ::execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+nnoremap <F4> :Errors<CR>
+nnoremap <F5> :GundoToggle<CR>
+map <F7> :PymodeLint<CR>
+nmap <F8> :TagbarToggle<CR>
+imap jk <Esc>
 
-au FileType python set omnifunc=pythoncomplete#Complete
+nmap <space> :<c-u>noh<cr>:<backspace>
+nnoremap <Leader>e :Rex<CR>
+nnoremap XX :<c-u>update<CR> 
+" Quickly toggle paste mode using ,p
+nnoremap <leader>p :se invpaste paste?<return>
+" %% in command line auto expand to folder of current buffer.(%:h)
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+" Coc completion mappings
+inoremap <silent><expr> <leader>a coc#refresh()
+inoremap <silent><expr> <tab> pumvisible() ? coc#_select_confirm() : "\<tab>"
+inoremap <expr> <c-j>   pumvisible() ? "\<C-n>" : "\<c-k>"
+inoremap <expr> <c-k> pumvisible() ? "\<C-p>" : "\<c-j>"
+inoremap <silent> <CR> <C-r>=<SID>ExpandSnippetOrClosePumOrReturnNewline()<CR>
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" CocList mappings, prefixed with ,l
+nnoremap <Leader>f :CocList buffers<CR>     " ,f to open buffers
+nnoremap <Leader>lf :CocList files<CR>     " ,lf to open from cwd
+" ,lc to open files from the current buffer's folder.
+nnoremap <expr> <Leader>lc ":CocList files " . expand('%:h')
+" outline with fuzzy search, preview. Insert mode mappings: 
+" c-s: switch matcher mode(strict/fuzzy/regex)
+" c-q: add to quickfix list
+" c-p: preview window
+" c-v: vertical split
+" c-o: to normal mode.
+" c-f/c-b: scroll window
+" In Normal mode:
+" p: preview,  t/d/s/v: tabe/drop/split/vsplit
+" q: Add to quickfix
+" ?: show help
+" c-e/c-y: scroll preview window.
+" c-o: jump to original window
+nnoremap <Leader>lo :CocList --auto-preview outline<CR>
+" Persistent outline window. May need manual refresh with c-l in normal mode.
+" Use c-w H/L to move outline window to the side and resize.
+nnoremap <Leader>lO :CocList --auto-preview --no-quit outline<CR>
+nnoremap <Leader>lm :CocList mru<CR>         " mru
+nnoremap <Leader>lq :CocList quickfix<CR>         " quickfix
+nnoremap <Leader>ll :CocList 
+
+"Install codefmt
+
+" Auto switch relative number on entering normal mode.
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+:augroup END
+
+"au FileType python set omnifunc=pythoncomplete#Complete
 "let g:SuperTabDefaultCompletionType = \"context\"
 "set completeopt=menuone,longest,preview
 
 
+call plug#begin('~/.vim/plugged')
+Plug 'vim-airline/vim-airline'
+Plug 'dense-analysis/ale'
+Plug 'neoclide/coc.nvim'
+Plug 'scrooloose/syntastic'
+" ... more plugins and their configurations can be added here.
+call plug#end()
+
+" All of your plugins must be added before the following line.
+" See go/vim-plugin-manager if you need help picking a plugin manager and
+" setting it up.
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+let g:pathogen_disabled = ["flake8-vim"]
+execute pathogen#infect()
+execute pathogen#helptags()
+
+" coc extensions
+let g:coc_global_extensions = ['coc-lists']
+
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#enabled = 1
+
 let g:pymode_lint_sort = ['E', 'C', 'I']
 
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
+set background=dark
+colorscheme solarized
 
-
+syntax on
+filetype plugin indent on
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -53,10 +180,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 
 let g:UltiSnipsEditSplit="vertical"
-
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
 
 let g:ctrlp_working_path_mode = 'ra'
 "mac/ios
@@ -92,20 +215,8 @@ nnoremap <C-]> g<C-]>
 "let g:easytags_on_cursorhold = 0
 "let g:easytags_auto_highlight = 0
 
-if &shell =~# 'bin/fish$'
-    set shell=/bin/sh
-endif
-
-"nerdtree bookmark
-autocmd Filetype nerdtree nnoremap <buffer> <leader>b :Bookmark<space>
-let g:NERDTreeShowBookmarks=1
-let NERDTreeIgnore = ['\.pyc$']
-
-
 " ,cd to change cwd to current folder
 nnoremap ,cd :lcd %:p:h<CR>:pwd<CR>
-
-cnoremap     <C-v> <C-\>esubstitute(getline('.'), '^\s*\(' . escape(substitute(&commentstring, '%s.*$', '', ''), '*') . '\)*\s*:*' , '', '')<CR>
 
 "for golang
 let g:go_fmt_command = "goimports"
@@ -115,14 +226,3 @@ au FileType go nmap <leader>t <Plug>(go-test)
 "use [[ and ]] to jump between methods
 au FileType go nmap [[ ?^func <CR>
 au FileType go nmap ]] /^func <CR>
-
-
-" close the buffer and keep window
-nnoremap <C-c> :bp\|bd #<CR>
-nnoremap <F2> :NERDTreeToggle<CR>
-nnoremap <F3> ::execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
-nnoremap <F4> :Errors<CR>
-nnoremap <F5> :GundoToggle<CR>
-map <F7> :PymodeLint<CR>
-nmap <F8> :TagbarToggle<CR>
-imap jk <Esc>
