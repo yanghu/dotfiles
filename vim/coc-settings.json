@@ -1,0 +1,43 @@
+{
+  "languageserver": {
+    "ciderlsp": {
+      "command": "/google/bin/releases/cider/ciderlsp/ciderlsp",
+      "args": [
+        "--tooltag=coc-nvim",
+        "--noforward_sync_responses"
+      ],
+      "filetypes": [
+        "borg",
+        "c",
+        "cpp",
+        "go",
+        "java",
+        "proto",
+        "python",
+        "textproto"
+      ]
+    }
+  },
+  "suggest": {
+    "maxCompleteItemCount": 15,
+    "minTriggerInputLength": 1,
+    "lowPrioritySourceLimit": 5,
+    "removeDuplicateItems": true
+  },
+  "list":{
+    "previewSplitRight": true,
+    "insertMappings": {
+      "<C-p>": "do:previewtoggle",
+      "<C-v>": "action:vsplit",
+      "<C-q>": "action:quickfix"
+    },
+    "normalMappings": {
+      "v": "action:vsplit",
+      "q": "action:quickfix"
+    },
+    "source": {
+      "files.excludePatterns": ["**/.git/**"]
+    }
+  }
+}
+

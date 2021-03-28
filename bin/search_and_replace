@@ -1,0 +1,99 @@
+#! /bin/bash
+
+# sed inline files faster by first grepping for the replacement string
+# DISCLAIMER: this script doesn't play well with escaped strings or regex
+
+grep_cmd='grep -l'
+sed_delim='#'
+
+usage()
+{
+    echo "$0 usage:"
+    echo "-a search string (required)"
+    echo "-b replace string (required)"
+    echo "-t file/dir (required)"
+    echo "-r act recursively if dir provided"
+    echo "-c grep with the C language (ASCII only)"
+    echo "-d a specific delimiter to be used by sed"
+    exit 1
+}
+
+replace_in_file()
+{
+    echo "replacing $search with $replace in $target"
+    sed -i "s$sed_delim$search$sed_delim$replace$sed_delim""g" "$target"
+}
+
+validate_input()
+{
+    search=$1
+    replace=$2
+    target=$3
+    if [ ! -n "$search" ] || [ ! -n "$replace" ] || [ ! -n "$target" ]; then
+        usage
+    fi
+
+    if echo "$search$replace" | grep "$sed_delim" > /dev/null; then
+        echo "search or replace string contains default sed_delim=$sed_delim; please use -d to specify a different delimiter; you cannot escape"
+        exit 1
+    fi
+}
+
+replace_in_dir()
+{
+    if ! ls -A "$target" > /dev/null; then
+        echo "no files found in dir=$target"
+        exit
+    fi
+
+    grep_results=$(eval "$grep_cmd" "\"$search\"" "$target"/* 2> /dev/null)
+
+    if [ "$grep_results" = '' ]; then
+        echo "search string=$search not found in dir=$target"
+        exit
+    fi
+
+    printf "replacing %s with %s in: \n%s\n" "$search" "$replace" "$grep_results"
+    echo "$grep_results" | xargs sed -i "s$sed_delim$search$sed_delim$replace$sed_delim""g"
+}
+
+while getopts "d:a:b:t:rch" o; do
+    case "${o}" in
+        a)
+            search=${OPTARG}
+            ;;
+        b)
+            replace=${OPTARG}
+            ;;
+        t)
+            target=$(readlink -f "${OPTARG}")
+            ;;
+        r)
+            grep_cmd="$grep_cmd""r"
+            echo "will search recursively"
+            ;;
+        c)
+            grep_cmd="LANG=C $grep_cmd"
+            echo "will search for ASCII only"
+            ;;
+        d)
+            sed_delim=${OPTARG}
+            echo "will use $sed_delim as sed delimiter"
+            ;;
+        *)
+            usage
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+validate_input "$search" "$replace" "$target"
+
+if [ -f "$target" ]; then
+    replace_in_file
+elif [ -d "$target" ]; then
+    replace_in_dir
+else
+    usage
+fi
+

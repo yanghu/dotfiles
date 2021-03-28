@@ -1,0 +1,9 @@
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot
+[submodule "fonts"]
+	path = fonts
+	url = https://github.com/powerline/fonts.git
+[submodule "vim/pack/themes/opt/solarized8"]
+	path = vim/pack/themes/opt/solarized8
+	url = https://github.com/lifepillar/vim-solarized8.git

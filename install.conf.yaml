@@ -1,0 +1,39 @@
+- clean: ['~']
+
+- link:
+  ~/.dotfiles: ''
+  ~/bin: bin/
+  ~/.clang-format: clang-format
+  ~/.tmux.conf: tmux.conf
+  ~/.tmux: tmux
+  ~/.vim:
+          force: true
+          path: vim/
+  ~/.vimrc: vimrc
+  ~/.config/nvim:
+          force: true
+          create: true
+          path: vim/
+  ~/.config/nvim/init.vim:
+          create: true
+          path: vimrc
+  ~/.vimrc_minimal: vimrc_minimal
+  ~/.zshrc: zshrc
+  ~/.zsh: zsh/
+  ~/.bash: bash/
+  ~/.bashrc:
+          force: true
+          path: bashrc
+
+- shell:
+  - [git submodule update --init --recursive, Updating submodules]
+  - command: ./scripts/dependency_install.sh
+    stdin: true
+    stdout: true
+    stderr: true
+  - command: ./bin/uu
+    stdin: true
+    stdout: true
+    stderr: true
+
+
