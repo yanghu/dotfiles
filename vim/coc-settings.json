@@ -1,24 +1,4 @@
 {
-  "suggest": {
-    "maxCompleteItemCount": 15,
-    "minTriggerInputLength": 1,
-    "lowPrioritySourceLimit": 5,
-    "removeDuplicateItems": true
-  },
-  "list":{
-    "previewSplitRight": true,
-    "insertMappings": {
-      "<C-p>": "do:previewtoggle",
-      "<C-v>": "action:vsplit",
-      "<C-q>": "action:quickfix"
-    },
-    "normalMappings": {
-      "v": "action:vsplit",
-      "q": "action:quickfix"
-    },
-    "source": {
-      "files.excludePatterns": ["**/.git/**"]
-    }
-  }
+  "clangd.path": "/home/huyang/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd"
 }
 

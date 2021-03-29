@@ -41,7 +41,38 @@ let g:ale_linters={
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
 " coc extensions
-let g:coc_global_extensions = ['coc-lists']
+if g:platform == "Linux" && !AtWork()
+  let g:coc_global_extensions = ['coc-lists', 'coc-clangd']
+elseif AtWork()
+  let g:coc_global_extensions = ['coc-lists']
+endif
+" Common coc user config for personal and work profiles.
+" Additional ones can be added by calling 
+" let g:coc_user_config = extend(g:coc_user_config, another_dict)
+let g:coc_user_config = {
+  \  "suggest": {
+  \    "maxCompleteItemCount": 15,
+  \    "minTriggerInputLength": 1,
+  \    "lowPrioritySourceLimit": 5,
+  \    "removeDuplicateItems": v:true
+  \  },
+  \  "list":{
+  \    "previewSplitRight": v:true,
+  \    "insertMappings": {
+  \      "<C-p>": "do:previewtoggle",
+  \      "<C-v>": "action:vsplit",
+  \      "<C-q>": "action:quickfix"
+  \    },
+  \    "normalMappings": {
+  \      "v": "action:vsplit",
+  \      "q": "action:quickfix"
+  \    },
+  \    "source": {
+  \      "files.excludePatterns": ["**/.git/**"]
+  \    }
+  \  }
+  \}
+
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#ale#enabled = 1

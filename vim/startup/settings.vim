@@ -1,6 +1,6 @@
 set nocompatible
 set backup                      " Be safe.
-set formatoptions=cqn1j         " See :help fo-table.
+set formatoptions=crqn1j         " See :help fo-table.
 set history=1000                " Remember a lot.
 set shell=sh                    " I use fish-shell. Vim shouldn't.
 set showcmd                     " Show the last command.
