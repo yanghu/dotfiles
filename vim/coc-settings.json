@@ -1,6 +1,4 @@
 {
-  "languageserver": {
-  },
   "suggest": {
     "maxCompleteItemCount": 15,
     "minTriggerInputLength": 1,

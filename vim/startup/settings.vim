@@ -1,7 +1,7 @@
+set nocompatible
 set backup                      " Be safe.
 set formatoptions=cqn1j         " See :help fo-table.
 set history=1000                " Remember a lot.
-set noesckeys                   " Removes the annoying delay after ESC
 set shell=sh                    " I use fish-shell. Vim shouldn't.
 set showcmd                     " Show the last command.
 set viewoptions=cursor,folds    " Save cursor position and folds.
@@ -9,7 +9,7 @@ set viewoptions=cursor,folds    " Save cursor position and folds.
 "" ============================================================================
 ""                                  Globals
 "" ============================================================================
-set nocompatible
+set noesckeys                   " Removes the annoying delay after ESC
 "" encoding
 scriptencoding utf-8
 set encoding=utf-8
@@ -224,10 +224,6 @@ autocmd FileType netrw setlocal nolist colorcolumn=
 
 " equalize splits when window resized
 autocmd VimResized * exe "normal! \<c-w>="
-
-" Set cursor to block/i-beam when in non-insert/insert modes.
-autocmd InsertLeave * silent exec "! echo -ne '\e[0 q'"
-autocmd InsertEnter * silent exec "! echo -ne '\e[6 q'"
 
 " Auto switch relative number on entering normal mode.
 :augroup numbertoggle
