@@ -21,10 +21,10 @@
   ~/.oh-my-zsh: zsh/ohmyzsh
   ~/.zshrc: zshrc
   ~/.zsh: zsh/
-  ~/.bash: bash/
-  ~/.bashrc:
-          force: true
-          path: bashrc
+  #~/.bash: bash/
+  #~/.bashrc:
+  #        force: true
+  #        path: bashrc
 
 - shell:
   - [git submodule update --init --recursive, Updating submodules]
