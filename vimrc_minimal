@@ -1,0 +1,78 @@
+" Welcome to Vim (http://go/vim).
+let mapleader=","               " Default is \, I prefer ,.
+set backspace=indent,eol,start  " Make backspace sane.
+set backup                      " Be safe.
+set clipboard=unnamed           " Allow vim to use the X clipboard.
+set cursorline                  " Highlight the current line.
+set formatoptions=cqn1j         " See :help fo-table.
+set gdefault                    " Replace globally by default.
+set hidden                      " Allow buffer backgrounding.
+set history=1000                " Remember a lot.
+set hlsearch
+set incsearch                   " Search incrementally as I type.
+set nocompatible
+set number
+set relativenumber number       " Use relative line numbers.
+set scrolloff=3                 " Add top/bottom scroll margins.
+set shell=sh                    " I use fish-shell. Vim shouldn't.
+set showcmd                     " Show the last command.
+set smartcase                   " Be smart about when case sensitivity matters.
+set smarttab                    " Only respect shiftwidth for code indents.
+set splitbelow splitright       " Windows are created in the direction I read.
+set ttyfast lazyredraw          " Make drawing faster.
+set undofile                    " Saves undo history across sessions.
+set viewoptions=cursor,folds    " Save cursor position and folds.
+set visualbell                  " Don't make noise.
+set wildmenu                    " Enhanced completion.
+set wildmode=list:longest       " Act like shell completion.
+set cc=80                       " Marker at 80 chars for reference.
+
+call plug#begin('~/.vim/plugged')
+Plug 'vim-airline/vim-airline'
+call plug#end()
+
+" All of your plugins must be added before the following line.
+" See go/vim-plugin-manager if you need help picking a plugin manager and
+" setting it up.
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" ****************************************************************************
+" Solarized
+" ****************************************************************************
+" Tell VIM that this terminal supports the 256-color pallette
+set t_Co=256
+let g:solarized_termcolors=256
+set background=dark
+colorscheme solarized8
+" easier window movement
+imap <c-j> <c-w>j
+imap <c-k> <c-w>k
+imap <c-h> <c-w>h
+imap <c-l> <c-w>l
+" Clear last search highlighting
+nmap <Space> :<c-u>noh<cr>:<backspace>
+nnoremap XX :<c-u>update<CR> 
+
+"set termguicolors
+"let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#enabled = 1
+
+" Enable file type based indent configuration and syntax highlighting.
+" Note that when code is pasted via the terminal, vim by default does not detect
+" that the code is pasted (as opposed to when using vim's paste mappings), which
+" leads to incorrect indentation when indent mode is on.
+" - enter insert mode with paste (https://github.com/tpope/vim-unimpaired)
+" - auto-detect pasting (https://github.com/ConradIrwin/vim-bracketed-paste)
+set timeoutlen=700
+
+filetype plugin indent on
+syntax on

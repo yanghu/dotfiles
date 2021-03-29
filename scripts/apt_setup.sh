@@ -11,6 +11,8 @@ sudo apt-get install \
   git \
   golang \
   htop \
+  nodejs \
+  npm \
   perl \
   python-dev \
   python3-dev \
