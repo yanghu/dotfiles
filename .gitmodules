@@ -19,3 +19,9 @@
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "zsh/omz-custom/plugins/alias-tips"]
+	path = zsh/omz-custom/plugins/alias-tips
+	url = https://github.com/djui/alias-tips.git
+[submodule "zsh/omz-custom/plugins/zsh-completions"]
+	path = zsh/omz-custom/plugins/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions
