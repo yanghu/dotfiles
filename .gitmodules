@@ -16,3 +16,6 @@
 [submodule "zsh/zsh-async"]
 	path = zsh/zsh-async
 	url = https://github.com/mafredri/zsh-async.git
+[submodule "tmux/plugins/tpm"]
+	path = tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
