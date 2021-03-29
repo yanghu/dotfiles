@@ -8,6 +8,9 @@ cmap w!! w !sudo tee > /dev/null %
 let mapleader=","
 imap jk <Esc>
 
+" Avoid going to ex mode
+nmap Q <Nop>
+
 "" ============================================================================
 ""                          Motion and Editing
 "" ============================================================================

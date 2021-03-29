@@ -2,7 +2,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'dense-analysis/ale'     " Syntax cheching.
-Plug 'neoclide/coc.nvim'      " Auto complete
+Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}      " Auto complete
 Plug 'easymotion/vim-easymotion'                          " I get around round round round
 Plug 'haya14busa/vim-poweryank'                           " yank over SSH
 Plug 'michaeljsmith/vim-indent-object'                    " indentation-level text objects (ai/I, ii/I)
