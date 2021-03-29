@@ -2,13 +2,14 @@
 ##                                 Settings
 ## ============================================================================
 # Vim mode
-#bindkey -v
+# bindkey -v
 
 bindkey '^r' history-incremental-search-backward
 bindkey -M "vicmd" 'k' history-substring-search-up
 bindkey -M "vicmd" 'j' history-substring-search-down
 
-# Run `bindkey -l` to see a list of modes, and `bindkey -M foo` to see a list of commands active in mode foo
+# Run `bindkey -l` to see a list of modes, and `bindkey -M foo` to see a list 
+# of commands active in mode foo
 # Move to vim escape mode
 bindkey -M "viins" kj vi-cmd-mode
 bindkey -M "viins" kk vi-cmd-mode
