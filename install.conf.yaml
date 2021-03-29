@@ -19,6 +19,10 @@
       path: vimrc
     ~/.vimrc_minimal: vimrc_minimal
     ~/.oh-my-zsh: zsh/ohmyzsh
+    ~/.oh-my-zsh/custom/plugins:
+      create: true
+      force: true
+      path: zsh/omz-custom/plugins
     ~/.zshrc: zshrc
     ~/.zsh: zsh/
     #~/.bash: bash/
