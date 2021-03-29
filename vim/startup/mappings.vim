@@ -47,8 +47,8 @@ au FileType go nmap ]] /^func <CR>
 " First unmap ultisnips mappings otherwise it conflicts with coc
 let g:UltiSnipsExpandTrigger = "<NUL>"
 let g:UltiSnipsListSnippets = "<NUL>"
-let g:UltiSnipsJumpForwardTrigger = "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
+let g:UltiSnipsJumpForwardTrigger = "<NUL>"
+let g:UltiSnipsJumpBackwardTrigger = "<NUL>"
 " 1. when pumvisible & entry selected, which is a snippet, <CR> triggers snippet expansion,
 " 2. when pumvisible & entry selected, which is not a snippet, <CR> only closes pum
 " 3. when pumvisible & no entry selected, <CR> closes pum and inserts newline
