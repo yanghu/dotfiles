@@ -104,6 +104,10 @@ nnoremap <Leader>lm :CocList mru<CR>         " mru
 nnoremap <Leader>lq :CocList quickfix<CR>         " quickfix
 nnoremap <Leader>ll :CocList 
 
+" Quickly moving btween ale linter errors
+nmap <silent> ,ak <Plug>(ale_previous_wrap)
+nmap <silent> ,aj <Plug>(ale_next_wrap)
+
 "" ============================================================================
 ""                          Change of default behaviors 
 "" ============================================================================
