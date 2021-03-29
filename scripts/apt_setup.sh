@@ -24,19 +24,25 @@ sudo apt-get install \
   xclip \
   zsh
 
-# QMK things
-sudo apt-get install \
-  avr-libc \
-  binutils-arm-none-eabi \
-  binutils-avr \
-  dfu-programmer \
-  dfu-util \
-  gcc \
-  gcc-arm-none-eabi \
-  gcc-avr \
-  libnewlib-arm-none-eabi \
-  teensy-loader-cli \
-  unzip \
-  wget \
-  zip
-
+echo -n "Do you want to install QMK related packages(y/n)? "
+read answer
+if [ "$answer" != "${answer#[Yy]}" ] ;then
+    echo "Installing QMK packages..."
+    # QMK things
+    sudo apt-get install \
+      avr-libc \
+      binutils-arm-none-eabi \
+      binutils-avr \
+      dfu-programmer \
+      dfu-util \
+      gcc \
+      gcc-arm-none-eabi \
+      gcc-avr \
+      libnewlib-arm-none-eabi \
+      teensy-loader-cli \
+      unzip \
+      wget \
+      zip
+else
+    echo "Skipped QMK install..."
+fi
