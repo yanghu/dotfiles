@@ -18,6 +18,7 @@
           create: true
           path: vimrc
   ~/.vimrc_minimal: vimrc_minimal
+  ~/.oh-my-zsh: zsh/ohmyzsh
   ~/.zshrc: zshrc
   ~/.zsh: zsh/
   ~/.bash: bash/

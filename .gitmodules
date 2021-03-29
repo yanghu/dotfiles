@@ -7,3 +7,12 @@
 [submodule "vim/pack/themes/opt/solarized8"]
 	path = vim/pack/themes/opt/solarized8
 	url = https://github.com/lifepillar/vim-solarized8.git
+[submodule "zsh/ohmyzsh"]
+	path = zsh/ohmyzsh
+	url = https://github.com/ohmyzsh/ohmyzsh.git
+[submodule "zsh/powerlevel10k"]
+	path = zsh/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git
+[submodule "zsh/zsh-async"]
+	path = zsh/zsh-async
+	url = https://github.com/mafredri/zsh-async.git

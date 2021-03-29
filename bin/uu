@@ -18,5 +18,7 @@ $SCRIPTS_DIR/update_env.sh
 # vim
 vim +PlugUpdate +qall
 
+vim -c "CocInstall coc-lists" -c qall
+
 # tmux
 $SCRIPTS_DIR/install_tmux_plugins.sh
