@@ -25,6 +25,7 @@
       path: zsh/omz-custom/plugins
     ~/.zshrc: zshrc
     ~/.zsh: zsh/
+    ~/.config/base16-shell: zsh/base16-shell
     #~/.bash: bash/
     #~/.bashrc:
     #        force: true

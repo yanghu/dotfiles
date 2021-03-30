@@ -25,3 +25,6 @@
 [submodule "zsh/omz-custom/plugins/zsh-completions"]
 	path = zsh/omz-custom/plugins/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions
+[submodule "zsh/base16-shell"]
+	path = zsh/base16-shell
+	url = https://github.com/chriskempson/base16-shell.git
