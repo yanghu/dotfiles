@@ -18,6 +18,8 @@ vim/autoload/plug.vim.old
 /* spell files are pretty big */
 vim/spell/en.utf-8.*
 
+vim/view/
+
 /* compiled spell files */
 vim/spell/*.spl
 

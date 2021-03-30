@@ -10,6 +10,8 @@ Plug 'benmills/vimux'                                     " Vim and Tmux Integra
 Plug 'tpope/vim-commentary'                               " Comment/uncomment operator
 Plug 'tpope/vim-fugitive'                                 " Git Wrapper
 Plug 'tpope/vim-surround'                                 " Surrounding text
+Plug 'chriskempson/base16-vim'     "colortheme
+Plug 'Yggdroot/indentLine'
 " Plug 'sirver/ultisnips'                                   " snippet engine with integration into ycm; needs vim compiled with python
 "Plug 'scrooloose/syntastic'
 call plug#end()

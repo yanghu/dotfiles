@@ -17,11 +17,20 @@ set encoding=utf-8
 " Determine Environment
 let g:platform=GetPlatform()
 
-set t_Co=256
-let g:solarized_termcolors=256
+" set t_Co=256
+" let g:solarized_termcolors=256
+" colorscheme solarized8
 set background=dark
-colorscheme solarized8
-
+"let base16colorspace=256
+"colorscheme base16-default-dark
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+else
+  set t_Co=256
+  let g:solarized_termcolors=256
+  colorscheme solarized8
+endif
 "" ============================================================================
 ""                            Editing and Moving
 "" ============================================================================
@@ -171,10 +180,10 @@ set laststatus=2
 
 " Set the folding method
 set foldmethod=manual
-set foldnestmax=3
-set foldminlines=10
-" but don't use folds because they're annoying
-set nofoldenable
+set foldnestmax=2
+set foldminlines=5
+" set nofoldenable
+let g:markdown_folding=1
 
 " double click to highlight all occurrences
 nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>
@@ -225,6 +234,9 @@ autocmd FileType netrw setlocal nolist colorcolumn=
 
 " equalize splits when window resized
 autocmd VimResized * exe "normal! \<c-w>="
+
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
 
 " Auto switch relative number on entering normal mode.
 :augroup numbertoggle
