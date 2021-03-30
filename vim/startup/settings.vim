@@ -148,7 +148,7 @@ set cursorline                  " Highlight the current line.
 set nowrap
 
 " whitespace characters
-set listchars=tab:>-,trail:-
+set listchars=tab:»-,trail:-
 
 " enable display of whitespace
 set list
