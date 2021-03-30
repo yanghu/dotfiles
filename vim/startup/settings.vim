@@ -182,6 +182,7 @@ set laststatus=2
 set foldmethod=manual
 set foldnestmax=2
 set foldminlines=5
+set foldlevelstart=2
 " set nofoldenable
 let g:markdown_folding=1
 
