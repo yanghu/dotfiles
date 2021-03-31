@@ -18,21 +18,20 @@ nnoremap ,rc :e ~/.vimrc<CR>
 "" ============================================================================
 
 " Surrounding: ,{ to insert {} in a new line
-imap ,{ <c-g>S{
-imap ,( <c-g>S(
+imap <Leader>{ <c-g>S{
+imap <Leader>( <c-g>S(
 
 " close the buffer and keep window
 nnoremap <C-c> :bp\|bd #<CR>
 " Space to clear search highlightin
 nmap <space> :<c-u>noh<cr>:<backspace>
-" ,e to return to netrw window
-nnoremap <Leader>e :Rex<CR>
 " Quickly save file
 nnoremap XX :<c-u>update<CR>
 " Toggle paste mode
-nnoremap <leader>p :se invpaste paste?<return>
+nnoremap <Leader>p :se invpaste paste?<return>
 " %% in command line auto expand to folder of current buffer.(%:h)
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:p:h').'/' : '%%'
+
 " ========== easymotion
 " `s{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
@@ -40,6 +39,15 @@ nmap s <Plug>(easymotion-overwin-f2)
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+" Move at current line.(word start/end, camel and brackets.
+map <Leader>ee <Plug>(easymotion-lineanywhere)
+" Enter n characters and use easy motion to move.
+nmap <Leader>es <Plug>(easymotion-sn)
+
+" upper case markers improves readability. You can still navigate using lower
+" letters.
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_keys = 'ASDGHKLQWERTYUIOPZXCVBNMFJ;'
 
 " ==== Golang specific
 "use [[ and ]] to jump between methods
@@ -74,7 +82,7 @@ endfunction
 " completion prompt. 
 
 " Coc completion mappings
-inoremap <silent><expr> <leader>a coc#refresh()
+inoremap <silent><expr> <Leader>a coc#refresh()
 inoremap <silent><expr> <tab> pumvisible() ? coc#_select_confirm() : "\<tab>"
 inoremap <expr> <c-j>   pumvisible() ? "\<C-n>" : "\<c-k>"
 inoremap <expr> <c-k> pumvisible() ? "\<C-p>" : "\<c-j>"
@@ -86,9 +94,9 @@ nmap <silent> gr <Plug>(coc-references)
 
 " CocList mappings, prefixed with ,l
 nnoremap <Leader>f :CocList buffers<CR>     " ,f to open buffers
-nnoremap <Leader>lf :CocList files<CR>     " ,lf to open files in cwd
+nnoremap <Leader>lc :CocList files<CR>     " ,lf to open files in cwd
 " ,lc to open files from the current buffer's folder.
-nnoremap <expr> <Leader>lc ":CocList files " . expand('%:p:h')
+nnoremap <expr> <Leader>lf ":CocList files " . expand('%:p:h')
 " outline with fuzzy search, preview. Insert mode mappings: 
 " c-s: switch matcher mode(strict/fuzzy/regex)
 " c-q: add to quickfix list
@@ -106,7 +114,7 @@ nnoremap <Leader>lo :CocList --auto-preview outline<CR>
 " Persistent outline window. May need manual refresh with c-l in normal mode.
 " Use c-w H/L to move outline window to the side and resize.
 nnoremap <Leader>lO :CocList --auto-preview --no-quit outline<CR>
-nnoremap <Leader>lm :CocList mru<CR>         " mru
+nnoremap <Leader>lm :CocList mru -A<CR>         " mru of all sessions
 nnoremap <Leader>lq :CocList quickfix<CR>         " quickfix
 nnoremap <Leader>ll :CocList 
 
