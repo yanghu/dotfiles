@@ -12,6 +12,7 @@ Plug 'tpope/vim-fugitive'                                 " Git Wrapper
 Plug 'tpope/vim-surround'                                 " Surrounding text
 Plug 'chriskempson/base16-vim'     "colortheme
 Plug 'Yggdroot/indentLine'
+Plug 'tpope/vim-repeat'
 " Plug 'sirver/ultisnips'                                   " snippet engine with integration into ycm; needs vim compiled with python
 "Plug 'scrooloose/syntastic'
 call plug#end()
@@ -19,6 +20,9 @@ call plug#end()
 "" ============================================================================
 ""                              Plugin Settings
 "" ============================================================================
+
+" indentLine set conceal level to 2, which breaks markdown.
+let g:indentLine_fileTypeExclude = ['json', 'markdown']
 
 " easymotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings

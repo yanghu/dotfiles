@@ -11,9 +11,15 @@ imap jk <Esc>
 " Avoid going to ex mode
 nmap Q <Nop>
 
+" quickly edit vimrc
+nnoremap ,rc :e ~/.vimrc<CR>
 "" ============================================================================
 ""                          Motion and Editing
 "" ============================================================================
+
+" Surrounding: ,{ to insert {} in a new line
+imap ,{ <c-g>S{
+imap ,( <c-g>S(
 
 " close the buffer and keep window
 nnoremap <C-c> :bp\|bd #<CR>
