@@ -1,6 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'dense-analysis/ale'     " Syntax cheching.
 Plug 'neoclide/coc.nvim'      " Auto complete
 Plug 'easymotion/vim-easymotion'                          " I get around round round round
@@ -21,6 +22,7 @@ call plug#end()
 ""                              Plugin Settings
 "" ============================================================================
 
+let g:airline_theme='base16'
 " indentLine set conceal level to 2, which breaks markdown.
 let g:indentLine_fileTypeExclude = ['json', 'markdown']
 
