@@ -16,6 +16,9 @@ nnoremap ,rc :e ~/.vimrc<CR>
 "" ============================================================================
 ""                          Motion and Editing
 "" ============================================================================
+" Scroll a little bit faster.
+nnoremap <C-y> 3<C-y>
+nnoremap <C-e> 3<C-e>
 
 " Surrounding: ,{ to insert {} in a new line
 imap <Leader>{ <c-g>S{
