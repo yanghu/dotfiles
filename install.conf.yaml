@@ -20,7 +20,6 @@
     ~/.vimrc_minimal: vimrc_minimal
     ~/.oh-my-zsh: zsh/ohmyzsh
     ~/.oh-my-zsh/custom/plugins/:
-      create: true
       glob: true
       path: zsh/omz-custom/plugins/*
     ~/.zshrc: zshrc
