@@ -14,17 +14,14 @@
       force: true
       create: true
       path: vim/
+    ~/.vimrc_minimal: vimrc_minimal
+    ~/.oh-my-zsh: zsh/ohmyzsh/
+    ~/.zshrc: zshrc
+    ~/.zsh: zsh/
+    ~/.config/base16-shell: zsh/base16-shell/
     ~/.config/nvim/init.vim:
       create: true
       path: vimrc
-    ~/.vimrc_minimal: vimrc_minimal
-    ~/.oh-my-zsh: zsh/ohmyzsh
-    ~/.oh-my-zsh/custom/plugins/:
-      glob: true
-      path: zsh/omz-custom/plugins/*
-    ~/.zshrc: zshrc
-    ~/.zsh: zsh/
-    ~/.config/base16-shell: zsh/base16-shell
     #~/.bash: bash/
     #~/.bashrc:
     #        force: true
@@ -43,8 +40,10 @@
 
 # Link after vim plugins are ready. 
 - link:
-  ~/.vim/colors:
-    create: true
-    path: vim/plugged/base16-vim/colors
-    force: true
-
+    ~/.vim/colors:
+      create: true
+      path: vim/plugged/base16-vim/colors/
+      force: true
+    ~/.oh-my-zsh/custom/plugins/:
+      glob: true
+      path: zsh/omz-custom/plugins/*
