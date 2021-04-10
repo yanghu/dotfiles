@@ -8,3 +8,4 @@ source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 source ~/.config/base16-shell/base16-shell.plugin.zsh
 # To customize prompt, run `p11k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.zsh/p10k.zsh ]] || source ~/.zsh/p10k.zsh
+[[ ! -f ~/.p10k_local.zsh ]] || source ~/.p10k_local.zsh
