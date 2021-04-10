@@ -17,14 +17,12 @@ set encoding=utf-8
 " Determine Environment
 let g:platform=GetPlatform()
 
-" set t_Co=256
-" let g:solarized_termcolors=256
-" colorscheme solarized8
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set background=dark
-"let base16colorspace=256
-"colorscheme base16-default-dark
+" autocmd vimenter * ++nested colorscheme gruvbox
 if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
   source ~/.vimrc_background
 else
   set t_Co=256
