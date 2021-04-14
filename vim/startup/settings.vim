@@ -200,7 +200,7 @@ set previewheight=15
 set lazyredraw
 
 " Stop certain movements from always going to the first character of a line.
-set nostartofline
+"set nostartofline
 
 " Smoother redraws
 set ttyfast
