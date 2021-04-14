@@ -44,6 +44,10 @@
       create: true
       path: vim/plugged/base16-vim/colors/
       force: true
+    ~/.vim/pack/minimal/opt:
+      create: true
+      path: vim/plugged/
+      force: true
     ~/.oh-my-zsh/custom/plugins/:
       glob: true
       path: zsh/omz-custom/plugins/*

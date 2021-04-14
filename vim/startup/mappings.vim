@@ -145,7 +145,7 @@ map <Leader>y <Plug>(operator-poweryank-osc52)
 " If text is selected, save it in the v buffer and send that buffer it to tmux
 vmap <Leader>vs "vy :call VimuxRunCommand(@v)<CR>
 " Select current paragraph and send it to tmux
-nmap <Leader>vs vip<LocalLeader>vs<CR>
+nmap <Leader>vs vip<Leader>vs<CR>
 
 " If text is selected, save it in the v buffer and send that buffer it to tmux
 vmap <Leader>vl "vy :call VimuxPromptCommand(@v . " > ~/tmp/executions/tmp")<CR>
