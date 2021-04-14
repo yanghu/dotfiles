@@ -69,11 +69,13 @@ let g:coc_user_config = {
   \    "insertMappings": {
   \      "<C-p>": "do:previewtoggle",
   \      "<C-v>": "action:vsplit",
+  \      "<C-x>": "action:delete",
   \      "<C-q>": "action:quickfix"
   \    },
   \    "normalMappings": {
   \      "v": "action:vsplit",
-  \      "q": "action:quickfix"
+  \      "q": "action:quickfix",
+  \      "x": "action:delete"
   \    },
   \    "source": {
   \      "files.excludePatterns": ["**/.git/**"]
