@@ -24,7 +24,7 @@ set background=dark
 
 autocmd vimenter * ++nested colorscheme gruvbox
 let g:gruvbox_contrast_dark="hard"
-let g:airline_theme="gruvbox"
+let g:airline_theme='base16_gruvbox_dark_hard'
 " if filereadable(expand("~/.vimrc_background"))
 "   source ~/.vimrc_background
 " else

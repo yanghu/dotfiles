@@ -22,7 +22,6 @@ call plug#end()
 ""                              Plugin Settings
 "" ============================================================================
 
-let g:airline_theme='base16'
 " indentLine set conceal level to 2, which breaks markdown.
 let g:indentLine_fileTypeExclude = ['json', 'markdown']
 
