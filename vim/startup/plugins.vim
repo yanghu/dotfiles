@@ -1,5 +1,4 @@
 call plug#begin('~/.vim/plugged')
-
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'dense-analysis/ale'     " Syntax cheching.
@@ -14,6 +13,7 @@ Plug 'tpope/vim-surround'                                 " Surrounding text
 Plug 'chriskempson/base16-vim'     "colortheme
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-repeat'
+Plug 'morhetz/gruvbox'
 " Plug 'sirver/ultisnips'                                   " snippet engine with integration into ycm; needs vim compiled with python
 "Plug 'scrooloose/syntastic'
 call plug#end()
