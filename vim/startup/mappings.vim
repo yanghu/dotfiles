@@ -24,6 +24,8 @@ nnoremap <C-e> 3<C-e>
 imap <Leader>{ <c-g>S{
 imap <Leader>( <c-g>S(
 
+nnoremap <c-n> :bnext<cr>
+nnoremap <c-p> :bprev<cr>
 " close the buffer and keep window
 nnoremap <C-c> :bp\|bd #<CR>
 " Space to clear search highlightin
