@@ -21,14 +21,17 @@ set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set background=dark
-" autocmd vimenter * ++nested colorscheme gruvbox
-if filereadable(expand("~/.vimrc_background"))
-  source ~/.vimrc_background
-else
-  set t_Co=256
-  let g:solarized_termcolors=256
-  colorscheme solarized8
-endif
+
+autocmd vimenter * ++nested colorscheme gruvbox
+let g:gruvbox_contrast_dark="hard"
+" if filereadable(expand("~/.vimrc_background"))
+"   source ~/.vimrc_background
+" else
+"   set t_Co=256
+"   let g:solarized_termcolors=256
+"   colorscheme solarized8
+" endif
+
 "" ============================================================================
 ""                            Editing and Moving
 "" ============================================================================
