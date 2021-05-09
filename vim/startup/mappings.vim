@@ -102,6 +102,7 @@ nnoremap <Leader>gg :CocSearch
 " Search the word under cursor
 nnoremap <Leader>gw "gyiw :CocSearch <c-r>g
 nnoremap <Leader>gW "gyiW :CocSearch <c-r>g
+vnoremap <Leader>gg "gy :CocSearch -F <c-r>=escape(@g, ' ')<cr>
 
 " CocList mappings, prefixed with ,l
 nnoremap <Leader>f :CocList buffers<CR>     " ,f to open buffers
