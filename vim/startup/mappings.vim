@@ -24,6 +24,8 @@ nnoremap <C-e> 3<C-e>
 imap <Leader>{ <c-g>S{
 imap <Leader>( <c-g>S(
 
+nnoremap <c-n> :bnext<cr>
+nnoremap <c-p> :bprev<cr>
 " close the buffer and keep window
 nnoremap <C-c> :bp\|bd #<CR>
 " Space to clear search highlightin
@@ -106,6 +108,7 @@ nnoremap <Leader>f :CocList buffers<CR>     " ,f to open buffers
 nnoremap <Leader>lc :CocList files<CR>     " ,lf to open files in cwd
 " ,lc to open files from the current buffer's folder.
 nnoremap <expr> <Leader>lf ":CocList files " . expand('%:p:h')
+nnoremap <expr> <Leader>lv ":CocList files " . "$HOME/tmp/executions"
 " outline with fuzzy search, preview. Insert mode mappings: 
 " c-s: switch matcher mode(strict/fuzzy/regex)
 " c-q: add to quickfix list
@@ -144,3 +147,20 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>:set 
 "" ============================================================================
 map <Leader>y <Plug>(operator-poweryank-osc52)
 
+" Vimux
+" If text is selected, save it in the v buffer and send that buffer it to tmux
+vmap <Leader>vs "vy :call VimuxRunCommand(@v)<CR>
+" Select current paragraph and send it to tmux
+nmap <Leader>vs vip<Leader>vs<CR>
+
+" If text is selected, save it in the v buffer and send that buffer it to tmux
+vmap <Leader>vl "vy :call VimuxPromptCommand(@v . " > ~/tmp/executions/tmp")<CR>
+" Select current paragraph and send it to tmux
+nmap <Leader>vl vip<Leader>vl
+" Use ,lv to open a list of files in the executions folder using coc-list.
+
+"" ============================================================================
+""                          Digraph
+"" ============================================================================
+" C-k is already mapped to auto complete selection movement.
+inoremap <c-g> <c-k>

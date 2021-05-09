@@ -1,5 +1,4 @@
 call plug#begin('~/.vim/plugged')
-
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'dense-analysis/ale'     " Syntax cheching.
@@ -17,6 +16,7 @@ Plug 'tpope/vim-repeat'
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
+Plug 'morhetz/gruvbox'
 " Plug 'sirver/ultisnips'                                   " snippet engine with integration into ycm; needs vim compiled with python
 "Plug 'scrooloose/syntastic'
 call plug#end()
@@ -25,7 +25,6 @@ call plug#end()
 ""                              Plugin Settings
 "" ============================================================================
 
-let g:airline_theme='base16'
 " indentLine set conceal level to 2, which breaks markdown.
 let g:indentLine_fileTypeExclude = ['json', 'markdown']
 
@@ -72,11 +71,13 @@ let g:coc_user_config = {
   \    "insertMappings": {
   \      "<C-p>": "do:previewtoggle",
   \      "<C-v>": "action:vsplit",
+  \      "<C-x>": "action:delete",
   \      "<C-q>": "action:quickfix"
   \    },
   \    "normalMappings": {
   \      "v": "action:vsplit",
-  \      "q": "action:quickfix"
+  \      "q": "action:quickfix",
+  \      "x": "action:delete"
   \    },
   \    "source": {
   \      "files.excludePatterns": ["**/.git/**"]

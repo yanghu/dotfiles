@@ -21,14 +21,18 @@ set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set background=dark
-" autocmd vimenter * ++nested colorscheme gruvbox
-if filereadable(expand("~/.vimrc_background"))
-  source ~/.vimrc_background
-else
-  set t_Co=256
-  let g:solarized_termcolors=256
-  colorscheme solarized8
-endif
+
+autocmd vimenter * ++nested colorscheme gruvbox
+let g:gruvbox_contrast_dark="hard"
+let g:airline_theme='base16_gruvbox_dark_hard'
+" if filereadable(expand("~/.vimrc_background"))
+"   source ~/.vimrc_background
+" else
+"   set t_Co=256
+"   let g:solarized_termcolors=256
+"   colorscheme solarized8
+" endif
+
 "" ============================================================================
 ""                            Editing and Moving
 "" ============================================================================
@@ -200,7 +204,7 @@ set previewheight=15
 set lazyredraw
 
 " Stop certain movements from always going to the first character of a line.
-set nostartofline
+"set nostartofline
 
 " Smoother redraws
 set ttyfast
@@ -212,6 +216,14 @@ let &t_EI = "\e[0 q"
 " Don't print mode on last status line
 set noshowmode
 
+" netrw
+
+" Tree style
+let g:netrw_liststyle = 3
+" Vertical preview splitting
+let g:netrw_preview = 1
+" Use 30% screen width
+let g:netrw_winsize = 30
 "" ============================================================================
 ""                               Auto Commands
 "" ============================================================================
@@ -234,8 +246,16 @@ autocmd FileType netrw setlocal nolist colorcolumn=
 " equalize splits when window resized
 autocmd VimResized * exe "normal! \<c-w>="
 
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
+" From https://vi.stackexchange.com/questions/13864/bufwinleave-mkview-with-unnamed-file-error-32
+augroup AutoSaveGroup
+  autocmd!
+  " view files are about 500 bytes
+  " bufleave but not bufwinleave captures closing 2nd tab
+  " nested is needed by bufwrite* (if triggered via other autocmd)
+  " BufHidden for for compatibility with `set hidden`
+  autocmd BufWinLeave,BufLeave,BufWritePost,BufHidden,QuitPre ?* nested silent! mkview!
+  autocmd BufWinEnter ?* silent! loadview
+augroup end
 
 " Auto switch relative number on entering normal mode.
 :augroup numbertoggle
