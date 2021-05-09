@@ -14,6 +14,9 @@ Plug 'tpope/vim-surround'                                 " Surrounding text
 Plug 'chriskempson/base16-vim'     "colortheme
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-repeat'
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
 " Plug 'sirver/ultisnips'                                   " snippet engine with integration into ycm; needs vim compiled with python
 "Plug 'scrooloose/syntastic'
 call plug#end()
@@ -89,3 +92,20 @@ let g:airline#extensions#tabline#enabled = 1
 set statusline^=%{coc#status()}
 
 let g:ale_lint_on_insert_leave = 0
+
+if g:platform == "Linux" && !AtWork()
+" Code formatter
+  augroup autoformat_settings
+    autocmd FileType bzl AutoFormatBuffer buildifier
+    autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+    autocmd FileType dart AutoFormatBuffer dartfmt
+    autocmd FileType go AutoFormatBuffer gofmt
+    autocmd FileType gn AutoFormatBuffer gn
+    autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+    autocmd FileType java AutoFormatBuffer google-java-format
+    " autocmd FileType python AutoFormatBuffer yapf
+    " autocmd FileType python AutoFormatBuffer autopep8
+    autocmd FileType rust AutoFormatBuffer rustfmt
+    autocmd FileType vue AutoFormatBuffer prettier
+  augroup END
+endif

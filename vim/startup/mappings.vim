@@ -95,6 +95,12 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" Coc search mappings
+nnoremap <Leader>gg :CocSearch 
+" Search the word under cursor
+nnoremap <Leader>gw "gyiw :CocSearch <c-r>g
+nnoremap <Leader>gW "gyiW :CocSearch <c-r>g
+
 " CocList mappings, prefixed with ,l
 nnoremap <Leader>f :CocList buffers<CR>     " ,f to open buffers
 nnoremap <Leader>lc :CocList files<CR>     " ,lf to open files in cwd
