@@ -23,7 +23,9 @@ call plug#end()
 "" ============================================================================
 
 " indentLine set conceal level to 2, which breaks markdown.
-let g:indentLine_fileTypeExclude = ['json', 'markdown']
+" let g:indentLine_fileTypeExclude = ['json', 'markdown']
+let g:vim_markdown_syntax_conceal = 0
+let g:vim_json_syntax_conceal = 0
 
 " easymotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
