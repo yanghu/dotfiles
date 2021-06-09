@@ -1,5 +1,6 @@
 if [ "$(uname)" = "Linux" ]; then
-    alias ls='ls --color=auto'
+  # "-B" to hide backup files (ends with ~)
+    alias ls='ls --color=auto -B'
 fi
 
 alias cdr='cd $(git rev-parse --show-toplevel)'
