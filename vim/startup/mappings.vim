@@ -13,6 +13,8 @@ nmap Q <Nop>
 
 " quickly edit vimrc
 nnoremap ,rc :e ~/.vimrc<CR>
+" Re-enter pwd.
+nnoremap ,rr :cd $PWD<CR>
 "" ============================================================================
 ""                          Motion and Editing
 "" ============================================================================
@@ -126,9 +128,12 @@ nnoremap <expr> <Leader>lv ":CocList files " . "$HOME/tmp/executions"
 nnoremap <Leader>lo :CocList --auto-preview outline<CR>
 " Persistent outline window. May need manual refresh with c-l in normal mode.
 " Use c-w H/L to move outline window to the side and resize.
-nnoremap <Leader>lO :CocList --auto-preview --no-quit outline<CR>
+nnoremap <Leader>lO :CocList --no-quit outline<CR>
 nnoremap <Leader>lm :CocList mru -A<CR>         " mru of all sessions
 nnoremap <Leader>lq :CocList quickfix<CR>         " quickfix
+nnoremap <Leader>l* :CocList -I words<CR>         " search words in current buffer.
+" Search word under cursor
+nnoremap <Leader>lw :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
 nnoremap <Leader>ll :CocList 
 
 " Quickly moving btween ale linter errors

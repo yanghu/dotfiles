@@ -235,6 +235,9 @@ autocmd FileType xml setlocal equalprg=xmllint\ --format\ -
 
 " Markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+au FileType markdown let g:indentLine_setConceal= 0
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
 
 " set appropriate commentstrings
 autocmd FileType cpp setlocal commentstring=//\ %s

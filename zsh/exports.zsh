@@ -60,3 +60,7 @@ PATH=$PATH:/usr/bin
 PATH=$PATH:/usr/local/sbin
 PATH=$PATH:/usr/sbin
 PATH=$PATH:$HOME/go/bin
+
+# For sensible-browser. Since now we mostly work remotely,
+# use echo just to echo the url.
+export BROWSER=echo
