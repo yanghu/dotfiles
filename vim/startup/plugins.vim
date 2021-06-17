@@ -1,4 +1,6 @@
 call plug#begin('~/.vim/plugged')
+Plug 'junegunn/vim-easy-align'
+Plug 'dhruvasagar/vim-table-mode'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'dense-analysis/ale'     " Syntax cheching.
@@ -34,6 +36,9 @@ let g:EasyMotion_smartcase = 1
 " set colors
 hi link EasyMotionTarget WarningMsg
 hi link EasyMotionShade  Comment
+
+" vim-table-mode
+let g:table_mode_corner='|'
 
 " Ale
 " turn off convention pylint messages and misc

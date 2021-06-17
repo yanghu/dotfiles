@@ -158,10 +158,14 @@ nmap <Leader>vs vip<Leader>vs<CR>
 vmap <Leader>vl "vy :call VimuxPromptCommand(@v . " > ~/tmp/executions/tmp")<CR>
 " Select current paragraph and send it to tmux
 nmap <Leader>vl vip<Leader>vl
-" Use ,lv to open a list of files in the executions folder using coc-list.
+
+" Easy align
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 
 "" ============================================================================
 ""                          Digraph
 "" ============================================================================
 " C-k is already mapped to auto complete selection movement.
 inoremap <c-g> <c-k>
+
