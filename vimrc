@@ -9,6 +9,7 @@ source ~/.vim/startup/settings.vim
 source ~/.vim/startup/plugins.vim
 source ~/.vim/startup/mappings.vim
 
+filetype plugin on
 " Work-only config
 call SourceIfExists('~/.vim_local/vimrc_after.vim')
 

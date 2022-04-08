@@ -10,13 +10,16 @@ Plug 'benmills/vimux'                                     " Vim and Tmux Integra
 Plug 'tpope/vim-commentary'                               " Comment/uncomment operator
 Plug 'tpope/vim-fugitive'                                 " Git Wrapper
 Plug 'tpope/vim-surround'                                 " Surrounding text
+Plug 'tpope/vim-obsession'                                 " Surrounding text
 Plug 'chriskempson/base16-vim'     "colortheme
+Plug 'inkarkat/vim-ReplaceWithRegister'
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-repeat'
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
 Plug 'morhetz/gruvbox'
+Plug 'dhruvasagar/vim-table-mode'
 " Plug 'sirver/ultisnips'                                   " snippet engine with integration into ycm; needs vim compiled with python
 "Plug 'scrooloose/syntastic'
 call plug#end()
@@ -39,6 +42,7 @@ hi link EasyMotionShade  Comment
 
 " Ale
 " turn off convention pylint messages and misc
+let g:ale_disable_lsp = 1
 let g:ale_python_pylint_options='--disable=C --disable=W0311'
 let g:ale_java_checkstyle_options='-c ~/.vim/config/checkstyle_custom_checks.xml'
 let g:ale_linters={
