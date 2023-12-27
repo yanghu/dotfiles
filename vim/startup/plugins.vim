@@ -22,6 +22,9 @@ Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
 Plug 'morhetz/gruvbox'
 Plug 'dhruvasagar/vim-table-mode'
+" The plugin is compatible with fzf up to this version (b/190191359).
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() }, 'commit': '3f75a83' }
+Plug 'junegunn/fzf.vim'
 " Plug 'sirver/ultisnips'                                   " snippet engine with integration into ycm; needs vim compiled with python
 "Plug 'scrooloose/syntastic'
 call plug#end()

@@ -8,6 +8,7 @@
 *.pyc
 nodes
 tags
+gitconfig
 
 /* only keep plugin manager */
 tmux/plugins

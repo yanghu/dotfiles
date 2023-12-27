@@ -106,6 +106,8 @@ nnoremap <Leader>gw "gyiw :CocSearch <c-r>g
 nnoremap <Leader>gW "gyiW :CocSearch <c-r>g
 vnoremap <Leader>gg "gy :CocSearch -F <c-r>=escape(@g, ' ')<cr>
 
+nnoremap <Leader>gl :silent lgrep<Space>
+
 " CocList mappings, prefixed with ,l
 nnoremap <Leader>f :CocList buffers<CR>     " ,f to open buffers
 nnoremap <Leader>lc :CocList files<CR>     " ,lf to open files in cwd
@@ -174,3 +176,7 @@ xmap ga <Plug>(EasyAlign)
 " C-k is already mapped to auto complete selection movement.
 inoremap <c-g> <c-k>
 
+if executable('rg')
+  set grepformat+=%f:%l:%c:%m
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+endif
