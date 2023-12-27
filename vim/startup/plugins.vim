@@ -4,11 +4,11 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'dense-analysis/ale'     " Syntax cheching.
-Plug 'neoclide/coc.nvim'      " Auto complete
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }      " Auto complete
 Plug 'easymotion/vim-easymotion'                          " I get around round round round
 Plug 'haya14busa/vim-poweryank'                           " yank over SSH
 Plug 'michaeljsmith/vim-indent-object'                    " indentation-level text objects (ai/I, ii/I)
-Plug 'benmills/vimux'                                     " Vim and Tmux Integration
+" Plug 'benmills/vimux'                                     " Vim and Tmux Integration
 Plug 'tpope/vim-commentary'                               " Comment/uncomment operator
 Plug 'tpope/vim-fugitive'                                 " Git Wrapper
 Plug 'tpope/vim-surround'                                 " Surrounding text
