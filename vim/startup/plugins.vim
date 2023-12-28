@@ -4,15 +4,17 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'dense-analysis/ale'     " Syntax cheching.
-Plug 'neoclide/coc.nvim'      " Auto complete
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }      " Auto complete
 Plug 'easymotion/vim-easymotion'                          " I get around round round round
 Plug 'haya14busa/vim-poweryank'                           " yank over SSH
 Plug 'michaeljsmith/vim-indent-object'                    " indentation-level text objects (ai/I, ii/I)
-Plug 'benmills/vimux'                                     " Vim and Tmux Integration
+" Plug 'benmills/vimux'                                     " Vim and Tmux Integration
 Plug 'tpope/vim-commentary'                               " Comment/uncomment operator
 Plug 'tpope/vim-fugitive'                                 " Git Wrapper
 Plug 'tpope/vim-surround'                                 " Surrounding text
+Plug 'tpope/vim-obsession'                                 " Surrounding text
 Plug 'chriskempson/base16-vim'     "colortheme
+Plug 'inkarkat/vim-ReplaceWithRegister'
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-repeat'
 Plug 'google/vim-maktaba'
@@ -23,6 +25,10 @@ Plug 'rust-lang/rust.vim'
 Plug 'nathangrigg/vim-beancount'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'tmhedberg/SimpylFold'
+Plug 'dhruvasagar/vim-table-mode'
+" The plugin is compatible with fzf up to this version (b/190191359).
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() }, 'commit': '3f75a83' }
+Plug 'junegunn/fzf.vim'
 " Plug 'sirver/ultisnips'                                   " snippet engine with integration into ycm; needs vim compiled with python
 "Plug 'scrooloose/syntastic'
 call plug#end()
@@ -48,6 +54,7 @@ let g:table_mode_corner='|'
 
 " Ale
 " turn off convention pylint messages and misc
+let g:ale_disable_lsp = 1
 let g:ale_python_pylint_options='--disable=C --disable=W0311'
 let g:ale_java_checkstyle_options='-c ~/.vim/config/checkstyle_custom_checks.xml'
 let g:ale_linters={

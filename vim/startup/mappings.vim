@@ -46,10 +46,13 @@ nmap s <Plug>(easymotion-overwin-f2)
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+map <Leader>w <Plug>(easymotion-w)
+map <Leader>f <Plug>(easymotion-f)
 " Move at current line.(word start/end, camel and brackets.
 map <Leader>ee <Plug>(easymotion-lineanywhere)
 " Enter n characters and use easy motion to move.
 nmap <Leader>es <Plug>(easymotion-sn)
+nmap <Leader>/ <Plug>(easymotion-sn)
 
 " upper case markers improves readability. You can still navigate using lower
 " letters.
@@ -97,17 +100,23 @@ inoremap <silent> <CR> <C-r>=<SID>ExpandSnippetOrClosePumOrReturnNewline()<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+" nmap <silent> gr <Plug>(coc-references)
 
 " Coc search mappings
-nnoremap <Leader>gg :CocSearch 
+" nnoremap <Leader>gg :CocSearch 
 " Search the word under cursor
 nnoremap <Leader>gw "gyiw :CocSearch <c-r>g
 nnoremap <Leader>gW "gyiW :CocSearch <c-r>g
 vnoremap <Leader>gg "gy :CocSearch -F <c-r>=escape(@g, ' ')<cr>
+" Search current folder using coclist. (using ripgrep)
+nnoremap <Leader>gg :CocList grep -w 
+" Resume coclist results
+nnoremap <Leader>cc :CocListResume<CR>
+
+nnoremap <Leader>gl :silent lgrep<Space>
 
 " CocList mappings, prefixed with ,l
-nnoremap <Leader>f :CocList buffers<CR>     " ,f to open buffers
+nnoremap <Leader>b :CocList buffers<CR>     " ,b to open buffers
 nnoremap <Leader>lc :CocList files<CR>     " ,lf to open files in cwd
 " ,lc to open files from the current buffer's folder.
 nnoremap <expr> <Leader>lf ":CocList files " . expand('%:p:h')
@@ -174,7 +183,14 @@ xmap ga <Plug>(EasyAlign)
 " C-k is already mapped to auto complete selection movement.
 inoremap <c-g> <c-k>
 
+" Beancount
 autocmd FileType beancount nnoremap <buffer> <Leader>= :AlignCommodity<CR>
 autocmd FileType beancount vnoremap <buffer> <Leader>= :AlignCommodity<CR>
 autocmd FileType beancount inoremap <buffer> . .<C-\><C-O>:AlignCommodity<CR>
 autocmd FileType beancount inoremap <buffer> <Nul> <C-x><C-o>
+
+" Use ripgrep for external vimgrep
+if executable('rg')
+  set grepformat+=%f:%l:%c:%m
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+endif

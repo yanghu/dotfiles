@@ -8,6 +8,8 @@
 *.pyc
 nodes
 tags
+gitconfig
+.DS_Store
 
 /* only keep plugin manager */
 tmux/plugins
