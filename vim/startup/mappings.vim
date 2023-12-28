@@ -174,3 +174,7 @@ xmap ga <Plug>(EasyAlign)
 " C-k is already mapped to auto complete selection movement.
 inoremap <c-g> <c-k>
 
+autocmd FileType beancount nnoremap <buffer> <Leader>= :AlignCommodity<CR>
+autocmd FileType beancount vnoremap <buffer> <Leader>= :AlignCommodity<CR>
+autocmd FileType beancount inoremap <buffer> . .<C-\><C-O>:AlignCommodity<CR>
+autocmd FileType beancount inoremap <buffer> <Nul> <C-x><C-o>

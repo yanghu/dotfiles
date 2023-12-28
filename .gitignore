@@ -30,4 +30,6 @@ vim/init.vim
  * profiles separation. The json file is only for local machine configs. */
 vim/coc-settings.json
 
+vim/.netrwbook
+
 fish/fish_history

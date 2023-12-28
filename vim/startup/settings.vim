@@ -118,6 +118,7 @@ if !isdirectory($HOME . '/.vim/backups')
 endif
 set undodir=~/.vim/backups
 set undofile
+set backupdir=~/.vim/backups
 
 " allow for scrolling to next/prev line with left/right
 set whichwrap+=<,>,h,l,[,]
@@ -266,3 +267,36 @@ augroup end
 :  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
 :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 :augroup END
+
+
+au BufRead,BufNewFile *.keymap setfiletype cpp
+
+" for folding beancount files with org markers ***
+function! MarkdownLevel()
+    if getline(v:lnum) =~ '^\* .*$'
+        return ">1"
+    endif
+    if getline(v:lnum) =~ '^\*\* .*$'
+        return ">2"
+    endif
+    if getline(v:lnum) =~ '^\*\*\* .*$'
+        return ">3"
+    endif
+    if getline(v:lnum) =~ '^\*\*\*\* .*$'
+        return ">4"
+    endif
+    if getline(v:lnum) =~ '^\*\*\*\*\* .*$'
+        return ">5"
+    endif
+    if getline(v:lnum) =~ '^\*\*\*\*\*\* .*$'
+        return ">6"
+    endif
+    return "=" 
+endfunction
+au BufEnter *.bean setlocal foldexpr=MarkdownLevel()  
+au BufEnter *.bean setlocal foldmethod=expr     
+au BufEnter *.bean setlocal fml=1
+au BufEnter *.bean setlocal foldopen-=block
+
+au FileType beancount setlocal foldlevel=3
+au FileType beancount,markdown nnoremap <space> za

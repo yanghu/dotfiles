@@ -32,3 +32,5 @@ alias v='vim'
 alias wfc='curl "wttr.in/nyc?m"'
 alias jdk11='PATH="/usr/local/buildtools/java/jdk11/bin:$PATH"'
 [ -f ~/.zsh_local/zshrc_local_aliases.zsh ] && source ~/.zsh_local/zshrc_local_aliases.zsh
+
+alias pip=pip3

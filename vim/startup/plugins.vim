@@ -19,6 +19,10 @@ Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
 Plug 'morhetz/gruvbox'
+Plug 'rust-lang/rust.vim'
+Plug 'nathangrigg/vim-beancount'
+Plug 'jmcantrell/vim-virtualenv'
+Plug 'tmhedberg/SimpylFold'
 " Plug 'sirver/ultisnips'                                   " snippet engine with integration into ycm; needs vim compiled with python
 "Plug 'scrooloose/syntastic'
 call plug#end()
@@ -92,6 +96,7 @@ let g:coc_user_config = {
   \  }
   \}
 
+au FileType beancount let b:coc_suggest_disable = 1
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#ale#enabled = 1
@@ -105,7 +110,8 @@ if g:platform == "Linux" && !AtWork()
 " Code formatter
   augroup autoformat_settings
     autocmd FileType bzl AutoFormatBuffer buildifier
-    autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+    " autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+    autocmd FileType c,cpp,proto,javascript,arduino clang-format
     autocmd FileType dart AutoFormatBuffer dartfmt
     autocmd FileType go AutoFormatBuffer gofmt
     autocmd FileType gn AutoFormatBuffer gn
