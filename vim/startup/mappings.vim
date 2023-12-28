@@ -103,13 +103,12 @@ nmap <silent> gi <Plug>(coc-implementation)
 " nmap <silent> gr <Plug>(coc-references)
 
 " Coc search mappings
-" nnoremap <Leader>gg :CocSearch 
 " Search the word under cursor
-nnoremap <Leader>gw "gyiw :CocSearch <c-r>g
-nnoremap <Leader>gW "gyiW :CocSearch <c-r>g
-vnoremap <Leader>gg "gy :CocSearch -F <c-r>=escape(@g, ' ')<cr>
-" Search current folder using coclist. (using ripgrep)
-nnoremap <Leader>gg :CocList grep -w 
+nnoremap <Leader>gw "gyiw :Rg <c-r>g
+nnoremap <Leader>gW "gyiW :Rg <c-r>g
+vnoremap <Leader>gg "gy :Rg <c-r>=escape(@g, ' ')<cr>
+" Search current folder using fzf+ripgrep.
+nnoremap <Leader>gg :Rg<Space>
 " Resume coclist results
 nnoremap <Leader>cc :CocListResume<CR>
 

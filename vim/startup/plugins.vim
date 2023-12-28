@@ -13,6 +13,7 @@ Plug 'tpope/vim-commentary'                               " Comment/uncomment op
 Plug 'tpope/vim-fugitive'                                 " Git Wrapper
 Plug 'tpope/vim-surround'                                 " Surrounding text
 Plug 'tpope/vim-obsession'                                 " Surrounding text
+Plug 'tpope/vim-unimpaired'                                 " Surrounding text
 Plug 'chriskempson/base16-vim'     "colortheme
 Plug 'inkarkat/vim-ReplaceWithRegister'
 Plug 'Yggdroot/indentLine'
