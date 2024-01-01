@@ -250,16 +250,16 @@ autocmd FileType netrw setlocal nolist colorcolumn=
 " equalize splits when window resized
 autocmd VimResized * exe "normal! \<c-w>="
 
-" From https://vi.stackexchange.com/questions/13864/bufwinleave-mkview-with-unnamed-file-error-32
-augroup AutoSaveGroup
-  autocmd!
-  " view files are about 500 bytes
-  " bufleave but not bufwinleave captures closing 2nd tab
-  " nested is needed by bufwrite* (if triggered via other autocmd)
-  " BufHidden for for compatibility with `set hidden`
-  autocmd BufWinLeave,BufLeave,BufWritePost,BufHidden,QuitPre ?* nested silent! mkview!
-  autocmd BufWinEnter ?* silent! loadview
-augroup end
+" " From https://vi.stackexchange.com/questions/13864/bufwinleave-mkview-with-unnamed-file-error-32
+" augroup AutoSaveGroup
+"   autocmd!
+"   " view files are about 500 bytes
+"   " bufleave but not bufwinleave captures closing 2nd tab
+"   " nested is needed by bufwrite* (if triggered via other autocmd)
+"   " BufHidden for for compatibility with `set hidden`
+"   autocmd BufWinLeave,BufLeave,BufWritePost,BufHidden,QuitPre ?* nested silent! mkview!
+"   autocmd BufWinEnter ?* silent! loadview
+" augroup end
 
 " Auto switch relative number on entering normal mode.
 :augroup numbertoggle

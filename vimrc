@@ -8,6 +8,7 @@ source ~/.vim/startup/functions/formatting.vim
 source ~/.vim/startup/settings.vim
 source ~/.vim/startup/plugins.vim
 source ~/.vim/startup/mappings.vim
+source ~/.vim/startup/restore_view.vim
 
 filetype plugin on
 " Work-only config
