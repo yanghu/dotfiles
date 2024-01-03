@@ -303,5 +303,3 @@ au BufEnter *.bean setlocal foldopen-=block
 
 au FileType beancount setlocal foldlevel=3
 au FileType beancount,markdown nnoremap <space> za
-
-let g:coc_disable_startup_warning = 1
