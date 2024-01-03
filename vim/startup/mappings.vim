@@ -52,7 +52,7 @@ map <Leader>f <Plug>(easymotion-f)
 map <Leader>ee <Plug>(easymotion-lineanywhere)
 " Enter n characters and use easy motion to move.
 nmap <Leader>es <Plug>(easymotion-sn)
-nmap <Leader>/ <Plug>(easymotion-sn)
+" nmap <Leader>/ <Plug>(easymotion-sn)
 
 " upper case markers improves readability. You can still navigate using lower
 " letters.
@@ -100,26 +100,36 @@ inoremap <silent> <CR> <C-r>=<SID>ExpandSnippetOrClosePumOrReturnNewline()<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <Leader>gr <Plug>(coc-references)
 
 " Coc search mappings
 " Search the word under cursor
-nnoremap <Leader>gw "gyiw :Rg <c-r>g
-nnoremap <Leader>gW "gyiW :Rg <c-r>g
-vnoremap <Leader>gg "gy :Rg <c-r>=escape(@g, ' ')<cr>
+nnoremap <Leader>gw :Rg2 <c-r><c-w>
+nnoremap <Leader>gW "gyiW :Rg2 <c-r>g
+vnoremap <Leader>gg "gy :Rg2 <c-r>=@g<CR>
 " Search current folder using fzf+ripgrep.
-nnoremap <Leader>gg :Rg<Space>
+nnoremap <Leader>gg :Rg2<Space>
 " Resume coclist results
 nnoremap <Leader>cc :CocListResume<CR>
 
 nnoremap <Leader>gl :silent lgrep<Space>
 
 " CocList mappings, prefixed with ,l
-nnoremap <Leader>b :CocList buffers<CR>     " ,b to open buffers
-nnoremap <Leader>lc :CocList files<CR>     " ,lf to open files in cwd
+" nnoremap <Leader>b :CocList buffers<CR>
+" nnoremap <Leader>lc :CocList files<CR>
+" Use fzf to view buffers and files, which is faster and better-looking
+",b to open buffers
+nnoremap <Leader>b :Buffers<CR>
+" open file in PWD
+nnoremap <Leader>lc :Files<CR>
+" open current git repo of current file
+nnoremap <Leader>gc :GFiles<CR>
 " ,lc to open files from the current buffer's folder.
-nnoremap <expr> <Leader>lf ":CocList files " . expand('%:p:h')
-nnoremap <expr> <Leader>lv ":CocList files " . "$HOME/tmp/executions"
+nnoremap <expr> <Leader>lf ":Files " . expand('%:p:h')
+nnoremap <expr> <Leader>lv ":Files " . "$HOME/tmp/executions"
+" nnoremap <expr> <Leader>lf ":CocList files " . expand('%:p:h')
+" nnoremap <expr> <Leader>lv ":CocList files " . "$HOME/tmp/executions"
+
 " outline with fuzzy search, preview. Insert mode mappings: 
 " c-s: switch matcher mode(strict/fuzzy/regex)
 " c-q: add to quickfix list
@@ -137,11 +147,21 @@ nnoremap <Leader>lo :CocList --auto-preview outline<CR>
 " Persistent outline window. May need manual refresh with c-l in normal mode.
 " Use c-w H/L to move outline window to the side and resize.
 nnoremap <Leader>lO :CocList --no-quit outline<CR>
-nnoremap <Leader>lm :CocList mru -A<CR>         " mru of all sessions
-nnoremap <Leader>lq :CocList quickfix<CR>         " quickfix
-nnoremap <Leader>l* :CocList -I words<CR>         " search words in current buffer.
+
+" Buffer history. Use coclist which has better sorting for MRU
+nnoremap <Leader>lm :CocList mru -A<CR>
+" nnoremap <Leader>lm :History<CR>
+" quickfix
+nnoremap <Leader>lq :CocList quickfix<CR>
+
+" nnoremap <Leader>l* :CocList -I words<CR>
+" Serach in all open buffers
+nnoremap <Leader>l* :Lines<CR>
+" Search in current buffer
+nnoremap <Leader>lb :BLines<CR>
+nmap <Leader>/ :BLines<CR>
 " Search word under cursor
-nnoremap <Leader>lw :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
+nnoremap <Leader>lw :exe 'Lines ' . expand('<cword>')<CR>
 nnoremap <Leader>ll :CocList 
 
 " Quickly moving btween ale linter errors
@@ -183,10 +203,12 @@ xmap ga <Plug>(EasyAlign)
 inoremap <c-g> <c-k>
 
 " Beancount
-autocmd FileType beancount nnoremap <buffer> <Leader>= :AlignCommodity<CR>
-autocmd FileType beancount vnoremap <buffer> <Leader>= :AlignCommodity<CR>
-autocmd FileType beancount inoremap <buffer> . .<C-\><C-O>:AlignCommodity<CR>
-autocmd FileType beancount inoremap <buffer> <Nul> <C-x><C-o>
+augroup beancount_settings
+  autocmd FileType beancount nnoremap <buffer> <Leader>= :AlignCommodity<CR>
+  autocmd FileType beancount vnoremap <buffer> <Leader>= :AlignCommodity<CR>
+  autocmd FileType beancount inoremap <buffer> . .<C-\><C-O>:AlignCommodity<CR>
+  autocmd FileType beancount inoremap <buffer> <Nul> <C-x><C-o>
+augroup end
 
 " Use ripgrep for external vimgrep
 if executable('rg')

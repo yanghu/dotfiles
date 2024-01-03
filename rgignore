@@ -1,0 +1,11 @@
+*.un~
+*.*~
+*~
+*.swp
+*.hi
+*.o
+*.pyc
+nodes
+tags
+.DS_Store
+*:Zone.Identifier

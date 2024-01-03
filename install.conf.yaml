@@ -22,6 +22,7 @@
     ~/.config/nvim/init.vim:
       create: true
       path: vimrc
+    ~/.rgignore: rgignore
     #~/.bash: bash/
     #~/.bashrc:
     #        force: true

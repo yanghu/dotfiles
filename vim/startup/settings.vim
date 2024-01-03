@@ -235,10 +235,12 @@ autocmd FileType qf setlocal colorcolumn=
 autocmd FileType xml setlocal equalprg=xmllint\ --format\ -
 
 " Markdown
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-au FileType markdown let g:indentLine_setConceal= 0
-let g:vim_markdown_conceal = 0
-let g:vim_markdown_conceal_code_blocks = 0
+augroup markdown_setings
+  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+  au FileType markdown let g:indentLine_setConceal= 0
+  let g:vim_markdown_conceal = 0
+  let g:vim_markdown_conceal_code_blocks = 0
+augroup end
 
 " set appropriate commentstrings
 autocmd FileType cpp setlocal commentstring=//\ %s
@@ -250,23 +252,24 @@ autocmd FileType netrw setlocal nolist colorcolumn=
 " equalize splits when window resized
 autocmd VimResized * exe "normal! \<c-w>="
 
-" From https://vi.stackexchange.com/questions/13864/bufwinleave-mkview-with-unnamed-file-error-32
-augroup AutoSaveGroup
-  autocmd!
-  " view files are about 500 bytes
-  " bufleave but not bufwinleave captures closing 2nd tab
-  " nested is needed by bufwrite* (if triggered via other autocmd)
-  " BufHidden for for compatibility with `set hidden`
-  autocmd BufWinLeave,BufLeave,BufWritePost,BufHidden,QuitPre ?* nested silent! mkview!
-  autocmd BufWinEnter ?* silent! loadview
-augroup end
+" " From https://vi.stackexchange.com/questions/13864/bufwinleave-mkview-with-unnamed-file-error-32
+" augroup AutoSaveGroup
+"   autocmd!
+"   " view files are about 500 bytes
+"   " bufleave but not bufwinleave captures closing 2nd tab
+"   " nested is needed by bufwrite* (if triggered via other autocmd)
+"   " BufHidden for for compatibility with `set hidden`
+"   autocmd BufWinLeave,BufLeave,BufWritePost,BufHidden,QuitPre ?* nested silent! mkview!
+"   autocmd BufWinEnter ?* silent! loadview
+" augroup end
+" augroup! AutoSaveGroup
 
 " Auto switch relative number on entering normal mode.
 :augroup numbertoggle
 :  autocmd!
 :  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
 :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-:augroup END
+:augroup end
 
 
 au BufRead,BufNewFile *.keymap setfiletype cpp
@@ -300,3 +303,5 @@ au BufEnter *.bean setlocal foldopen-=block
 
 au FileType beancount setlocal foldlevel=3
 au FileType beancount,markdown nnoremap <space> za
+
+let g:coc_disable_startup_warning = 1

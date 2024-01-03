@@ -25,8 +25,7 @@ Plug 'morhetz/gruvbox'
 Plug 'rust-lang/rust.vim'
 Plug 'nathangrigg/vim-beancount'
 Plug 'jmcantrell/vim-virtualenv'
-Plug 'tmhedberg/SimpylFold'
-Plug 'dhruvasagar/vim-table-mode'
+" Plug 'tmhedberg/SimpylFold'
 " The plugin is compatible with fzf up to this version (b/190191359).
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() }, 'commit': '3f75a83' }
 Plug 'junegunn/fzf.vim'
@@ -105,6 +104,34 @@ let g:coc_user_config = {
   \}
 
 au FileType beancount let b:coc_suggest_disable = 1
+au FileType markdown let b:coc_suggest_disable = 1
+
+" FZF
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+let $FZF_DEFAULT_OPTS .= '--bind ctrl-a:select-all'
+
+" Snippet from
+" https://github.com/junegunn/fzf.vim/issues/837#issuecomment-1179386300
+" Search with ripgrep and fzf with folder specs
+" Examples:
+"   :Rg2 "apple teste" ./folder_test
+"   :Rg2 --type=js "apple"
+"   :Rg2 --fixed-strings "apple"
+"   :Rg2 -e -foo
+command! -bang -nargs=* Rg2
+  \ call fzf#vim#grep(
+  \ "rg --column --line-number --no-heading --color=always --smart-case ".<q-args>,
+  \ 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]},
+  \ <bang>0)
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#ale#enabled = 1
@@ -129,5 +156,11 @@ if g:platform == "Linux" && !AtWork()
     " autocmd FileType python AutoFormatBuffer autopep8
     autocmd FileType rust AutoFormatBuffer rustfmt
     autocmd FileType vue AutoFormatBuffer prettier
-  augroup END
+  augroup end
 endif
+
+
+augroup fugitive
+  " Fugitive automatically delete fugitive buffers when leaving them
+  autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup end
