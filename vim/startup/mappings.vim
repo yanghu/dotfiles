@@ -160,7 +160,7 @@ nnoremap <Leader>l* :Lines<CR>
 " Search in current buffer
 nnoremap <Leader>lb :BLines<CR>
 nmap <Leader>/ :BLines<CR>
-" Search word under cursor
+" Search word under cursor in all opened buffers. Search with rg see ,gw
 nnoremap <Leader>lw :exe 'Lines ' . expand('<cword>')<CR>
 nnoremap <Leader>ll :CocList 
 

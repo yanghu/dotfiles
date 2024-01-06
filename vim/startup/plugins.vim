@@ -128,6 +128,7 @@ let $FZF_DEFAULT_OPTS .= '--bind ctrl-a:select-all'
 "   :Rg2 --type=js "apple"
 "   :Rg2 --fixed-strings "apple"
 "   :Rg2 -e -foo
+"   :Rg2 vim ~/repo/hugo --glob "*.md" 
 command! -bang -nargs=* Rg2
   \ call fzf#vim#grep(
   \ "rg --column --line-number --no-heading --color=always --smart-case ".<q-args>,
