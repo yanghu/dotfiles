@@ -9,6 +9,3 @@ _fzf_comprun() {
     *)            fzf "$@" ;;
   esac
 }
-
-source ~/.zsh/fzf/completion.zsh
-source ~/.zsh/fzf/key-bindings.zsh

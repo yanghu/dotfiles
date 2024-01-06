@@ -8,6 +8,9 @@ source ~/.zsh/functions.zsh
 source ~/.zsh/settings.zsh
 source ~/.zsh/aliases.zsh
 source ~/.zsh/exports.zsh
+source ~/.zsh/fzf/completion.zsh
+source ~/.zsh/fzf/key-bindings.zsh
+source ~/.zsh/fzf.zsh
 
 if [ -f ~/.zsh_local/zshrc_local_after.zsh ]; then
     source ~/.zsh_local/zshrc_local_after.zsh

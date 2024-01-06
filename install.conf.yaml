@@ -23,6 +23,7 @@
       create: true
       path: vimrc
     ~/.rgignore: rgignore
+    ~/.gitconfig: gitconfig
     #~/.bash: bash/
     #~/.bashrc:
     #        force: true
