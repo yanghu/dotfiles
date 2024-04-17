@@ -110,7 +110,7 @@ vnoremap <Leader>gg "gy :Rg2 <c-r>=@g<CR>
 " Search current folder using fzf+ripgrep.
 nnoremap <Leader>gg :Rg2<Space>
 " Resume coclist results
-nnoremap <Leader>cc :CocListResume<CR>
+" nnoremap <Leader>cc :CocListResume<CR>
 
 nnoremap <Leader>gl :silent lgrep<Space>
 
