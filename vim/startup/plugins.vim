@@ -122,6 +122,7 @@ let $FZF_DEFAULT_OPTS .= '--bind ctrl-a:select-all'
 " Snippet from
 " https://github.com/junegunn/fzf.vim/issues/837#issuecomment-1179386300
 " Search with ripgrep and fzf with folder specs
+" Defult starts in git root folder
 " Examples:
 "   :Rg2 "apple teste" ./folder_test
 "   :Rg2 --type=js "apple"
@@ -133,6 +134,18 @@ command! -bang -nargs=* Rg2
   \ "rg --column --line-number --no-heading --color=always --smart-case ".<q-args>,
   \ 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]},
   \ <bang>0)
+" Git grep wrapper using fzf. Example usage
+" Examples:
+"   :GGrep "app teste"
+"   :GGrep "app teste" HEAD~
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number -- '.<q-args>,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+" command! -bang -nargs=* GGrep
+"   \ call fzf#vim#grep(
+"   \   'git grep --line-number -- '.fzf#shellescape(<q-args>),
+"   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#ale#enabled = 1

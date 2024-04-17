@@ -124,6 +124,8 @@ nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>lc :Files<CR>
 " open current git repo of current file
 nnoremap <Leader>gc :GFiles<CR>
+" open git status files list
+nnoremap <Leader>gs :GFiles?<CR>
 " ,lc to open files from the current buffer's folder.
 nnoremap <expr> <Leader>lf ":Files " . expand('%:p:h')
 nnoremap <expr> <Leader>lv ":Files " . "$HOME/tmp/executions"
@@ -156,10 +158,10 @@ nnoremap <Leader>lq :CocList quickfix<CR>
 
 " nnoremap <Leader>l* :CocList -I words<CR>
 " Serach in all open buffers
-nnoremap <Leader>l* :Lines<CR>
+nnoremap <Leader>l* :Lines<space>
 " Search in current buffer
 nnoremap <Leader>lb :BLines<CR>
-nmap <Leader>/ :BLines<CR>
+nnoremap <Leader>/ :BLines<space>
 " Search word under cursor in all opened buffers. Search with rg see ,gw
 nnoremap <Leader>lw :exe 'Lines ' . expand('<cword>')<CR>
 nnoremap <Leader>ll :CocList 
