@@ -34,3 +34,5 @@ vim/coc-settings.json
 vim/.netrwbook
 
 fish/fish_history
+
+lazy-lock.json
