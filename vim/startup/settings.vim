@@ -9,7 +9,9 @@ set viewoptions=cursor,folds    " Save cursor position and folds.
 "" ============================================================================
 ""                                  Globals
 "" ============================================================================
+if !has('nvim')
 set noesckeys                   " Removes the annoying delay after ESC
+endif
 "" encoding
 scriptencoding utf-8
 set encoding=utf-8
@@ -116,7 +118,9 @@ set wildignorecase
 if !isdirectory($HOME . '/.vim/backups')
   call mkdir($HOME . '/.vim/backups', 'p')
 endif
+if !has("nvim")
 set undodir=~/.vim/backups
+endif
 set undofile
 set backupdir=~/.vim/backups
 
