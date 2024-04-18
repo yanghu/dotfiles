@@ -9,7 +9,7 @@ return {
       { "<leader>j",  "<Plug>(easymotion-j)", desc="Easymotion UP" },
       { "<leader>k",  "<Plug>(easymotion-k)", desc="Easymotion DOWN" },
       { "<leader>w",  "<Plug>(easymotion-w)", desc="Easymotion next WORDS" },
-      { "<leader>f",  "<Plug>(easymotion-f)", desc="Easymotion find SINGLE CHAR" },
+      -- { "<leader>f",  "<Plug>(easymotion-f)", desc="Easymotion find SINGLE CHAR" },
 
     },
     config = function ()
