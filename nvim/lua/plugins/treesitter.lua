@@ -34,7 +34,9 @@ return {
         incremental_selection = {
           enable = true,
           keymaps = {
+            init_selection = '<CR>',
             node_incremental = 'v',
+            scope_incremental = 'grc',
             node_decremental = 'V',
           }
         },
@@ -59,3 +61,5 @@ return {
     end
   },
 }
+
+-- vim: foldmethod=marker foldlevel=1
