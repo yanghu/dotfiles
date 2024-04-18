@@ -1,7 +1,9 @@
 local indent = 2
 
+local prefix = vim.env.XDG_CONFIG_HOME or vim.fn.expand("~/.config")
 
 vim.opt.backup = true
+vim.opt.backupdir = {prefix .. "/nvim/backup//"}
 vim.opt.undofile = true
 vim.opt.formatoptions = crqn1j
 
