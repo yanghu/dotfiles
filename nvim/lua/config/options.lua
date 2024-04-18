@@ -44,6 +44,7 @@ vim.opt.magic = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+vim.g.have_nerd_font = true
 -- ==============================================
 --                      Appearnces
 -- ==============================================

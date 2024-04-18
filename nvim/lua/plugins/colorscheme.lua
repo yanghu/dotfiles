@@ -8,3 +8,5 @@ return {
   },
   -- }}}2
 }
+
+-- vim: foldmethod=marker foldlevel=1

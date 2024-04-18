@@ -27,7 +27,7 @@ Plug 'nathangrigg/vim-beancount'
 Plug 'jmcantrell/vim-virtualenv'
 " Plug 'tmhedberg/SimpylFold'
 " The plugin is compatible with fzf up to this version (b/190191359).
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() }, 'commit': '3f75a83' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
 " Plug 'sirver/ultisnips'                                   " snippet engine with integration into ycm; needs vim compiled with python
 "Plug 'scrooloose/syntastic'
