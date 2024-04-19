@@ -1,6 +1,8 @@
 return {
   -- {{{2 fzf
   { "junegunn/fzf", 
+    tag = "0.50.0",
+    pin = true,
     build = './install --all --xdg'},
   {
     'ibhagwan/fzf-lua',
