@@ -73,3 +73,9 @@ vim.opt.cc = '80'
 -- Don't show mode
 vim.opt.showmode = false
 
+
+vim.filetype.add({
+  extension = {
+    bean = 'beancount'
+  }
+})

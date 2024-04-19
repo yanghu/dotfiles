@@ -9,6 +9,8 @@ return {
       { "<leader>j",  "<Plug>(easymotion-j)", desc="Easymotion UP" },
       { "<leader>k",  "<Plug>(easymotion-k)", desc="Easymotion DOWN" },
       { "<leader>w",  "<Plug>(easymotion-w)", desc="Easymotion next WORDS" },
+      { "<leader>W",  "<Plug>(easymotion-b)", desc="Easymotion prev WORDS" },
+      -- { "<leader>b",  "<Plug>(easymotion-b)", desc="Easymotion pre WORDS" },
       -- { "<leader>f",  "<Plug>(easymotion-f)", desc="Easymotion find SINGLE CHAR" },
 
     },
@@ -25,7 +27,7 @@ return {
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       {
-        'L3MON4D3/LuaSnip',
+        'L3MON4D3/LuaSnip',-- {{{
         build = (function()
           -- Build Step is needed for regex support in snippets.
           -- This step is not supported in many windows environments.
@@ -45,7 +47,7 @@ return {
           --     require('luasnip.loaders.from_vscode').lazy_load()
           --   end,
           -- },
-        },
+        },-- }}}
       },
       'saadparwaiz1/cmp_luasnip',
 

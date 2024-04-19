@@ -1,6 +1,7 @@
 return {
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
+    event = 'BufReadPre',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       'williamboman/mason.nvim',
@@ -40,6 +41,7 @@ return {
       --
       -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
       -- and elegantly composed help section, `:help lsp-vs-treesitter`
+      require('lspconfig.ui.windows').default_options.border = require('config.ui').borders
 
       --  This function gets run when an LSP attaches to a particular buffer.
       --    That is to say, every time a new file is opened that is associated with
@@ -157,6 +159,13 @@ return {
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
+        beancount = require("config.lsp.servers.beancount").config,
+        -- beancount = {
+        --   init_options = {
+        --     journalFile = "~/beancount/journals/main.bean",
+        --     -- pythonPath = "~/venv/redimport/bin/python3",
+        --   }
+        -- },
 
         lua_ls = {
           -- cmd = {...},
