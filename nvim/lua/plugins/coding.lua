@@ -3,7 +3,7 @@ return {
   -- {{{2 vim-easymotion
   {'easymotion/vim-easymotion', 
     keys = {
-      { "s",  "<Plug>(easymotion-overwin-f2)" },
+      -- { "s",  "<Plug>(easymotion-overwin-f2)" },
       { "<leader>ee", "<Plug>(easymotion-lineanywhere)", desc="Line anywhere" },
       { "<leader>es", "<Plug>(easymotion-sn)", desc="Enter n characters to match and move." },
       { "<leader>j",  "<Plug>(easymotion-j)", desc="Easymotion UP" },
@@ -125,8 +125,52 @@ return {
       }
     end,
   },-- }}}
-
   --
+  {
+    'stevearc/aerial.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
+    },
+    config = function ()
+      local aerial = require 'aerial'
+      aerial.setup {
+        on_attach = function(bufnr)
+          -- Jump forwards/backwards with '{' and '}'
+          vim.keymap.set("n", "<leader>{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+          vim.keymap.set("n", "<leader>}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+        end,
+      }
+    end,
+    keys = {
+      { "<leader>a",  "<cmd>AerialToggle!<CR>", desc="Toggle Aerial"},
+      { "<leader>A",  "<cmd>AerialToggle<CR>", desc="Toggle Aerial and stay in Aerial window"}
+    }
+  },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {
+      label = {
+        rainbow = {
+          enabled = true,
+        }
+      }
+    },
+    -- stylua: ignore
+    keys = {
+      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+    },
+  }
 }
+
+
 
 -- vim: foldmethod=marker foldlevel=1

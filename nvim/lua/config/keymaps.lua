@@ -19,7 +19,15 @@ end
 -- ==============================================
 local wk = require("which-key")
 wk.register({
-  ["<leader>e"] = { name = "easymotion" }
+  ["<leader>e"] = { name = "easymotion" },
+  ["<leader>w"] = { name = "[W]orkspace" },
+  ["<leader>d"] = {
+    name = "[D]iagnostics",
+    j = { vim.diagnostic.goto_next, "Go to next diagnostics" },
+    k = { vim.diagnostic.goto_prev, "Go to previous diagnostics" },
+    d = { require('fzf-lua').diagnostics_document, "[D]iagnostics [D]ocument" },
+    w = { require('fzf-lua').diagnostics_workspace, "[D]iagnostics [W]orkspace" },
+  }
 })
 
 -- ==============================================

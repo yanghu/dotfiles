@@ -16,7 +16,7 @@ return {
       -- { '<Leader>k', function() require('fzf-lua').man_pages() end, desc = 'Fzf: man' },
       -- { '<Leader>t', function() require('fzf-lua').tabs() end, desc = 'Fzf: tabs' },
       { '<Leader>lb', function() require('fzf-lua').lgrep_curbuf() end, desc = 'Fzf: grep current buffer lines' },
-      { '<Leader>/', function() require('fzf-lua').live_grep_native() end, desc = 'Fzf: grep all files' },
+      { '<Leader>/', function() require('fzf-lua').live_grep_glob() end, desc = 'Fzf: live grep all files' },
       { '<Leader>gf', function() require('fzf-lua').git_files() end, desc = 'Fzf: git files' },
       { '<Leader>gb', function() require('fzf-lua').git_bcommits() end, desc = 'Fzf: git buffer commits' },
       { '<Leader>gc', function() require('fzf-lua').git_commits() end, desc = 'Fzf: git commits' },
@@ -65,6 +65,7 @@ return {
       fzf_lua.setup({
         global_resume = true,
         winopts = bottom_row,
+        file_ignore_patterns = {},
         builtin = {
           winopts = right_column
         },
@@ -169,16 +170,8 @@ return {
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
-      -- Telescope is a fuzzy finder that comes with a lot of different things that
-      -- it can fuzzy find! It's more than just a "file finder", it can search
-      -- many different aspects of Neovim, your workspace, LSP, and more!
-      --
       -- The easiest way to use Telescope, is to start by doing something like:
       --  :Telescope help_tags
-      --
-      -- After running this command, a window will open up and you're able to
-      -- type in the prompt window. You'll see a list of `help_tags` options and
-      -- a corresponding preview of the help.
       --
       -- Two important keymaps to use while in Telescope are:
       --  - Insert mode: <c-/>
@@ -191,14 +184,13 @@ return {
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
-        -- You can put your default mappings / updates / etc. in here
-        --  All the info you're looking for is in `:help telescope.setup()`
-        --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          previewer = true,
+          layout_strategy = 'horizontal',
+          -- mappings = {
+          --   i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+          -- },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {

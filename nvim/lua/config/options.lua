@@ -1,12 +1,9 @@
-local indent = 2
-
 local prefix = vim.env.XDG_CONFIG_HOME or vim.fn.expand("~/.config")
 
 vim.opt.backup = true
 vim.opt.backupdir = {prefix .. "/nvim/backup//"}
 vim.opt.undofile = true
-vim.opt.formatoptions = crqn1j
-
+vim.opt.formatoptions = "crqn1j"
 
 -- Enable breakindent
 vim.opt.breakindent = true
@@ -24,7 +21,7 @@ vim.opt.smartcase = true
 
 -- Ignore files
 vim.opt.wildignore:append({
-  '*.o', '*.d', '00*', 'nohup.out', 'tags', 
+  '*.o', '*.d', '00*', 'nohup.out', 'tags',
   '.hs-tags', '*.hi', '*.gcno', '*.gcda', '*.fasl', '*.pyc'
 })
 -- MacOS ignore
