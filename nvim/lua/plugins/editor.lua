@@ -240,6 +240,10 @@ return {
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },-- }}}
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
+}
 }
 
 -- vim: foldmethod=marker foldlevel=1

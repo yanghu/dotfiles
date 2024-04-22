@@ -1,6 +1,6 @@
 return {
   {'numToStr/Comment.nvim', opts = {}, lazy = false },
-  {
+  {-- hop.nvim {{{2
     'smoka7/hop.nvim',
     version = "*",
     opts = {
@@ -13,14 +13,15 @@ return {
       { "<leader>ee", function () require('hop').hint_camel_case({current_line_only = true}) end, desc= "Hop Camel Case" },
       { "<leader>w", function () require('hop').hint_words({direction = require('hop.hint').HintDirection.AFTER_CURSOR}) end, desc= "Hop Words" },
       { "<leader>W", function () require('hop').hint_words({direction = require('hop.hint').HintDirection.BEFORE_CURSOR}) end, desc= "Hop Words" },
+      { "s", function () require('hop').hint_char2({}) end, desc= "Hop 2char" },
       -- { "f", function () require('hop').hint_char1({direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only=true}) end, desc= "Hop f" },
       -- { "F", function () require('hop').hint_char1({direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only=true}) end, desc= "Hop F" },
       -- { "t", function () require('hop').hint_char1({direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only=true, hint_offset = -1}) end, desc= "Hop t" },
       -- { "T", function () require('hop').hint_char1({direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only=true, hint_offset = -1}) end, desc= "Hop T" },
     },
-  },
+  },-- }}}
 
-  { -- Autocompletion{{{
+  { -- Autocompletion{{{2
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
@@ -125,7 +126,7 @@ return {
     end,
   },-- }}}
   --
-  {
+  {-- aerial.nvim {{{2
     'stevearc/aerial.nvim',
     opts = {},
     -- Optional dependencies
@@ -147,8 +148,8 @@ return {
       { "<leader>a",  "<cmd>AerialToggle!<CR>", desc="Toggle Aerial"},
       { "<leader>A",  "<cmd>AerialToggle<CR>", desc="Toggle Aerial and stay in Aerial window"}
     }
-  },
-  {
+  },-- }}}
+  {-- flash.nvim {{{
     "folke/flash.nvim",
     event = "VeryLazy",
     ---@type Flash.Config
@@ -161,7 +162,7 @@ return {
     },
     -- stylua: ignore
     keys = {
-      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      -- { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
       { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
       { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
       { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
@@ -169,7 +170,18 @@ return {
       -- jump to scope
       { "<leader>n",   mode = { "n" }, function() require("flash").treesitter({jump={pos="start"}, label={after=false}}) end,  desc = "Flash Treesitter" },
     },
-  }
+  },-- }}}
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  },
+
 }
 
 
