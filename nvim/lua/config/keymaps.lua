@@ -62,4 +62,9 @@ nmap('XX', vim.cmd.update)
 
 imap('jk', '<Esc>')
 
+nmap("[c", function() require("treesitter-context").go_to_context(vim.v.count1) end)
+
+-- "where am I" from vim-matchup plugin
+nmap("<c-k>", '<cmd>MatchupWhereAmI??<CR>')
+
 -- vim: foldmethod=marker foldlevel=1

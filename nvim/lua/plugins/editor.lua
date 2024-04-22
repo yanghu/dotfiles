@@ -145,7 +145,7 @@ return {
   },
   -- }}}2
 
-  { -- Fuzzy Finder (files, lsp, etc)
+  { -- Fuzzy Finder (files, lsp, etc){{{2
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
     branch = '0.1.x',
@@ -239,7 +239,7 @@ return {
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
     end,
-  },
+  },-- }}}
 }
 
 -- vim: foldmethod=marker foldlevel=1

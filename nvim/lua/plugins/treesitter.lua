@@ -6,6 +6,14 @@ return {
     dependencies = {
       'nvim-treesitter/nvim-treesitter-refactor',
       'windwp/nvim-ts-autotag',
+      'andymass/vim-matchup',
+      { 'nvim-treesitter/nvim-treesitter-context',
+        config = function ()
+          require('treesitter-context').setup({
+              multiline_threshold = 5, -- Maximum number of lines to show for a single context
+          })
+        end
+      },
       {
         'HiPhish/rainbow-delimiters.nvim',
         event = 'VeryLazy',
@@ -31,15 +39,15 @@ return {
         highlight = {
           enable = true
         },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = '<CR>',
-            node_incremental = 'v',
-            scope_incremental = 'grc',
-            node_decremental = 'V',
-          }
-        },
+        -- incremental_selection = {
+        --   enable = true,
+        --   keymaps = {
+        --     init_selection = '<CR>',
+        --     node_incremental = 'v',
+        --     scope_incremental = 'grc',
+        --     node_decremental = 'V',
+        --   }
+        -- },
         indent = {
           enable = true
         },
@@ -56,7 +64,14 @@ return {
           smart_rename = {
             enable = true
           }
-        }
+        },
+        matchup = {
+          enable = true,              -- mandatory, false will disable the whole extension
+          disable = { "c", "ruby" },  -- optional, list of language that will be disabled
+          disable_virtual_text = false,
+          include_match_words = false,
+          -- [options]
+        },
       })
     end
   },

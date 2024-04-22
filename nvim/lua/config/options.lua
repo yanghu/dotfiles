@@ -76,3 +76,6 @@ vim.filetype.add({
     bean = 'beancount'
   }
 })
+
+vim.cmd([[hi TreesitterContextBottom gui=underline guisp=Grey]])
+vim.cmd([[hi TreesitterContextLineNumberBottom gui=underline guisp=Grey]])

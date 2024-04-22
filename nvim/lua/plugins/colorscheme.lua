@@ -7,6 +7,9 @@ return {
     opts =...
   },
   -- }}}2
+  {
+    "rebelot/kanagawa.nvim"
+  }
 }
 
 -- vim: foldmethod=marker foldlevel=1

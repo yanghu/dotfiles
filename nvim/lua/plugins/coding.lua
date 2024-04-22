@@ -1,25 +1,24 @@
 return {
   {'numToStr/Comment.nvim', opts = {}, lazy = false },
-  -- {{{2 vim-easymotion
-  {'easymotion/vim-easymotion', 
-    keys = {
-      -- { "s",  "<Plug>(easymotion-overwin-f2)" },
-      { "<leader>ee", "<Plug>(easymotion-lineanywhere)", desc="Line anywhere" },
-      { "<leader>es", "<Plug>(easymotion-sn)", desc="Enter n characters to match and move." },
-      { "<leader>j",  "<Plug>(easymotion-j)", desc="Easymotion UP" },
-      { "<leader>k",  "<Plug>(easymotion-k)", desc="Easymotion DOWN" },
-      { "<leader>w",  "<Plug>(easymotion-w)", desc="Easymotion next WORDS" },
-      { "<leader>W",  "<Plug>(easymotion-b)", desc="Easymotion prev WORDS" },
-      -- { "<leader>b",  "<Plug>(easymotion-b)", desc="Easymotion pre WORDS" },
-      -- { "<leader>f",  "<Plug>(easymotion-f)", desc="Easymotion find SINGLE CHAR" },
-
+  {
+    'smoka7/hop.nvim',
+    version = "*",
+    opts = {
+      keys = 'etovxqpdygfblzhckisuran',
+      uppercase_labels = true,
     },
-    config = function ()
-      vim.g.EasyMotion_use_upper = 1
-      vim.g.EasyMotion_keys = 'ASDGHKLQWERTYUIOPZXCVBNMFJ;'
-    end,
+    keys = {
+      { "<leader>j", function () require('hop').hint_lines({direction = require('hop.hint').HintDirection.AFTER_CURSOR}) end, desc= "Hop down lines" },
+      { "<leader>k", function () require('hop').hint_lines({direction = require('hop.hint').HintDirection.BEFORE_CURSOR}) end, desc= "Hop up lines" },
+      { "<leader>ee", function () require('hop').hint_camel_case({current_line_only = true}) end, desc= "Hop Camel Case" },
+      { "<leader>w", function () require('hop').hint_words({direction = require('hop.hint').HintDirection.AFTER_CURSOR}) end, desc= "Hop Words" },
+      { "<leader>W", function () require('hop').hint_words({direction = require('hop.hint').HintDirection.BEFORE_CURSOR}) end, desc= "Hop Words" },
+      -- { "f", function () require('hop').hint_char1({direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only=true}) end, desc= "Hop f" },
+      -- { "F", function () require('hop').hint_char1({direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only=true}) end, desc= "Hop F" },
+      -- { "t", function () require('hop').hint_char1({direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only=true, hint_offset = -1}) end, desc= "Hop t" },
+      -- { "T", function () require('hop').hint_char1({direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only=true, hint_offset = -1}) end, desc= "Hop T" },
+    },
   },
-  -- }}}2
 
   { -- Autocompletion{{{
     'hrsh7th/nvim-cmp',
@@ -36,7 +35,7 @@ return {
             return
           end
           return 'make install_jsregexp'
-        end)(),
+          end)(),
         dependencies = {
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
@@ -107,12 +106,12 @@ return {
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
             end
-          end, { 'i', 's' }),
+            end, { 'i', 's' }),
           ['<C-h>'] = cmp.mapping(function()
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
             end
-          end, { 'i', 's' }),
+            end, { 'i', 's' }),
 
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -158,7 +157,7 @@ return {
         rainbow = {
           enabled = true,
         }
-      }
+      },
     },
     -- stylua: ignore
     keys = {
@@ -167,6 +166,8 @@ return {
       { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
       { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+      -- jump to scope
+      { "<leader>n",   mode = { "n" }, function() require("flash").treesitter({jump={pos="start"}, label={after=false}}) end,  desc = "Flash Treesitter" },
     },
   }
 }
