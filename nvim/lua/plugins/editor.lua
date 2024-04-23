@@ -191,11 +191,15 @@ return {
           path_display = {
             shorten = 2
           },
-          -- mappings = {
-          --   i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-          -- },
+          mappings = {
+            i = {
+              ['<c-g>'] = 'to_fuzzy_refine',
+              ['<c-j>'] = 'move_selection_next',
+              ['<c-k>'] = 'move_selection_previous',
+            },
+          },
         },
-        -- pickers = {}
+        -- pickers = {},
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
