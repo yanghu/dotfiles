@@ -19,6 +19,10 @@ require('catppuccin').setup({
     aerial = true,
     hop = true,
     which_key = true,
+    navic = {
+      enabled = true,
+      custom_bg = "NONE"
+    }
   }
 })
 vim.cmd([[colorscheme catppuccin]])
