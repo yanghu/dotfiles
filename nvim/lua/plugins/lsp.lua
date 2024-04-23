@@ -15,6 +15,17 @@ return {
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
       { 'folke/neodev.nvim', opts = {} },
+      {
+        'SmiteshP/nvim-navic',
+        config = function ()
+          require('nvim-navic').setup({
+            highlight = true,
+            -- lsp = {
+            --   -- auto_attach = true
+            -- }
+          })
+        end
+      }
     },
     config = function()
       -- LSP provides Neovim with features like:
@@ -104,6 +115,10 @@ return {
             map('<leader>th', function()
               vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
             end, '[T]oggle Inlay [H]ints')
+          end
+
+          if client.server_capabilities.documentSymbolProvider then
+            require('nvim-navic').attach(client, event.buf)
           end
         end,
       })

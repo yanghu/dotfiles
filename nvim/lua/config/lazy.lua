@@ -16,7 +16,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ 
   defaults = {
-    lazy = true
+    lazy = true,
+    version = "*"
   },
   spec = {
     import = 'plugins'
@@ -45,7 +46,8 @@ require("lazy").setup({
     cmd = 'git'
   },
   checker = {
-    enabled = true
+    enabled = true,
+    frequency = 3600*24,  -- check for updates every day.
   },
   performance = {
     rtp = {

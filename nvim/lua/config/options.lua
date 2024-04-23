@@ -1,74 +1,77 @@
 local prefix = vim.env.XDG_CONFIG_HOME or vim.fn.expand("~/.config")
+local o =vim.opt
 
-vim.opt.backup = true
-vim.opt.backupdir = {prefix .. "/nvim/backup//"}
-vim.opt.undofile = true
-vim.opt.formatoptions = "crqn1j"
+o.backup = true
+o.backupdir = {prefix .. "/nvim/backup//"}
+o.undofile = true
+o.formatoptions = "crqn1j"
 
 -- Enable breakindent
-vim.opt.breakindent = true
-vim.opt.breakindentopt:append({shift=2})
+o.breakindent = true
+o.breakindentopt:append({shift=2})
 
 -- Tabs
-vim.opt.tabstop = 2
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 2
-vim.opt.shiftround = true
+o.tabstop = 2
+o.expandtab = true
+o.shiftwidth = 2
+o.shiftround = true
 
 -- Case-insensitive search
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+o.ignorecase = true
+o.smartcase = true
 
 -- Ignore files
-vim.opt.wildignore:append({
+o.wildignore:append({
   '*.o', '*.d', '00*', 'nohup.out', 'tags',
   '.hs-tags', '*.hi', '*.gcno', '*.gcda', '*.fasl', '*.pyc'
 })
 -- MacOS ignore
-vim.opt.wildignore:append({
+o.wildignore:append({
   '*/tmp/*', '*.so', '*.swp', '*.zip', '.DS_Store', '*/.metadata/*'
 })
-vim.opt.wildignorecase = true
+o.wildignorecase = true
 
 -- Allows scrolling to next/prev lines with left/right
-vim.opt.whichwrap:append("<,>,h,l,[,]")
+o.whichwrap:append("<,>,h,l,[,]")
 
 -- Raise a dialog asking if you wish to save changed files
-vim.opt.confirm = true
+o.confirm = true
 
 -- Enables magic regex
-vim.opt.magic = true
+o.magic = true
 
 -- Configure how new splits should be opened
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+o.splitright = true
+o.splitbelow = true
 
 vim.g.have_nerd_font = true
 -- ==============================================
 --                      Appearnces
 -- ==============================================
-vim.opt.number = true
-vim.opt.relativenumber = true
+o.number = true
+o.relativenumber = true
+o.wrap = false
 
 -- highlight the current line
-vim.opt.cursorline = true
+o.cursorline = true
 
 -- Display whitespaces
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '-', nbsp = '␣' }
+o.list = true
+o.listchars = { tab = '» ', trail = '-', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
-vim.opt.inccommand = 'split'
+o.inccommand = 'split'
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+o.scrolloff = 5
 
 -- Ruler
-vim.opt.ruler = true
-vim.opt.cc = '80'
+o.ruler = true
+o.colorcolumn = '80'
+o.signcolumn = "yes"
 
 -- Don't show mode
-vim.opt.showmode = false
+o.showmode = false
 
 
 vim.filetype.add({

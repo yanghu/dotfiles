@@ -7,13 +7,13 @@ return {
       'nvim-treesitter/nvim-treesitter-refactor',
       'windwp/nvim-ts-autotag',
       'andymass/vim-matchup',
-      { 'nvim-treesitter/nvim-treesitter-context',
-        config = function ()
-          require('treesitter-context').setup({
-              multiline_threshold = 5, -- Maximum number of lines to show for a single context
-          })
-        end
-      },
+      -- { 'nvim-treesitter/nvim-treesitter-context',
+      --   -- config = function ()
+      --   --   require('treesitter-context').setup({
+      --   --       multiline_threshold = 5, -- Maximum number of lines to show for a single context
+      --   --   })
+      --   -- end
+      -- },
       {
         'HiPhish/rainbow-delimiters.nvim',
         event = 'VeryLazy',

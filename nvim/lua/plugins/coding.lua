@@ -154,6 +154,9 @@ return {
     event = "VeryLazy",
     ---@type Flash.Config
     opts = {
+      modes = {
+        search = {enabled = false},
+      },
       label = {
         rainbow = {
           enabled = true,
@@ -181,6 +184,11 @@ return {
       })
     end
   },
+  -- Formatting
+  {
+  'stevearc/conform.nvim',
+  opts = {},
+}
 
 }
 

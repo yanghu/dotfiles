@@ -1,6 +1,6 @@
 return {
   -- {{{2 fzf
-  { "junegunn/fzf", 
+  { "junegunn/fzf",
     tag = "0.50.0",
     pin = true,
     build = './install --all --xdg'},
@@ -145,7 +145,7 @@ return {
   },
   -- }}}2
 
-  { -- Fuzzy Finder (files, lsp, etc){{{2
+  { -- Telescope(files, lsp, etc){{{2
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
     branch = '0.1.x',
@@ -186,7 +186,11 @@ return {
       require('telescope').setup {
         defaults = {
           previewer = true,
-          layout_strategy = 'horizontal',
+          layout_strategy = 'bottom_pane',
+          sorting_strategy = 'ascending',
+          path_display = {
+            shorten = 2
+          },
           -- mappings = {
           --   i = { ['<c-enter>'] = 'to_fuzzy_refine' },
           -- },
@@ -214,7 +218,8 @@ return {
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader>o', builtin.oldfiles, { desc = '[O]ld files' })
+      vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[ ] Find existing buffers' })
       --
       -- -- Slightly advanced example of overriding default behavior and theme
       -- vim.keymap.set('n', '<leader>/', function()
@@ -240,10 +245,24 @@ return {
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },-- }}}
+  {'ethanholz/nvim-lastplace',
+    config = function ()
+      require('nvim-lastplace').setup{
+        lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
+        lastplace_ignore_filetype = {"gitcommit", "gitrebase", "svn", "hgcommit"},
+        lastplace_open_folds = true
+      }
+    end,
+    lazy = false,
+  },
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' }
-}
+  },
+  {'akinsho/bufferline.nvim',
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons',
+  }
 }
 
 -- vim: foldmethod=marker foldlevel=1
