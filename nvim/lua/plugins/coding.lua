@@ -191,16 +191,22 @@ return {
     'tpope/vim-repeat',
     keys = {
       { '.' },
-}},
+    }},
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    config = true
+    -- use opts = {} for passing setup options
+    -- this is equalent to setup({}) function
+    -- See https://github.com/windwp/nvim-autopairs?tab=readme-ov-file#override-default-values
+  },
 
   -- Formatting
   {
-  'stevearc/conform.nvim',
-  opts = {},
+    'stevearc/conform.nvim',
+    opts = {},
+  },
 }
-
-}
-
 
 
 -- vim: foldmethod=marker foldlevel=1
