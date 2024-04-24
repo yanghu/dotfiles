@@ -21,7 +21,7 @@ return {
     },
   },-- }}}
 
-  { -- Autocompletion{{{2
+  { -- Autocompletion (nvim-cmp, luasnip, etc.) {{{2
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
@@ -174,7 +174,7 @@ return {
       { "<leader>n",   mode = { "n" }, function() require("flash").treesitter({jump={pos="start"}, label={after=false}}) end,  desc = "Flash Treesitter" },
     },
   },-- }}}
-  {
+  {-- nvim-surround {{{
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
@@ -183,7 +183,16 @@ return {
         -- Configuration here, or leave empty to use defaults
       })
     end
+  },-- }}}
+  { 'tpope/vim-unimpaired' ,
+    lazy = false,
   },
+  {
+    'tpope/vim-repeat',
+    keys = {
+      { '.' },
+}},
+
   -- Formatting
   {
   'stevearc/conform.nvim',
