@@ -8,11 +8,11 @@ return {
     'ibhagwan/fzf-lua',
     keys = {
       { '<Leader>F', function() require('fzf-lua').builtin() end, desc = 'Fzf: builtin' },
-      { '<Leader>b', function() require('fzf-lua').buffers() end, desc = 'Fzf: buffers' },
+      -- { '<Leader>b', function() require('fzf-lua').buffers() end, desc = 'Fzf: buffers' },
       -- { '<Leader>c', function() require('fzf-lua').colorschemes() end, desc = 'Fzf: colorschemes' },
-      { '<Leader>f', function() require('fzf-lua').files() end, desc = 'Fzf: files' },
-      { '<Leader>o', function() require('fzf-lua').oldfiles() end, desc = 'Fzf: oldfiles' },
-      { '<Leader>h', function() require('fzf-lua').help_tags() end, desc = 'Fzf: help' },
+      -- { '<Leader>f', function() require('fzf-lua').files() end, desc = 'Fzf: files' },
+      -- { '<Leader>o', function() require('fzf-lua').oldfiles() end, desc = 'Fzf: oldfiles' },
+      -- { '<Leader>h', function() require('fzf-lua').help_tags() end, desc = 'Fzf: help' },
       -- { '<Leader>k', function() require('fzf-lua').man_pages() end, desc = 'Fzf: man' },
       -- { '<Leader>t', function() require('fzf-lua').tabs() end, desc = 'Fzf: tabs' },
       { '<Leader>lb', function() require('fzf-lua').lgrep_curbuf() end, desc = 'Fzf: grep current buffer lines' },
@@ -213,18 +213,26 @@ return {
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
+      local utils = require 'telescope.utils'
+      -- Single-key maps
+      vim.keymap.set('n', '<leader>o', builtin.oldfiles, { desc = '[O]ld files' })
+      vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Find open [B]uffers' })
+      vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Search cwd [F]iles' })
+      vim.keymap.set('n', '<leader>h', builtin.help_tags, { desc = '[H]elp' })
+
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sf', function() builtin.find_files({ cwd = utils.buffer_dir() }) end, { desc = '[S]earch [F]iles in buffer dir' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader>o', builtin.oldfiles, { desc = '[O]ld files' })
-      vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[ ] Find existing buffers' })
-      --
+
+      -- diagnostics
+      vim.keymap.set('n', '<leader>dd', function() builtin.diagnostics({bufnr=0}) end, { desc = '[D]ocument [D]iagnostics'})
+      vim.keymap.set('n', '<leader>dw', builtin.diagnostics, { desc = '[D]iagnostics [W]orkspace'})
       -- -- Slightly advanced example of overriding default behavior and theme
       -- vim.keymap.set('n', '<leader>/', function()
       --   -- You can pass additional configuration to Telescope to change the theme, layout, etc.

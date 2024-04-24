@@ -25,8 +25,8 @@ wk.register({
     name = "[D]iagnostics",
     j = { vim.diagnostic.goto_next, "Go to next diagnostics" },
     k = { vim.diagnostic.goto_prev, "Go to previous diagnostics" },
-    d = { require('fzf-lua').diagnostics_document, "[D]iagnostics [D]ocument" },
-    w = { require('fzf-lua').diagnostics_workspace, "[D]iagnostics [W]orkspace" },
+    -- d = { require('fzf-lua').diagnostics_document, "[D]iagnostics [D]ocument" },
+    -- w = { require('fzf-lua').diagnostics_workspace, "[D]iagnostics [W]orkspace" },
   }
 })
 
@@ -35,7 +35,7 @@ wk.register({
 -- ==============================================
 
 -- Use space to cancel search highlight
-nmap('<Space>', '<cmd>nohlsearch<CR>')
+nmap('<CR>', '<cmd>nohlsearch<CR>')
 -- Avoid going into ex mode
 nmap('Q', '<Nop>')
 
@@ -66,5 +66,9 @@ nmap("[c", function() require("treesitter-context").go_to_context(vim.v.count1) 
 
 -- "where am I" from vim-matchup plugin
 nmap("<c-k>", '<cmd>MatchupWhereAmI??<CR>')
+
+-- Diagnostics motion
+nmap("[d", vim.diagnostic.goto_prev, { desc = 'Previous [D]iagnostics'})
+nmap("]d", vim.diagnostic.goto_next, { desc = 'Next [D]iagnostics'})
 
 -- vim: foldmethod=marker foldlevel=1

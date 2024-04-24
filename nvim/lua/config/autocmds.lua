@@ -19,7 +19,12 @@ augroup('NumberToggle', function(g)
   aucmd({ 'BufEnter', 'FocusGained', 'InsertLeave' }, {
     pattern = '*',
     group = g,
-    command = 'set relativenumber',
+    callback = function ()
+      if vim.bo.filetype == "help" then
+        return
+      end
+      vim.opt.relativenumber = true
+    end
   })
   aucmd({ 'BufLeave', 'FocusLost', 'InsertEnter' }, {
     pattern = '*',
@@ -42,7 +47,7 @@ augroup('checktime', function(g)
   })
 end)
 
--- close some filetypes with <q>
+-- close some filetypes with <q>, and hide line numbers
 augroup('close_with_q', function(g)
   aucmd("FileType", {
     pattern = {
@@ -64,6 +69,8 @@ augroup('close_with_q', function(g)
     callback = function (event)
       vim.bo[event.buf].buflisted = false
       vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+      vim.opt_local.number = false
+      vim.opt_local.relativenumber = false
     end
   })
 end)
@@ -99,4 +106,3 @@ augroup('auto_create_dir', function(g)
   })
 end)
 
--- TODO: disable numbers in help text
