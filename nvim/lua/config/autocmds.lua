@@ -98,3 +98,5 @@ augroup('auto_create_dir', function(g)
     end
   })
 end)
+
+-- TODO: disable numbers in help text
