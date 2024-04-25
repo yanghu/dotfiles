@@ -28,6 +28,9 @@ return {
       -- Snippet Engine & its associated nvim-cmp source
       {
         'L3MON4D3/LuaSnip',-- {{{
+        config = function ()
+          require("luasnip.loaders.from_lua").load({paths = { "~/.config/nvim/lua/snippets/" }})
+        end,
         build = (function()
           -- Build Step is needed for regex support in snippets.
           -- This step is not supported in many windows environments.
@@ -47,6 +50,7 @@ return {
               require('luasnip.loaders.from_vscode').lazy_load()
             end,
           },
+          { 'benfowler/telescope-luasnip.nvim', },
         },-- }}}
       },
       'saadparwaiz1/cmp_luasnip',
