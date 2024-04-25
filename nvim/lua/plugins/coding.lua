@@ -84,6 +84,7 @@ return {
           ['<C-j>'] = cmp.mapping.select_next_item(),
           -- Select the [p]revious item
           ['<C-k>'] = cmp.mapping.select_prev_item(),
+          ['<C-c>'] = cmp.mapping.close(),
 
           -- Scroll the documentation window [b]ack / [f]orward
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),

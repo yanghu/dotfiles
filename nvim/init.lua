@@ -27,19 +27,28 @@ require('catppuccin').setup({
 })
 vim.cmd([[colorscheme catppuccin]])
 
+-- Lualine
 require('lualine').setup({
   options = {
     theme = "catppuccin",
   },
-  winbar = {
+  sections = {
+    lualine_a = {
+      -- Paste indicator
+      { "[[]]", cond = function () return vim.opt.paste:get() end, },
+      "mode",
+    },
     lualine_c = {
+      "filename",
       {
         "navic",
         color_correction = nil,
         navic_opts = nil
-      }
+      },
     }
-  }
+  },
+  extensions = {'aerial', 'quickfix', 'trouble'},
+  winbar = {}
 })
 require("bufferline").setup{
   highlights = require("catppuccin.groups.integrations.bufferline").get(),

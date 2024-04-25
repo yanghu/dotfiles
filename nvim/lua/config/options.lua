@@ -1,6 +1,7 @@
 local prefix = vim.env.XDG_CONFIG_HOME or vim.fn.expand("~/.config")
 local o =vim.opt
 
+o.mouse = ""
 o.backup = true
 o.backupdir = {prefix .. "/nvim/backup//"}
 o.undofile = true

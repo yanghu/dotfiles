@@ -20,10 +20,9 @@ augroup('NumberToggle', function(g)
     pattern = '*',
     group = g,
     callback = function ()
-      if vim.bo.filetype == "help" then
-        return
+      if vim.opt.number:get() then
+        vim.opt.relativenumber = true
       end
-      vim.opt.relativenumber = true
     end
   })
   aucmd({ 'BufLeave', 'FocusLost', 'InsertEnter' }, {
@@ -54,6 +53,7 @@ augroup('close_with_q', function(g)
   aucmd("FileType", {
     pattern = {
       "PlenaryTestPopup",
+      "aerial",
       "help",
       "lspinfo",
       "notify",
