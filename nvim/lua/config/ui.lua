@@ -54,6 +54,20 @@ M.icons = {
     Unit = '󰺾 ', -- '󰑭 ', -- '󰜫 '  --' ',
     Value = '󰎠 ', -- ' ',
     Variable = ' ', -- '󰆧 ', -- ' ',
+  },
+  lazy = {
+    cmd = ' ',
+    config = ' ',
+    event = ' ',
+    ft = ' ',
+    import = ' ',
+    init = ' ',
+    keys = ' ',
+    plugin = ' ',
+    runtime = ' ',
+    source = ' ',
+    start = ' ',
+    task = ' ',
   }
 }
 

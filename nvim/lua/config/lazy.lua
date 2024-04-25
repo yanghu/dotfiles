@@ -27,27 +27,14 @@ require("lazy").setup({
   },
   ui = {
     border = require('config.ui').borders,
-    icons = {
-      cmd = ' ',
-      config = ' ',
-      event = ' ',
-      ft = ' ',
-      import = ' ',
-      init = ' ',
-      keys = ' ',
-      plugin = ' ',
-      runtime = ' ',
-      source = ' ',
-      start = ' ',
-      task = ' ',
-    }
+    icons = require('config.ui').lazy,
   },
   diff = {
     cmd = 'git'
   },
   checker = {
     enabled = true,
-    frequency = 3600*24,  -- check for updates every day.
+    frequency = 3600*24*7,  -- check for updates every week.
   },
   performance = {
     rtp = {

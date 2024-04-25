@@ -199,6 +199,22 @@ return {
             },
           },
         },
+        pickers = {
+          find_files = {
+            mappings = {
+              n = {
+                -- 'cd' to change dir when finding files
+                ["cd"] = function(prompt_bufnr)
+                  local selection = require("telescope.actions.state").get_selected_entry()
+                  local dir = vim.fn.fnamemodify(selection.path, ":p:h")
+                  require("telescope.actions").close(prompt_bufnr)
+                  -- Depending on what you want put `cd`, `lcd`, `tcd`
+                  vim.cmd(string.format("silent lcd %s", dir))
+                end,
+              }
+            }
+          }
+        },
         -- pickers = {},
         extensions = {
           ['ui-select'] = {
@@ -223,12 +239,13 @@ return {
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', function() builtin.find_files({ cwd = utils.buffer_dir() }) end, { desc = '[S]earch [F]iles in buffer dir' })
+      -- Find sibling files (in current folder of the buffer)
+      vim.keymap.set('n', '<leader>s.', function() builtin.find_files({ cwd = vim.fn.expand('%:p:h') }) end)
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 
       -- diagnostics
       vim.keymap.set('n', '<leader>dd', function() builtin.diagnostics({bufnr=0}) end, { desc = '[D]ocument [D]iagnostics'})
