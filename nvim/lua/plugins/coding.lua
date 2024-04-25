@@ -114,6 +114,13 @@ return {
             end
             end, { 'i', 's' }),
 
+          -- For choice node. inspired from
+          -- https://www.reddit.com/r/neovim/comments/tbtiy9/comment/i0bje36/
+          ['<C-e>'] = cmp.mapping(function()
+            if luasnip.choice_active() then
+              luasnip.change_choice(1)
+            end
+            end, { 'i', 's' }),
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
