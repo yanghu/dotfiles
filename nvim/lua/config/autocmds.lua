@@ -28,8 +28,10 @@ augroup('NumberToggle', function(g)
   })
   aucmd({ 'BufLeave', 'FocusLost', 'InsertEnter' }, {
     pattern = '*',
-    group = setnumber,
-    command = 'set norelativenumber',
+    group = g,
+    callback = function ()
+      vim.opt.relativenumber = false
+    end
   })
 end)
 
