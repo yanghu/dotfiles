@@ -48,3 +48,13 @@ require("bufferline").setup{
     diagnostics = "nvim_lsp",
   },
 }
+
+-- TODO: setup telescope grep keymappings for:
+--   * grep current project
+--   * grep current buffer's dir
+--   * glob grep?
+--   * grep current buffer lines
+--
+--   Grapple/Harpoon?
+--
+--   Setup snippets

@@ -39,6 +39,13 @@ nmap('<CR>', '<cmd>nohlsearch<CR>')
 -- Avoid going into ex mode
 nmap('Q', '<Nop>')
 
+-- Movements in interactive mode
+imap('<c-j>', '<c-o>j')
+imap('<c-k>', '<c-o>k')
+-- The following doesn't work. TODO: fix them
+imap('<c-h>', '<c-o>h')
+imap('<c-l>', '<c-o>l')
+
 -- Motion and Editing{{{2
 nmap('<C-y>', '3<C-y>')
 nmap('<C-e>', '3<C-e>')
