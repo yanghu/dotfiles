@@ -48,6 +48,7 @@ return {
         --     node_decremental = 'V',
         --   }
         -- },
+        ensure_installed = {"c", "lua", "vim", "markdown", "markdown_inline", "vimdoc", "query", "go", "python"},
         indent = {
           enable = true
         },

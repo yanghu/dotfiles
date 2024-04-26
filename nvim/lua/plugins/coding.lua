@@ -196,14 +196,13 @@ return {
       })
     end
   },-- }}}
-  { 'tpope/vim-unimpaired' ,
-    lazy = false,
-  },
+  { 'tpope/vim-unimpaired' , lazy = false, },
   {
     'tpope/vim-repeat',
     keys = {
       { '.' },
-    }},
+    }
+  },
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",

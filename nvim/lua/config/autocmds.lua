@@ -62,6 +62,7 @@ augroup('close_with_q', function(g)
       "spectre_panel",
       "startuptime",
       "tsplayground",
+      "trouble",
       "neotest-output",
       "checkhealth",
       "neotest-summary",
@@ -73,6 +74,7 @@ augroup('close_with_q', function(g)
       vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
       vim.opt_local.number = false
       vim.opt_local.relativenumber = false
+      vim.b.miniindentscope_disable = true
     end
   })
 end)

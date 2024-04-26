@@ -36,7 +36,70 @@ return {
       --  - and more!
       --
       require('lspconfig.ui.windows').default_options.border = require('config.ui').borders
+      -- Diagnostics Display
 
+      -- LSP handlers
+      vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help,
+        { border = require('config.ui').borders })
+      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover,
+        { border = require('config.ui').borders })
+
+      -- diagnostic icons
+      local diagnostic_signs = require('config.ui').icons.diagnostics
+      local diagnostic_severity_fullnames = { 'Error', 'Warning', 'Information', 'Hint', 'Ok' }
+      local diagnostic_severity_shortnames = { 'Error', 'Warn', 'Info', 'Hint', 'Ok' }
+      for index, icon in ipairs(diagnostic_signs) do
+        local fullname = diagnostic_severity_fullnames[index]
+        local shortname = diagnostic_severity_shortnames[index]
+
+        vim.fn.sign_define('DiagnosticSign' .. shortname, {
+          text = icon,
+          texthl = 'Diagnostic' .. shortname,
+          linehl = '',
+          numhl = '',
+        })
+
+        vim.fn.sign_define('LspDiagnosticsSign' .. fullname, {
+          text = icon,
+          texthl = 'LspDiagnosticsSign' .. fullname,
+          linehl = '',
+          numhl = '',
+        })
+      end
+
+      local enabled = true
+      local function toggle_diagnostics()
+        enabled = not enabled
+        if enabled then
+          vim.diagnostic.enable()
+          vim.notify('Diagnostics enabled', vim.log.levels.INFO, { title = '[LSP]' })
+        else
+          vim.diagnostic.disable()
+          vim.notify('Diagnostics disabled', vim.log.levels.INFO, { title = '[LSP]' })
+        end
+      end
+      vim.keymap.set('n', '[d', function() vim.diagnostic.goto_prev({ float = false }) end,
+        { desc = 'Diagnostic: got to previous error' })
+      vim.keymap.set('n', ']d', function() vim.diagnostic.goto_next({ float = false }) end,
+        { desc = 'Diagnostic: got to next error' })
+      vim.keymap.set('n', '<leader>dt', function() toggle_diagnostics() end, { desc = 'Diagnostics: toggle' })
+      vim.keymap.set('n', '<leader>df', vim.diagnostic.open_float, { desc = 'Diagnostics: open floating window' })
+      vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Diagnostics: populate location list' })
+      vim.keymap.set('n', '<leader>dq', vim.diagnostic.setqflist, { desc = 'Diagnostics: populate quickfix' })
+
+
+      vim.diagnostic.config({
+        float = {
+          border = require('config.ui').borders,
+          focusable = false,
+          header = '',
+          scope = 'line',
+          source = 'always'
+        },
+        virtual_text = {
+          source = 'always'
+        }
+      })
       --  This function gets run when an LSP attaches to a particular buffer.
       --    That is to say, every time a new file is opened that is associated with
       --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
@@ -174,3 +237,4 @@ return {
   },
 }
 
+-- vim: foldmethod=marker foldlevel=1

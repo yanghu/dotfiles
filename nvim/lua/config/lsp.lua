@@ -1,6 +1,12 @@
 local M = {}
 
 M.local_servers = {
+  bashls = {
+    filetypes = {
+      'sh',
+      'bash'
+    }
+  },
   clangd = {},
   gopls = {},
   pyright = {},
@@ -14,6 +20,7 @@ M.local_servers = {
   -- tsserver = {},
   --
   beancount = require("config.servers.beancount").config,
+  jsonls = {},
 
   lua_ls = {
     -- cmd = {...},
@@ -29,6 +36,8 @@ M.local_servers = {
       },
     },
   },
+  marksman = {},
+  vimls = {},
 }
 
 M.servers = M.local_servers

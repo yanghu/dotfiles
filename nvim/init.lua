@@ -11,45 +11,6 @@ require('config.keymaps')
 -- Themes
 vim.o.background = "dark" -- or "light" for light mode
 
--- vim.cmd([[colorscheme gruvbox]])
--- vim.cmd([[colorscheme kanagawa]])
-require('catppuccin').setup({
-  default_integrations = true,
-  integrations = {
-    aerial = true,
-    hop = true,
-    which_key = true,
-    navic = {
-      enabled = true,
-      custom_bg = "NONE"
-    }
-  }
-})
-vim.cmd([[colorscheme catppuccin]])
-
--- Lualine
-require('lualine').setup({
-  options = {
-    theme = "catppuccin",
-  },
-  sections = {
-    lualine_a = {
-      -- Paste indicator
-      { "[[]]", cond = function () return vim.opt.paste:get() end, },
-      "mode",
-    },
-    lualine_c = {
-      "filename",
-      {
-        "navic",
-        color_correction = nil,
-        navic_opts = nil
-      },
-    }
-  },
-  extensions = {'aerial', 'quickfix', 'trouble'},
-  winbar = {}
-})
 require("bufferline").setup{
   highlights = require("catppuccin.groups.integrations.bufferline").get(),
   options = {
@@ -67,3 +28,7 @@ require("bufferline").setup{
 --   Grapple/Harpoon?
 --
 --   Setup snippets
+--   
+--   nvim outline
+--   nvim lightbulb
+--

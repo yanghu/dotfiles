@@ -1,3 +1,4 @@
+local icons = require('config.ui').icons
 return {
   -- {{{2 fzf
   { "junegunn/fzf",
@@ -138,6 +139,19 @@ return {
       vim.o.timeoutlen = 300
     end,
     opts = {
+      plugins = {
+        presets = {
+          motions = false,
+          operators = false,
+        },
+      },
+      layout={
+        height = {max = 5},
+      },
+      triggers_blacklist = {
+        n = {"gf","gT", "gt", "gc"}
+      },
+
       -- your configuration comes here
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
@@ -274,7 +288,79 @@ return {
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },-- }}}
-  {'ethanholz/nvim-lastplace',
+  { "folke/trouble.nvim",-- {{{2
+    branch = "dev", -- IMPORTANT!
+    keys = {
+      {
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>xX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>cs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>cl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>xQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
+    },
+    opts = { use_diagnostic_signs = false }, -- for default options, refer to the configuration section for custom setup.
+  },-- }}}
+  {-- gitsigns.nvim {{{2
+    "lewis6991/gitsigns.nvim",
+    event = "VeryLazy",
+    opts = {
+      signs = {
+        add = { text = "▎" },
+        change = { text = "▎" },
+        delete = { text = "" },
+        topdelete = { text = "" },
+        changedelete = { text = "▎" },
+        untracked = { text = "▎" },
+      },
+      on_attach = function(buffer)
+        local gs = package.loaded.gitsigns
+
+        local function map(mode, l, r, desc)
+          vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
+        end
+
+        -- stylua: ignore start
+        map("n", "]h", gs.next_hunk, "Next Hunk")
+        map("n", "[h", gs.prev_hunk, "Prev Hunk")
+        map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+        map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+        map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
+        map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
+        map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
+        map("n", "<leader>ghp", gs.preview_hunk_inline, "Preview Hunk Inline")
+        map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
+        map("n", "<leader>ghd", gs.diffthis, "Diff This")
+        map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
+        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+      end,
+    },
+  },-- }}}
+
+  {'ethanholz/nvim-lastplace',-- {{{2
     config = function ()
       require('nvim-lastplace').setup{
         lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
@@ -283,16 +369,55 @@ return {
       }
     end,
     lazy = false,
-  },
+  },-- }}}
   {'tpope/vim-sleuth', lazy=false },
-  {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' }
-  },
-  {'akinsho/bufferline.nvim',
+  { 'nvim-lualine/lualine.nvim',-- {{{2
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    lazy = false,
+    opts = {
+      options = {
+        theme = "catppuccin",
+      },
+      sections = {
+        lualine_a = {
+          -- Paste indicator
+          { "[[]]", cond = function () return vim.opt.paste:get() end, },
+          "mode",
+        },
+        lualine_b = {
+          "branch",
+          {
+            "diff",
+            symbols = {added = icons.git.added, modified = icons.git.modified, removed = icons.git.removed}
+          },
+          "diagnostics"
+        },
+        lualine_c = {
+          "filename",
+          {
+            "navic",
+            color_correction = nil,
+            navic_opts = nil
+          },
+        }
+      },
+      extensions = {'aerial', 'quickfix', 'trouble'},
+      winbar = {}
+    },
+  },-- }}}
+  {'akinsho/bufferline.nvim',-- {{{2
     version = "*",
     dependencies = 'nvim-tree/nvim-web-devicons',
-  }
+    config = function ()
+      require("bufferline").setup{
+        highlights = require("catppuccin.groups.integrations.bufferline").get(),
+        options = {
+          numbers = "bufer_id",
+          diagnostics = "nvim_lsp",
+        },
+      }
+    end
+  }-- }}}
 }
 
 -- vim: foldmethod=marker foldlevel=1
