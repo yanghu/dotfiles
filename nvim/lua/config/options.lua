@@ -1,15 +1,15 @@
 local prefix = vim.env.XDG_CONFIG_HOME or vim.fn.expand("~/.config")
-local o =vim.opt
+local o = vim.opt
 
 o.mouse = ""
 o.backup = true
-o.backupdir = {prefix .. "/nvim/backup//"}
+o.backupdir = { prefix .. "/nvim/backup//" }
 o.undofile = true
 o.formatoptions = "crqn1j"
 
 -- Enable breakindent
 o.breakindent = true
-o.breakindentopt:append({shift=2})
+o.breakindentopt:append({ shift = 2 })
 
 -- Tabs
 o.tabstop = 2
@@ -23,12 +23,26 @@ o.smartcase = true
 
 -- Ignore files
 o.wildignore:append({
-  '*.o', '*.d', '00*', 'nohup.out', 'tags',
-  '.hs-tags', '*.hi', '*.gcno', '*.gcda', '*.fasl', '*.pyc'
+	"*.o",
+	"*.d",
+	"00*",
+	"nohup.out",
+	"tags",
+	".hs-tags",
+	"*.hi",
+	"*.gcno",
+	"*.gcda",
+	"*.fasl",
+	"*.pyc",
 })
 -- MacOS ignore
 o.wildignore:append({
-  '*/tmp/*', '*.so', '*.swp', '*.zip', '.DS_Store', '*/.metadata/*'
+	"*/tmp/*",
+	"*.so",
+	"*.swp",
+	"*.zip",
+	".DS_Store",
+	"*/.metadata/*",
 })
 o.wildignorecase = true
 
@@ -58,29 +72,27 @@ o.cursorline = true
 
 -- Display whitespaces
 o.list = true
-o.listchars = { tab = '» ', trail = '-', nbsp = '␣' }
+o.listchars = { tab = "» ", trail = "-", nbsp = "␣" }
 
 -- Preview substitutions live, as you type!
-o.inccommand = 'split'
+o.inccommand = "split"
 
 -- Minimal number of screen lines to keep above and below the cursor.
 o.scrolloff = 5
 
 -- Ruler
 o.ruler = true
-o.colorcolumn = '80'
+o.colorcolumn = "80"
 o.signcolumn = "yes"
 
 -- Don't show mode
 o.showmode = false
 
-
 vim.filetype.add({
-  extension = {
-    bean = 'beancount'
-  }
+	extension = {
+		bean = "beancount",
+	},
 })
-
 
 -- Themes
 vim.o.background = "dark" -- or "light" for light mode
