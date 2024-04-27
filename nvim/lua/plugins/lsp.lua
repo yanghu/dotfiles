@@ -39,10 +39,10 @@ return {
 			-- Diagnostics Display
 
 			-- LSP handlers (handled by noice, do not need these lines)
-			vim.lsp.handlers["textDocument/signatureHelp"] =
-				vim.lsp.with(vim.lsp.handlers.signature_help, { border = require("config.ui").borders })
-			vim.lsp.handlers["textDocument/hover"] =
-				vim.lsp.with(vim.lsp.handlers.hover, { border = require("config.ui").borders })
+			-- vim.lsp.handlers["textDocument/signatureHelp"] =
+			-- 	vim.lsp.with(vim.lsp.handlers.signature_help, { border = require("config.ui").borders })
+			-- vim.lsp.handlers["textDocument/hover"] =
+			-- 	vim.lsp.with(vim.lsp.handlers.hover, { border = require("config.ui").borders })
 
 			-- diagnostic icons
 			local diagnostic_signs = require("config.ui").icons.diagnostics

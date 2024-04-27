@@ -512,9 +512,27 @@ return {
 					command_palette = true, -- position the cmdline and popupmenu together
 					long_message_to_split = true, -- long messages will be sent to a split
 					inc_rename = false, -- enables an input dialog for inc-rename.nvim
-					lsp_doc_border = false, -- add a border to hover docs and signature help
+					lsp_doc_border = true, -- add a border to hover docs and signature help
 				},
 			})
+		end,
+	},
+
+	-- Session and dashboard
+	{
+		"goolord/alpha-nvim",
+		config = function()
+			require("alpha").setup(require("alpha.themes.theta").config)
+		end,
+		lazy = false,
+		enabled = false,
+	},
+	{
+		"mhinz/vim-startify",
+		lazy = false,
+		config = function()
+			-- Do not auto change dir to file opened from startify
+			vim.g.startify_change_to_dir = false
 		end,
 	},
 }
