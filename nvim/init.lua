@@ -8,9 +8,6 @@ require("config.options")
 require("config.autocmds")
 require("config.keymaps")
 
--- Themes
-vim.o.background = "dark" -- or "light" for light mode
-
 require("bufferline").setup({
 	highlights = require("catppuccin.groups.integrations.bufferline").get(),
 	options = {

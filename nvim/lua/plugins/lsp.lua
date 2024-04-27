@@ -38,7 +38,7 @@ return {
 			require("lspconfig.ui.windows").default_options.border = require("config.ui").borders
 			-- Diagnostics Display
 
-			-- LSP handlers
+			-- LSP handlers (handled by noice, do not need these lines)
 			vim.lsp.handlers["textDocument/signatureHelp"] =
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = require("config.ui").borders })
 			vim.lsp.handlers["textDocument/hover"] =
