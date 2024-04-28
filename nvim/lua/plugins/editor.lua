@@ -533,6 +533,7 @@ return {
 		config = function()
 			-- Do not auto change dir to file opened from startify
 			vim.g.startify_change_to_dir = false
+			vim.g.startify_change_to_vcs_root = true
 		end,
 	},
 }

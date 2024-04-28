@@ -7,7 +7,9 @@ M.local_servers = {
 			"bash",
 		},
 	},
-	clangd = {},
+	clangd = {
+		cmd = { "/usr/bin/clangd" },
+	},
 	gopls = {},
 	pyright = {},
 	-- rust_analyzer = {},
