@@ -284,10 +284,12 @@ return {
 			-- Enable Telescope extensions if they are installed
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
+			pcall(require("telescope").load_extension, "persisted")
 
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
 			local utils = require("telescope.utils")
+			local telescope = require("telescope")
 			-- Single-key maps
 			vim.keymap.set("n", "<leader>o", builtin.oldfiles, { desc = "[O]ld files" })
 			vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "Find open [B]uffers" })
@@ -307,6 +309,7 @@ return {
 			vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 			vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
 			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
+			vim.keymap.set("n", "<leader>sp", "<cmd>Telescope persisted<CR>", { desc = "[S]earch [P]rojects" })
 			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 
 			-- diagnostics
@@ -482,7 +485,7 @@ return {
 		end,
 	}, -- }}}
 	-- lazy.nvim
-	{
+	{ -- noice.nvim {{{
 		"folke/noice.nvim",
 		event = "VeryLazy",
 		opts = {
@@ -513,6 +516,28 @@ return {
 					long_message_to_split = true, -- long messages will be sent to a split
 					inc_rename = false, -- enables an input dialog for inc-rename.nvim
 					lsp_doc_border = true, -- add a border to hover docs and signature help
+				},
+			})
+		end,
+	}, -- }}}
+
+	-- Sessions
+	{
+		"olimorris/persisted.nvim",
+		lazy = false, -- make sure the plugin is always loaded at startup
+		config = function()
+			require("persisted").setup({
+				should_autosave = function()
+					-- do not autosave if the alpha dashboard is the current filetype
+					if vim.bo.filetype == "alpha" then
+						return false
+					end
+					return true
+				end,
+				telescope = {
+					mappings = {
+						copy_session = "<c-y>",
+					},
 				},
 			})
 		end,

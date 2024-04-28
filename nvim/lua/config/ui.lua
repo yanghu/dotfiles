@@ -106,12 +106,13 @@ M.alpha_config = function()
 
 	-- Set menu
 	startify.section.top_buttons.val = {
-		startify.button("e", " > New File", "<cmd>ene<CR>"),
-		startify.button("f", " > Find File", "<cmd>Telescope find_files<CR>"),
-		startify.button("o", " > Recent Files", "<cmd>Telescope oldfiles<CR>"),
-		startify.button("g", " > Find Word", "<cmd>Telescope live_grep<CR>"),
-		startify.button("t", " > Toggle file explorer", "<cmd>Neotree toggle current reveal_force_cwd<CR>"),
-		startify.button("s", " > Restore Session For Current Directory", "<cmd>SessionRestore<CR>"),
+		startify.button("e", " > New File", "<cmd>ene<CR>"),
+		startify.button("f", "󰈞 > Find File", "<cmd>Telescope find_files<CR>"),
+		startify.button("o", " > Recent Files", "<cmd>Telescope oldfiles<CR>"),
+		startify.button("g", "󰊄 > Live Grep", "<cmd>Telescope live_grep<CR>"),
+		startify.button("s", " > Restore Session For Current Directory", "<cmd>SessionLoad<CR>"),
+		startify.button("l", " > Restore Last Session", "<cmd>SessionLoadLast<CR>"),
+		startify.button("t", " > Toggle file explorer", "<cmd>Neotree toggle current reveal_force_cwd<CR>"),
 	}
 
 	-- Send config to alpha

@@ -34,7 +34,7 @@ wk.register({
 nmap("<CR>", "<cmd>nohlsearch<CR>")
 -- Avoid going into ex mode
 nmap("Q", "<Nop>")
-
+nmap("QQ", "<cmd>qa<CR>")
 -- Motion and Editing{{{2
 nmap("<C-y>", "3<C-y>")
 nmap("<C-e>", "3<C-e>")
