@@ -81,4 +81,44 @@ M.icons = {
 -- M.borders = { '┬', '─', '┬', '│', '┴', '─', '┴', '│' }
 M.borders = "rounded"
 
+-- Start up screen config
+M.alpha_config = function()
+	local alpha = require("alpha")
+	local startify = require("alpha.themes.startify")
+
+	startify.section.header.val = {
+		"                                                     ",
+		"  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
+		"  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
+		"  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
+		"  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
+		"  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
+		"  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
+		"                                                     ",
+	}
+
+	-- add margins to the top and left
+	startify.opts.layout[1].val = 2
+	startify.opts.opts.margin = 45
+
+	-- disable MRU
+	startify.section.mru.val = { { type = "padding", val = 0 } }
+
+	-- Set menu
+	startify.section.top_buttons.val = {
+		startify.button("e", " > New File", "<cmd>ene<CR>"),
+		startify.button("f", " > Find File", "<cmd>Telescope find_files<CR>"),
+		startify.button("o", " > Recent Files", "<cmd>Telescope oldfiles<CR>"),
+		startify.button("g", " > Find Word", "<cmd>Telescope live_grep<CR>"),
+		startify.button("t", " > Toggle file explorer", "<cmd>Neotree toggle current reveal_force_cwd<CR>"),
+		startify.button("s", " > Restore Session For Current Directory", "<cmd>SessionRestore<CR>"),
+	}
+
+	-- Send config to alpha
+	alpha.setup(startify.config)
+
+	-- Disable folding on alpha buffer
+	vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
+end
+
 return M

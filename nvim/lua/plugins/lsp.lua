@@ -1,5 +1,5 @@
 return {
-	{ -- LSP Configuration & Plugins
+	{ -- LSP Configuration & Plugins{{{2
 		"neovim/nvim-lspconfig",
 		event = "BufReadPre",
 		dependencies = {
@@ -246,7 +246,7 @@ return {
 				},
 			})
 		end,
-	},
+	}, -- }}}
 }
 
 -- vim: foldmethod=marker foldlevel=1

@@ -522,13 +522,15 @@ return {
 	{
 		"goolord/alpha-nvim",
 		config = function()
-			require("alpha").setup(require("alpha.themes.theta").config)
+			-- require("alpha").setup(require("alpha.themes.theta").config)
+			require("config.ui").alpha_config()
 		end,
 		lazy = false,
-		enabled = false,
+		-- enabled = false,
 	},
 	{
 		"mhinz/vim-startify",
+		enabled = false,
 		lazy = false,
 		config = function()
 			-- Do not auto change dir to file opened from startify
