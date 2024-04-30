@@ -1,5 +1,36 @@
 local icons = require("config.ui").icons
 return {
+	-- Keymap helper
+	-- {{{2 which-key.nvim
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+		end,
+		opts = {
+			plugins = {
+				presets = {
+					motions = false,
+					operators = false,
+				},
+			},
+			layout = {
+				height = { max = 5 },
+			},
+			triggers_blacklist = {
+				n = { "gf", "gT", "gt", "gc" },
+			},
+
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
+	},
+	-- }}}2
+
+	-- Search
 	-- {{{2 fzf
 	{ "junegunn/fzf", tag = "0.50.0", pin = true, build = "./install --all --xdg" },
 	{
@@ -174,35 +205,6 @@ return {
 		end,
 	},
 	-- }}}2
-	-- {{{2 which-key.nvim
-	{
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-		init = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
-		end,
-		opts = {
-			plugins = {
-				presets = {
-					motions = false,
-					operators = false,
-				},
-			},
-			layout = {
-				height = { max = 5 },
-			},
-			triggers_blacklist = {
-				n = { "gf", "gT", "gt", "gc" },
-			},
-
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
-		},
-	},
-	-- }}}2
-
 	{ -- Telescope(files, lsp, etc){{{2
 		"nvim-telescope/telescope.nvim",
 		event = "VimEnter",
@@ -346,8 +348,9 @@ return {
 			end, { desc = "[S]earch [Config] files" })
 		end,
 	}, -- }}}
-	{
-		"folke/trouble.nvim", -- {{{2
+	-- Browsing: diagnostics, lists, locations
+	{ -- folke/trouble.nvim {{{2
+		"folke/trouble.nvim",
 		branch = "dev", -- IMPORTANT! v3
 		keys = {
 			{
@@ -412,8 +415,8 @@ return {
 		}, -- for default options, refer to the configuration section for custom setup.
 	}, -- }}}
 
-	{
-		"ethanholz/nvim-lastplace", -- {{{2
+	{ -- ethanholz/nvim-lastplace {{{2
+		"ethanholz/nvim-lastplace",
 		config = function()
 			require("nvim-lastplace").setup({
 				lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
@@ -426,7 +429,7 @@ return {
 	{ "tpope/vim-sleuth", lazy = false },
 
 	-- Sessions
-	{
+	{ -- olimorris/persisted.nvim {{{
 		"olimorris/persisted.nvim",
 		lazy = false, -- make sure the plugin is always loaded at startup
 		config = function()
@@ -454,10 +457,10 @@ return {
 				},
 			})
 		end,
-	},
+	}, -- }}}
 
-	-- Session and dashboard
-	{
+	-- Dashboard
+	{ -- goolord/alpha-nvim {{{2
 		"goolord/alpha-nvim",
 		config = function()
 			-- require("alpha").setup(require("alpha.themes.theta").config)
@@ -465,8 +468,8 @@ return {
 		end,
 		lazy = false,
 		-- enabled = false,
-	},
-	{
+	}, -- }}}
+	{ -- mhinz/vim-startify {{{2
 		"mhinz/vim-startify",
 		enabled = false,
 		lazy = false,
@@ -475,8 +478,10 @@ return {
 			vim.g.startify_change_to_dir = false
 			vim.g.startify_change_to_vcs_root = true
 		end,
-	},
-	{
+	}, -- }}}
+
+	-- Misc
+	{ -- iamcco/markdown-preview.nvim {{{2
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 		ft = { "markdown" },
@@ -491,7 +496,7 @@ return {
 				desc = "Markdown Preview",
 			},
 		},
-	},
+	}, -- }}}
 }
 
 -- vim: foldmethod=marker foldlevel=1

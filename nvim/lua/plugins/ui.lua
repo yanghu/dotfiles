@@ -1,7 +1,9 @@
+local icons = require("config.ui").icons
 return {
 	{ -- akinsho/bufferline.nvim {{{2
 		"akinsho/bufferline.nvim",
 		version = "*",
+		event = "VeryLazy",
 		dependencies = "nvim-tree/nvim-web-devicons",
 		config = function()
 			require("bufferline").setup({
@@ -13,8 +15,8 @@ return {
 			})
 		end,
 	}, -- }}}
-	{
-		"lukas-reineke/indent-blankline.nvim", -- {{{2
+	{ -- lukas-reineke/indent-blankline.nvim {{{2
+		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
 		opts = {
 			indent = {
@@ -43,7 +45,8 @@ return {
 	{ "echasnovski/mini.indentscope", version = "*", config = true, ft = { "lua", "python", "c", "go", "java" } },
 	{ -- noice.nvim {{{
 		"folke/noice.nvim",
-		event = "VeryLazy",
+		-- event = "VeryLazy",
+		lazy = false,
 		opts = {
 			-- add any options here
 		},
@@ -74,6 +77,19 @@ return {
 					lsp_doc_border = true, -- add a border to hover docs and signature help
 				},
 			})
+			local lualine_x = require("lualine").get_config().sections.lualine_x
+			local merged_line = vim.tbl_deep_extend("force", lualine_x, {
+				{
+					require("noice").api.statusline.mode.get,
+					cond = require("noice").api.statusline.mode.has,
+					color = { fg = "#ff9e64" },
+				},
+			})
+			require("lualine").setup({
+				sections = {
+					lualine_x = merged_line,
+				},
+			})
 		end,
 		-- stylua: ignore
 		keys = {
@@ -86,9 +102,9 @@ return {
 			{ "<c-b>",       function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true,              expr = true, desc = "Scroll Backward", mode = { "i", "n", "s" } },
 		},
 	}, -- }}}
-	{
-		"nvim-lualine/lualine.nvim", -- {{{2
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+	{ -- nvim-lualine/lualine.nvim {{{2
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons", "folke/noice.nvim" },
 		lazy = false,
 		opts = {
 			options = {
