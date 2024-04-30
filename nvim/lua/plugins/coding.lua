@@ -50,10 +50,6 @@ return {
 				end,
 				desc = "Hop 2char",
 			},
-			-- { "f", function () require('hop').hint_char1({direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only=true}) end, desc= "Hop f" },
-			-- { "F", function () require('hop').hint_char1({direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only=true}) end, desc= "Hop F" },
-			-- { "t", function () require('hop').hint_char1({direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only=true, hint_offset = -1}) end, desc= "Hop t" },
-			-- { "T", function () require('hop').hint_char1({direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only=true, hint_offset = -1}) end, desc= "Hop T" },
 		},
 	}, -- }}}
 
@@ -216,6 +212,7 @@ return {
 		opts = {
 			modes = {
 				search = { enabled = false },
+				char = { enabled = false },
 			},
 			label = {
 				rainbow = {
@@ -223,16 +220,16 @@ return {
 				},
 			},
 		},
-    -- stylua: ignore
-    keys = {
-      -- { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
-      -- jump to scope
-      { "<leader>n",   mode = { "n" }, function() require("flash").treesitter({jump={pos="start"}, label={after=false}}) end,  desc = "Flash Treesitter" },
-    },
+		-- stylua: ignore
+		keys = {
+			-- { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+			{ "S",         mode = { "n", "x", "o" }, function() require("flash").treesitter() end,                                          desc = "Flash Treesitter" },
+			{ "r",         mode = "o",               function() require("flash").remote() end,                                              desc = "Remote Flash" },
+			{ "R",         mode = { "n", "o", "x" }, function() require("flash").treesitter_search() end,                                   desc = "Treesitter Search" },
+			-- { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },j
+			-- jump to scope
+			{ "<leader>n", mode = { "n" },           function() require("flash").treesitter({ jump = { pos = "start" }, label = { after = false } }) end, desc = "Flash Treesitter" },
+		},
 	}, -- }}}
 	{ -- nvim-surround {{{
 		"kylechui/nvim-surround",
@@ -258,42 +255,6 @@ return {
 		-- use opts = {} for passing setup options
 		-- this is equalent to setup({}) function
 		-- See https://github.com/windwp/nvim-autopairs?tab=readme-ov-file#override-default-values
-	},
-
-	-- Formatting
-	{
-		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
-		cmd = { "ConformInfo" },
-		keys = {
-			{
-				"<localleader>f",
-				function()
-					require("conform").format({ async = true, lsp_fallback = true })
-				end,
-				mode = "",
-				desc = "Format buffer",
-			},
-		},
-		opts = {
-			-- Define your formatters
-			formatters_by_ft = {
-				lua = { "stylua" },
-				python = { "isort", "black" },
-				javascript = { { "prettierd", "prettier" } },
-			},
-			-- Set up format-on-save
-			format_on_save = { timeout_ms = 500, lsp_fallback = true },
-			-- Customize formatters
-			formatters = {
-				shfmt = {
-					prepend_args = { "-i", "2" },
-				},
-			},
-		},
-		init = function()
-			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-		end,
 	},
 }
 

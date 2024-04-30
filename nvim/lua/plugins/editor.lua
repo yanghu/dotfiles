@@ -241,19 +241,24 @@ return {
 
 			-- [[ Configure Telescope ]]
 			-- See `:help telescope` and `:help telescope.setup()`
+			local actions = require("telescope.actions")
 			require("telescope").setup({
 				defaults = {
 					previewer = true,
 					layout_strategy = "bottom_pane",
 					sorting_strategy = "ascending",
 					path_display = {
-						shorten = 2,
+						-- shorten = 2,
 					},
 					mappings = {
 						i = {
 							["<c-g>"] = "to_fuzzy_refine",
 							["<c-j>"] = "move_selection_next",
 							["<c-k>"] = "move_selection_previous",
+							["<c-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+						},
+						n = {
+							["<c-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
 						},
 					},
 				},
@@ -336,47 +341,75 @@ return {
 			end, { desc = "[S]earch [/] in Open Files" })
 
 			-- Shortcut for searching your Neovim configuration files
-			vim.keymap.set("n", "<leader>sn", function()
+			vim.keymap.set("n", "<leader>sc", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
-			end, { desc = "[S]earch [N]eovim files" })
+			end, { desc = "[S]earch [Config] files" })
 		end,
 	}, -- }}}
 	{
 		"folke/trouble.nvim", -- {{{2
-		branch = "dev", -- IMPORTANT!
+		branch = "dev", -- IMPORTANT! v3
 		keys = {
 			{
 				"<leader>xx",
 				"<cmd>Trouble diagnostics toggle<cr>",
+				-- "<cmd>Trouble preview_float toggle<cr>",
+				-- "<cmd>Trouble preview_split toggle<cr>",
 				desc = "Diagnostics (Trouble)",
 			},
 			{
 				"<leader>xX",
 				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				-- "<cmd>Trouble preview_split toggle filter.buf=0<cr>",
 				desc = "Buffer Diagnostics (Trouble)",
 			},
 			{
-				"<leader>cs",
+				"<leader>xs",
 				"<cmd>Trouble symbols toggle focus=false<cr>",
 				desc = "Symbols (Trouble)",
 			},
 			{
-				"<leader>cl",
+				"<leader>xp",
 				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
 				desc = "LSP Definitions / references / ... (Trouble)",
 			},
 			{
-				"<leader>xL",
+				"<leader>xl",
 				"<cmd>Trouble loclist toggle<cr>",
 				desc = "Location List (Trouble)",
 			},
 			{
-				"<leader>xQ",
+				"<leader>xq",
 				"<cmd>Trouble qflist toggle<cr>",
 				desc = "Quickfix List (Trouble)",
 			},
 		},
-		opts = { use_diagnostic_signs = false }, -- for default options, refer to the configuration section for custom setup.
+		opts = {
+			modes = {
+				preview_float = {
+					mode = "diagnostics",
+					preview = {
+						type = "float",
+						relative = "editor",
+						border = "rounded",
+						title = "Preview",
+						title_pos = "center",
+						position = { 0, -2 },
+						size = { width = 0.5, height = 0.4 },
+						zindex = 200,
+					},
+				},
+				preview_split = {
+					mode = "diagnostics",
+					preview = {
+						type = "split",
+						relative = "win",
+						position = "right",
+						size = 0.5,
+					},
+				},
+			},
+		}, -- for default options, refer to the configuration section for custom setup.
 	}, -- }}}
 	{ -- gitsigns.nvim {{{2
 		"lewis6991/gitsigns.nvim",
@@ -397,19 +430,19 @@ return {
 					vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
 				end
 
-        -- stylua: ignore start
-        map("n", "]h", gs.next_hunk, "Next Hunk")
-        map("n", "[h", gs.prev_hunk, "Prev Hunk")
-        map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-        map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
-        map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
-        map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
-        map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
-        map("n", "<leader>ghp", gs.preview_hunk_inline, "Preview Hunk Inline")
-        map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
-        map("n", "<leader>ghd", gs.diffthis, "Diff This")
-        map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
-        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+				-- stylua: ignore start
+				map("n", "]h", gs.next_hunk, "Next Hunk")
+				map("n", "[h", gs.prev_hunk, "Prev Hunk")
+				map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+				map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+				map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
+				map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
+				map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
+				map("n", "<leader>ghp", gs.preview_hunk_inline, "Preview Hunk Inline")
+				map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
+				map("n", "<leader>ghd", gs.diffthis, "Diff This")
+				map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
+				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
 			end,
 		},
 	}, -- }}}
@@ -519,6 +552,16 @@ return {
 				},
 			})
 		end,
+		-- stylua: ignore
+		keys = {
+			-- { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
+			{ "<leader>snl", function() require("noice").cmd("last") end,                                   desc = "Noice Last Message" },
+			{ "<leader>snh", function() require("noice").cmd("history") end,                                desc = "Noice History" },
+			{ "<leader>sna", function() require("noice").cmd("all") end,                                    desc = "Noice All" },
+			{ "<leader>snd", function() require("noice").cmd("dismiss") end,                                desc = "Dismiss All" },
+			{ "<c-f>",       function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end,  silent = true,              expr = true, desc = "Scroll Forward",  mode = { "i", "n", "s" } },
+			{ "<c-b>",       function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true,              expr = true, desc = "Scroll Backward", mode = { "i", "n", "s" } },
+		},
 	}, -- }}}
 
 	-- Sessions
@@ -531,6 +574,15 @@ return {
 					-- do not autosave if the alpha dashboard is the current filetype
 					if vim.bo.filetype == "alpha" then
 						return false
+					end
+					for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+						-- Don't save while there's any 'nofile' buffer open.
+						if
+							vim.api.nvim_get_option_value("buftype", { buf = buf }) == ""
+							and vim.api.nvim_buf_get_name(buf) == ""
+						then
+							return false
+						end
 					end
 					return true
 				end,
@@ -562,6 +614,22 @@ return {
 			vim.g.startify_change_to_dir = false
 			vim.g.startify_change_to_vcs_root = true
 		end,
+	},
+	{
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		ft = { "markdown" },
+		build = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+		keys = {
+			{
+				"<leader>cp",
+				ft = "markdown",
+				"<cmd>MarkdownPreviewToggle<cr>",
+				desc = "Markdown Preview",
+			},
+		},
 	},
 }
 

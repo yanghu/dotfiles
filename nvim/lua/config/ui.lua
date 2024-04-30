@@ -103,16 +103,16 @@ M.alpha_config = function()
 
 	-- disable MRU
 	startify.section.mru.val = { { type = "padding", val = 0 } }
-
 	-- Set menu
 	startify.section.top_buttons.val = {
 		startify.button("e", " > New File", "<cmd>ene<CR>"),
 		startify.button("f", "󰈞 > Find File", "<cmd>Telescope find_files<CR>"),
 		startify.button("o", " > Recent Files", "<cmd>Telescope oldfiles<CR>"),
-		startify.button("g", "󰊄 > Live Grep", "<cmd>Telescope live_grep<CR>"),
-		startify.button("s", " > Restore Session For Current Directory", "<cmd>SessionLoad<CR>"),
-		startify.button("l", " > Restore Last Session", "<cmd>SessionLoadLast<CR>"),
-		startify.button("t", " > Toggle file explorer", "<cmd>Neotree toggle current reveal_force_cwd<CR>"),
+		startify.button("g", "󱎸 > Live Grep", "<cmd>Telescope live_grep<CR>"),
+		startify.button("s", "󰪺 > Restore Session For Current Directory", "<cmd>SessionLoad<CR>"),
+		startify.button("l", "󰖲 > Restore Last Session", "<cmd>SessionLoadLast<CR>"),
+		startify.button("p", "󰖲 > Recent Sessions", "<cmd>Telescope persisted<CR>"),
+		startify.button("t", "󰙅 > Toggle file explorer", "<cmd>Neotree toggle current reveal_force_cwd<CR>"),
 	}
 
 	-- Send config to alpha
