@@ -165,7 +165,7 @@ return {
 					--  See `:help K` for why this keymap.
 					nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 
-					nmap("gs", vim.lsp.buf.signature_help, "Signature Help")
+					nmap("gK", vim.lsp.buf.signature_help, "Signature Help")
 					imap("<c-s>", vim.lsp.buf.signature_help, "Signature Help")
 
 					-- WARN: This is not Goto Definition, this is Goto Declaration.

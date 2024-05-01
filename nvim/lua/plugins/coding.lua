@@ -1,5 +1,28 @@
 return {
 	{ "numToStr/Comment.nvim", opts = {}, lazy = false },
+	{
+		"ggandor/leap.nvim",
+		keys = {
+			{ "s", "<Plug>(leap)", desc = "Leap" },
+			{ "gs", "<Plug>(leap-from-window)", desc = "Leap from window" },
+		},
+		opts = {
+			-- case_sensitive = false,
+			equivalence_classes = { " \t\r\n", "([{", ")]}", "'\"`" },
+			max_phase_one_targets = nil,
+			highlight_unlabeled_phase_one_targets = false,
+			max_highlighted_traversal_targets = 10,
+			substitute_chars = {},
+			safe_labels = "sfnut/SFNLHMUGTZ?",
+			labels = "sfnjklhodweimbuyvrgtaqpcxz/SFNJKLHODWEIMBUYVRGTAQPCXZ?",
+			special_keys = {
+				next_target = "<enter>",
+				prev_target = "<backspace>",
+				next_group = "<space>",
+				prev_group = "<backspace>",
+			},
+		},
+	},
 	{ -- hop.nvim {{{2
 		"smoka7/hop.nvim",
 		version = "*",
@@ -43,13 +66,13 @@ return {
 				end,
 				desc = "Hop Words",
 			},
-			{
-				"s",
-				function()
-					require("hop").hint_char2({})
-				end,
-				desc = "Hop 2char",
-			},
+			-- {
+			-- 	"s",
+			-- 	function()
+			-- 		require("hop").hint_char2({})
+			-- 	end,
+			-- 	desc = "Hop 2char",
+			-- },
 		},
 	}, -- }}}
 
