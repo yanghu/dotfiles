@@ -35,6 +35,7 @@ return {
 	{ "junegunn/fzf", tag = "0.50.0", pin = true, build = "./install --all --xdg" },
 	{
 		"ibhagwan/fzf-lua",
+		branch = "main",
 		-- stylua: ignore
 		keys = {
 			{ "<Leader>F", function() require("fzf-lua").builtin() end, desc = "Fzf: builtin"},
@@ -164,6 +165,7 @@ return {
 				},
 				files = {
 					prompt = "Files❯ ",
+					path_shorten = 4,
 				},
 				filetypes = {
 					winopts = {
@@ -189,7 +191,12 @@ return {
 				grep = {
 					-- cmd = 'ugrep -RIjnkzs --hidden --ignore-files --exclude-dir=".git"',
 					rg_opts = "--column --trim --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
-					winopts = right_column,
+					path_shorten = 4,
+					winopts = bottom_row,
+					-- winopts = {
+					-- 	fullscreen = true,
+					-- },
+					formatter = "path.filename_first",
 				},
 				highlights = {
 					winopts = right_column,
