@@ -91,11 +91,9 @@ o.showmode = false
 vim.filetype.add({
 	extension = {
 		bean = "beancount",
+		keymap = "c",
 	},
 })
 
 -- Themes
 vim.o.background = "dark" -- or "light" for light mode
-
-vim.cmd([[hi TreesitterContextBottom gui=underline guisp=Grey]])
-vim.cmd([[hi TreesitterContextLineNumberBottom gui=underline guisp=Grey]])

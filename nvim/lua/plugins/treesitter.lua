@@ -7,15 +7,19 @@ return {
 			"nvim-treesitter/nvim-treesitter-refactor",
 			"windwp/nvim-ts-autotag",
 			"andymass/vim-matchup",
-			{
+			{ -- nvim-treesitter/nvim-treesitter-context {{{2
 				"nvim-treesitter/nvim-treesitter-context",
 				config = function()
 					require("treesitter-context").setup({
 						multiline_threshold = 1, -- Maximum number of lines to show for a single context
 					})
+
+					-- Add a line between context and normal text.
+					vim.cmd([[hi TreesitterContextBottom gui=underline guisp=Grey]])
+					vim.cmd([[hi TreesitterContextLineNumberBottom gui=underline guisp=Grey]])
 				end,
-			},
-			{
+			}, -- }}}
+			{ -- HiPhish/rainbow-delimiters.nvim {{{2
 				"HiPhish/rainbow-delimiters.nvim",
 				event = "VeryLazy",
 				config = function()
@@ -29,7 +33,7 @@ return {
 						},
 					}
 				end,
-			},
+			}, -- }}}
 		},
 		config = function()
 			require("nvim-treesitter.configs").setup({
@@ -40,15 +44,6 @@ return {
 				highlight = {
 					enable = true,
 				},
-				-- incremental_selection = {
-				--   enable = true,
-				--   keymaps = {
-				--     init_selection = '<CR>',
-				--     node_incremental = 'v',
-				--     scope_incremental = 'grc',
-				--     node_decremental = 'V',
-				--   }
-				-- },
 				ensure_installed = {
 					"c",
 					"lua",

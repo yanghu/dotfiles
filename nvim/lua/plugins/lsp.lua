@@ -72,14 +72,13 @@ return {
 				})
 			end
 
-			local enabled = true
 			local function toggle_diagnostics()
-				enabled = not enabled
-				if enabled then
-					vim.diagnostic.enable()
+				local enabled = not vim.diagnostic.is_disabled(0)
+				if not enabled then
+					vim.diagnostic.enable(0)
 					vim.notify("Diagnostics enabled", vim.log.levels.INFO, { title = "[LSP]" })
 				else
-					vim.diagnostic.disable()
+					vim.diagnostic.disable(0)
 					vim.notify("Diagnostics disabled", vim.log.levels.INFO, { title = "[LSP]" })
 				end
 			end
@@ -89,9 +88,7 @@ return {
 			vim.keymap.set("n", "]d", function()
 				vim.diagnostic.goto_next({ float = false })
 			end, { desc = "Diagnostic: got to next error" })
-			vim.keymap.set("n", "<leader>dt", function()
-				toggle_diagnostics()
-			end, { desc = "Diagnostics: toggle" })
+			vim.keymap.set("n", "<leader>dt", toggle_diagnostics, { desc = "Diagnostics: toggle" })
 			vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float, { desc = "Diagnostics: open floating window" })
 			vim.keymap.set(
 				"n",

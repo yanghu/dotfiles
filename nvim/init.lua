@@ -13,6 +13,8 @@ require("config.keymaps")
 --   * grep current buffer's dir
 --   * glob grep?
 --   * grep current buffer lines
+--   * grep Git commits/bcommits,etc.
+--   * Find file in git project
 --
 --   Grapple/Harpoon?
 --
