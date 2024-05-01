@@ -108,8 +108,8 @@ M.alpha_config = function()
 		startify.button("e", " > New File", "<cmd>ene<CR>"),
 		-- startify.button("f", "󰈞 > Find File", "<cmd>Telescope find_files<CR>"),
 		startify.button("f", "󰈞 > Find File", "<cmd>FzfLua files<CR>"), -- use fzf which is faster
-		startify.button("o", " > Recent Files", "<cmd>Telescope oldfiles<CR>"),
-		startify.button("g", "󱎸 > Live Grep", "<cmd>Telescope live_grep<CR>"),
+		startify.button("o", " > Recent Files", "<cmd>FzfLua oldfiles<CR>"),
+		startify.button("g", "󱎸 > Live Grep", "<cmd>FzfLua live_grep_glob<CR>"),
 		startify.button("s", "󰪺 > Restore Session For Current Directory", "<cmd>SessionLoad<CR>"),
 		startify.button("l", "󰖲 > Restore Last Session", "<cmd>SessionLoadLast<CR>"),
 		startify.button("p", "󰖲 > Recent Sessions", "<cmd>Telescope persisted<CR>"),

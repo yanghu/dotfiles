@@ -10,7 +10,7 @@ return {
 			-- case_sensitive = false,
 			equivalence_classes = { " \t\r\n", "([{", ")]}", "'\"`" },
 			max_phase_one_targets = nil,
-			highlight_unlabeled_phase_one_targets = false,
+			highlight_unlabeled_phase_one_targets = true,
 			max_highlighted_traversal_targets = 10,
 			substitute_chars = {},
 			safe_labels = "sfnut/SFNLHMUGTZ?",
