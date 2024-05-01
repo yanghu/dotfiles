@@ -31,11 +31,12 @@ return {
 	-- }}}2
 
 	-- Search
-	-- {{{2 fzf
+	--  fzf {{{2
 	{ "junegunn/fzf", tag = "0.50.0", pin = true, build = "./install --all --xdg" },
 	{
 		"ibhagwan/fzf-lua",
 		branch = "main",
+		event = "VimEnter",
 		-- stylua: ignore
 		keys = {
 			{ "<Leader>F", function() require("fzf-lua").builtin() end, desc = "Fzf: builtin"},
@@ -43,23 +44,24 @@ return {
 			-- { '<Leader>c', function() require('fzf-lua').colorschemes() end, desc = 'Fzf: colorschemes' },
 			{ '<Leader>f', function() require('fzf-lua').files() end, desc = 'Fzf: files' },
 			{ '<Leader>o', function() require('fzf-lua').oldfiles() end, desc = 'Fzf: oldfiles' },
-			-- { '<Leader>h', function() require('fzf-lua').help_tags() end, desc = 'Fzf: help' },
+			{ '<Leader>h', function() require('fzf-lua').help_tags() end, desc = 'Fzf: help' },
 			{ '<Leader>sm', function() require('fzf-lua').man_pages() end, desc = '[S]earch [M]an pages' },
+			{ '<Leader>sk', function() require('fzf-lua').keymaps() end, desc = 'Fzf: keymaps' },
+			-- Files files in same folder of current buffer
+			{ '<Leader>s.', function() require('fzf-lua').files({ cwd = vim.fn.expand("%:p:h") }) end, desc = 'Fzf: Files in buffer dir' },
 			-- { '<Leader>t', function() require('fzf-lua').tabs() end, desc = 'Fzf: tabs' },
-			{
-				"<Leader>lb",
-				function()
-					require("fzf-lua").lgrep_curbuf()
-				end,
-				desc = "Fzf: grep current buffer lines",
-			},
-			{
-				"<Leader>/",
-				function()
-					require("fzf-lua").live_grep_glob()
-				end,
-				desc = "Fzf: live grep all files",
-			},
+			{ "<Leader>sb", function() require("fzf-lua").blines() end,
+				desc = "Fzf: current buffer lines", },
+			{ "<Leader>sa", function() require("fzf-lua").lines() end,
+				desc = "Fzf: all open buffer lines", },
+			{ "<Leader>/", function() require("fzf-lua").live_grep_glob() end,
+				desc = "Fzf: live grep all files", },
+			{ "<Leader>sw", function() require("fzf-lua").grep_cword() end,
+				desc = "Fzf: Grep Current word", },
+			{ "<Leader>sW", function() require("fzf-lua").grep_cWORD() end,
+				desc = "Fzf: Grep Current WORD", },
+			{ "<Leader>sw", function() require("fzf-lua").grep_visual() end,
+				desc = "Fzf: Grep vislau selection", mode="v"},
 			{
 				"<Leader>gf",
 				function()
@@ -97,7 +99,6 @@ return {
 			},
 			-- { '<Leader>fc', function() require('fzf-lua').command_history() end, desc = 'Fzf: command history' },
 			-- { '<Leader>fh', function() require('fzf-lua').highlights() end, desc = 'Fzf: highlights' },
-			-- { '<Leader>fk', function() require('fzf-lua').keymaps() end, desc = 'Fzf: keymaps' },
 			-- { '<Leader>fm', function() require('fzf-lua').marks() end, desc = 'Fzf: marks' },
 			-- { '<Leader>fq', function() require('fzf-lua').quickfix() end, desc = 'Fzf: quickfix' },
 			-- { '<Leader>fr', function() require('fzf-lua').registers() end, desc = 'Fzf: registers' },
@@ -200,6 +201,11 @@ return {
 				},
 				highlights = {
 					winopts = right_column,
+				},
+				keymaps = {
+					actions = {
+						["default"] = require("fzf-lua.actions").keymap_edit,
+					},
 				},
 				spell_suggest = {
 					winopts = {
@@ -351,17 +357,17 @@ return {
 			-- vim.keymap.set("n", "<leader>o", builtin.oldfiles, { desc = "[O]ld files" })
 			-- vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "Find open [B]uffers" })
 			-- vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Search cwd [F]iles" })
-			vim.keymap.set("n", "<leader>h", builtin.help_tags, { desc = "[H]elp" })
+			-- vim.keymap.set("n", "<leader>h", builtin.help_tags, { desc = "[H]elp" })
 
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-			vim.keymap.set("n", "<leader>sf", function()
-				builtin.find_files({ cwd = utils.buffer_dir() })
-			end, { desc = "[S]earch [F]iles in buffer dir" })
+			-- vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
+			-- vim.keymap.set("n", "<leader>sf", function()
+			-- 	builtin.find_files({ cwd = utils.buffer_dir() })
+			-- end, { desc = "[S]earch [F]iles in buffer dir" })
 			-- Find sibling files (in current folder of the buffer)
-			vim.keymap.set("n", "<leader>s.", function()
-				builtin.find_files({ cwd = vim.fn.expand("%:p:h") })
-			end)
+			-- vim.keymap.set("n", "<leader>s.", function()
+			-- 	builtin.find_files({ cwd = vim.fn.expand("%:p:h") })
+			-- end)
 			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 			vim.keymap.set(
 				"n",
