@@ -229,13 +229,13 @@ return {
 		end,
 	},
 	-- }}}2
-	{ -- Telescope(files, lsp, etc){{{2
+	{ -- Telescope(files, lsp, etc) {{{2
 		"nvim-telescope/telescope.nvim",
 		event = "VimEnter",
 		branch = "0.1.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			{ -- nvim-telescope/telescope-fzf-native.nvim {{{2
+			{ -- nvim-telescope/telescope-fzf-native.nvim {{{3
 				"nvim-telescope/telescope-fzf-native.nvim",
 				-- If encountering errors, see telescope-fzf-native README for installation instructions
 				-- This plugin adds support for full FZF syntax in fuzzy search:
@@ -256,7 +256,7 @@ return {
 			}, -- }}}
 			{ "nvim-telescope/telescope-ui-select.nvim" },
 
-			{ -- nvim-telescope/telescope-live-grep-args.nvim {{{2
+			{ -- nvim-telescope/telescope-live-grep-args.nvim {{{3
 				"nvim-telescope/telescope-live-grep-args.nvim",
 				-- This will not install any breaking changes.
 				-- For major updates, this must be adjusted manually.
@@ -457,6 +457,12 @@ return {
 			},
 		},
 		opts = {
+			preview = {
+				type = "main",
+				wo = {
+					foldenable = false,
+				},
+			},
 			modes = {
 				preview_float = {
 					mode = "diagnostics",
