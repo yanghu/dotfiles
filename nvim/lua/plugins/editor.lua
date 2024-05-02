@@ -39,75 +39,72 @@ return {
 		event = "VimEnter",
 		-- stylua: ignore
 		keys = {
-			{ "<Leader>F", function() require("fzf-lua").builtin() end, desc = "Fzf: builtin"},
-			{ '<Leader>b', function() require('fzf-lua').buffers() end, desc = '[B]uffers' },
-			-- { '<Leader>c', function() require('fzf-lua').colorschemes() end, desc = 'Fzf: colorschemes' },
-			{ '<Leader>f', function() require('fzf-lua').files() end, desc = 'Fzf: files' },
-			{ '<Leader>o', function() require('fzf-lua').oldfiles() end, desc = 'Fzf: oldfiles' },
-			{ '<Leader>h', function() require('fzf-lua').help_tags() end, desc = 'Fzf: help' },
-			{ '<Leader>sm', function() require('fzf-lua').man_pages() end, desc = '[S]earch [M]an pages' },
-			{ '<Leader>sk', function() require('fzf-lua').keymaps() end, desc = 'Fzf: keymaps' },
+			{ "<Leader>F", function() require("fzf-lua").builtin() end, desc = "builtin"},
+			{ "<Leader>ss", function() require("fzf-lua").builtin() end, desc = "builtin"},
+			-- Files
+			{ '<Leader>f', function() require('fzf-lua').files() end, desc = 'files' },
+			{ '<Leader>o', function() require('fzf-lua').oldfiles() end, desc = 'oldfiles' },
 			-- Files files in same folder of current buffer
-			{ '<Leader>s.', function() require('fzf-lua').files({ cwd = vim.fn.expand("%:p:h") }) end, desc = 'Fzf: Files in buffer dir' },
-			-- { '<Leader>t', function() require('fzf-lua').tabs() end, desc = 'Fzf: tabs' },
-			{ "<Leader>sb", function() require("fzf-lua").blines() end,
-				desc = "Fzf: current buffer lines", },
-			{ "<Leader>sa", function() require("fzf-lua").lines() end,
-				desc = "Fzf: all open buffer lines", },
+			{ '<Leader>s.', function() require('fzf-lua').files({ cwd = vim.fn.expand("%:p:h") }) end, desc = 'Files in buffer dir' },
+			{ '<Leader>sf', ":FzfLua files cwd=" .. vim.fn.expand("%:p:h"), desc = 'Files any dir' },
+
+			{ '<Leader>b', function() require('fzf-lua').buffers() end, desc = '[B]uffers' },
+			-- Grep keymaps
+			--   live grep
 			{ "<Leader>/", function() require("fzf-lua").live_grep_glob() end,
-				desc = "Fzf: live grep all files", },
+				desc = "live grep all files", },
+			-- Grep word
 			{ "<Leader>sw", function() require("fzf-lua").grep_cword() end,
-				desc = "Fzf: Grep Current word", },
+				desc = "Grep Current word", },
 			{ "<Leader>sW", function() require("fzf-lua").grep_cWORD() end,
-				desc = "Fzf: Grep Current WORD", },
+				desc = "Grep Current WORD", },
 			{ "<Leader>sw", function() require("fzf-lua").grep_visual() end,
-				desc = "Fzf: Grep vislau selection", mode="v"},
-			{
-				"<Leader>gf",
-				function()
-					require("fzf-lua").git_files()
-				end,
-				desc = "Fzf: git files",
-			},
-			{
-				"<Leader>gb",
-				function()
-					require("fzf-lua").git_bcommits()
-				end,
-				desc = "Fzf: git buffer commits",
-			},
-			{
-				"<Leader>gc",
-				function()
-					require("fzf-lua").git_commits()
-				end,
-				desc = "Fzf: git commits",
-			},
-			{
-				"<Leader>gs",
-				function()
-					require("fzf-lua").git_status()
-				end,
-				desc = "Fzf: git status",
-			},
-			{
-				"<Leader>gg",
-				function()
-					require("fzf-lua").grep()
-				end,
-				desc = "Fzf: grep",
-			},
-			-- { '<Leader>fc', function() require('fzf-lua').command_history() end, desc = 'Fzf: command history' },
-			-- { '<Leader>fh', function() require('fzf-lua').highlights() end, desc = 'Fzf: highlights' },
-			-- { '<Leader>fm', function() require('fzf-lua').marks() end, desc = 'Fzf: marks' },
-			-- { '<Leader>fq', function() require('fzf-lua').quickfix() end, desc = 'Fzf: quickfix' },
-			-- { '<Leader>fr', function() require('fzf-lua').registers() end, desc = 'Fzf: registers' },
-			-- { '<Leader>fs', function() require('fzf-lua').spell_suggest() end, desc = 'Fzf: spell suggest' },
-			-- { '<Leader>ft', function() require('fzf-lua').filetypes() end, desc = 'Fzf: filetypes' },
-			-- { '<Leader>fw', function() require('fzf-lua').grep_cword() end, desc = 'Fzf: grep string' }
+				desc = "Grep vislau selection", mode="v"},
+
+			-- Buffer lines
+			{ "<Leader>sb", function() require("fzf-lua").lgrep_curbuf() end, desc = "current buffer lines", },
+			{ "<Leader>so", function() require("fzf-lua").lines() end, desc = "Lines of open buffers", },
+
+			-- LSP related (diagnostics)
+			{ "<Leader>sd", function() require("fzf-lua").diagnostics_document() end, desc = "Document Diagnostics", },
+			{ "<Leader>sq", function() require("fzf-lua").quickfix() end, desc = "Quickfix", },
+			{ "<Leader>sl", function() require("fzf-lua").loclist() end, desc = "Loclist", },
+			{ "<Leader>dd", function() require("fzf-lua").lsp_document_symbols() end, desc = "Document Symbols", },
+
+			-- Help content
+			{ '<Leader>h', function() require('fzf-lua').help_tags() end, desc = "Help" },
+			{ '<Leader>sm', function() require('fzf-lua').man_pages() end, desc = "[S]earch [M]an pages" },
+			{ '<Leader>sk', function() require('fzf-lua').keymaps() end, desc = "Keymaps" },
+
+			{ '<Leader>sc', function() require('fzf-lua').files({ cwd = vim.fn.stdpath("config")}) end, desc = 'Nim Config files' },
+
+			{ "<Leader>sr", function() require("fzf-lua").resume() end, desc = "Resume", },
+
+			-- Git contents
+			{ "<Leader>gf", function() require("fzf-lua").git_files() end, desc = "git files", },
+
+			{ "<Leader>g/", function() require("fzf-lua").live_grep_glob({cwd=require("fzf-lua.path").git_root()}) end, desc = "git files", },
+			{ "<Leader>gg", function() require("fzf-lua").live_grep_glob({cwd=require("fzf-lua.path").git_root()}) end, desc = "git files", },
+
+			{ "<Leader>gb", function() require("fzf-lua").git_bcommits() end,
+				desc = "git buffer commits", },
+			{ "<Leader>gc", function() require("fzf-lua").git_commits() end,
+				desc = "git commits", },
+			{ "<Leader>gs", function() require("fzf-lua").git_status() end,
+				desc = "git status", },
+			-- { "<Leader>gg", function() require("fzf-lua").grep() end, desc = "grep", },
+			-- { '<Leader>fc', function() require('fzf-lua').command_history() end, desc = 'command history' },
+			-- { '<Leader>fh', function() require('fzf-lua').highlights() end, desc = 'highlights' },
+			-- { '<Leader>fm', function() require('fzf-lua').marks() end, desc = 'marks' },
+			-- { '<Leader>fq', function() require('fzf-lua').quickfix() end, desc = 'quickfix' },
+			-- { '<Leader>fr', function() require('fzf-lua').registers() end, desc = 'registers' },
+			-- { '<Leader>fs', function() require('fzf-lua').spell_suggest() end, desc = 'spell suggest' },
+			-- { '<Leader>ft', function() require('fzf-lua').filetypes() end, desc = 'filetypes' },
+			-- { '<Leader>fw', function() require('fzf-lua').grep_cword() end, desc = 'grep string' }
 		},
 		config = function()
 			local fzf_lua = require("fzf-lua")
+			local actions = require("fzf-lua.actions")
 
 			local bottom_row = {
 				height = 0.4,
@@ -144,6 +141,7 @@ return {
 						["ctrl-d"] = "half-page-down",
 						["<C-f>"] = "preview-page-down",
 						["<C-b>"] = "preview-page-up",
+						["<C-q>"] = "select-all+accept",
 					},
 					fzf = {
 						["ctrl-u"] = "half-page-up",
@@ -198,6 +196,9 @@ return {
 					-- 	fullscreen = true,
 					-- },
 					formatter = "path.filename_first",
+					actions = {
+						["ctrl-q"] = actions.sef_qflist,
+					},
 				},
 				highlights = {
 					winopts = right_column,
@@ -360,7 +361,7 @@ return {
 			-- vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Search cwd [F]iles" })
 			-- vim.keymap.set("n", "<leader>h", builtin.help_tags, { desc = "[H]elp" })
 
-			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
+			-- vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 			-- vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
 			-- vim.keymap.set("n", "<leader>sf", function()
 			-- 	builtin.find_files({ cwd = utils.buffer_dir() })
@@ -369,14 +370,10 @@ return {
 			-- vim.keymap.set("n", "<leader>s.", function()
 			-- 	builtin.find_files({ cwd = vim.fn.expand("%:p:h") })
 			-- end)
-			vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
-			vim.keymap.set(
-				"n",
-				"<leader>sw",
-				lga_shortcuts.grep_word_under_cursor,
-				{ desc = "[S]earch current [W]ord" }
-			)
-			vim.keymap.set("v", "<leader>sw", lga_shortcuts.grep_visual_selection, { desc = "[S]earch current [W]ord" })
+			vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
+			-- vim.keymap.set( "n", "<leader>sw", lga_shortcuts.grep_word_under_cursor,
+			-- 	{ desc = "[S]earch current [W]ord" })
+			-- vim.keymap.set("v", "<leader>sw", lga_shortcuts.grep_visual_selection, { desc = "[S]earch current [W]ord" })
 			-- vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
 			vim.keymap.set(
 				"n",
@@ -384,9 +381,9 @@ return {
 				telescope.extensions.live_grep_args.live_grep_args,
 				{ desc = "[S]earch by [G]rep" }
 			)
-			vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
+			-- vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 			vim.keymap.set("n", "<leader>sp", "<cmd>Telescope persisted<CR>", { desc = "[S]earch [P]rojects" })
-			vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
+			-- vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 
 			-- diagnostics
 			vim.keymap.set("n", "<leader>dd", function()
@@ -412,9 +409,9 @@ return {
 			end, { desc = "[S]earch [/] in Open Files" })
 
 			-- Shortcut for searching your Neovim configuration files
-			vim.keymap.set("n", "<leader>sc", function()
-				builtin.find_files({ cwd = vim.fn.stdpath("config") })
-			end, { desc = "[S]earch [Config] files" })
+			-- vim.keymap.set("n", "<leader>sc", function()
+			-- 	builtin.find_files({ cwd = vim.fn.stdpath("config") })
+			-- end, { desc = "[S]earch [Config] files" })
 		end,
 	}, -- }}}
 	-- Browsing: diagnostics, lists, locations

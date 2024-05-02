@@ -3,7 +3,8 @@ return {
 	{ -- ggandor/leap.nvim {{{2
 		"ggandor/leap.nvim",
 		keys = {
-			{ "s", "<Plug>(leap)", desc = "Leap" },
+			{ "s", "<Plug>(leap)", desc = "Leap", mode = { "n", "x" } },
+			{ "z", "<Plug>(leap)", desc = "Leap", mode = { "o" } },
 			{ "gs", "<Plug>(leap-from-window)", desc = "Leap from window" },
 		},
 		opts = {
@@ -81,8 +82,8 @@ return {
 		event = "InsertEnter",
 		dependencies = {
 			-- Snippet Engine & its associated nvim-cmp source
-			{
-				"L3MON4D3/LuaSnip", -- {{{
+			{ -- luasnip {{{
+				"L3MON4D3/LuaSnip",
 				config = function()
 					require("luasnip.loaders.from_lua").load({ paths = { "~/.config/nvim/lua/snippets/" } })
 				end,
@@ -106,15 +107,17 @@ return {
 						end,
 					},
 					{ "benfowler/telescope-luasnip.nvim" },
-				}, -- }}}
-			},
+				},
+			}, -- }}}
 			"saadparwaiz1/cmp_luasnip",
 
+			"hrsh7th/cmp-cmdline",
 			-- Adds other completion capabilities.
 			--  nvim-cmp does not ship with all sources by default. They are split
 			--  into multiple repos for maintenance purposes.
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-buffer",
 			-- Adds pictograms to neovim built-in lsp
 			"onsails/lspkind.nvim",
 		},
@@ -122,8 +125,51 @@ return {
 			-- See `:help cmp`
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
+			local feedkeys = require("cmp.utils.feedkeys")
+			local keymap = require("cmp.utils.keymap")
 			luasnip.config.setup({})
-
+			local cmd_mapping = {
+				-- Select the [n]ext item
+				["<C-j>"] = {
+					c = function()
+						if cmp.visible() then
+							cmp.select_next_item()
+						else
+							feedkeys.call(keymap.t("<C-z>"), "n")
+						end
+					end,
+				},
+				["<C-k>"] = {
+					c = function()
+						if cmp.visible() then
+							cmp.select_prev_item()
+						else
+							feedkeys.call(keymap.t("<C-z>"), "n")
+						end
+					end,
+				},
+				["<C-y>"] = cmp.mapping.confirm({ select = true }),
+			}
+			cmp.setup.cmdline("/", {
+				mapping = cmp.mapping.preset.cmdline(cmd_mapping),
+				sources = {
+					{ name = "buffer" },
+				},
+			})
+			cmp.setup.cmdline(":", {
+				-- mapping = cmd_mapping,
+				mapping = cmp.mapping.preset.cmdline(cmd_mapping),
+				sources = cmp.config.sources({
+					{ name = "path" },
+				}, {
+					{
+						name = "cmdline",
+						option = {
+							ignore_cmds = { "Man", "!" },
+						},
+					},
+				}),
+			})
 			cmp.setup({
 				snippet = {
 					expand = function(args)
@@ -136,7 +182,7 @@ return {
 				-- chosen, you will need to read `:help ins-completion`
 				--
 				-- No, but seriously. Please read `:help ins-completion`, it is really good!
-				mapping = cmp.mapping.preset.insert({
+				mapping = cmp.mapping.preset.insert({ -- {{{
 					-- Select the [n]ext item
 					["<C-j>"] = cmp.mapping.select_next_item(),
 					-- Select the [p]revious item
@@ -185,11 +231,12 @@ return {
 					end, { "i", "s" }),
 					-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
 					--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
-				}),
+				}), -- }}}
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 					{ name = "path" },
+					{ name = "buffer" },
 				},
 				formatting = {
 					format = require("lspkind").cmp_format({
@@ -263,20 +310,8 @@ return {
 		end,
 	}, -- }}}
 	{ "tpope/vim-unimpaired", lazy = false },
-	{
-		"tpope/vim-repeat",
-		keys = {
-			{ "." },
-		},
-	},
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = true,
-		-- use opts = {} for passing setup options
-		-- this is equalent to setup({}) function
-		-- See https://github.com/windwp/nvim-autopairs?tab=readme-ov-file#override-default-values
-	},
+	{ "tpope/vim-repeat", keys = { { "." } } },
+	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
 }
 
 -- vim: foldmethod=marker foldlevel=1
