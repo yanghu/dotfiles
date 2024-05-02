@@ -33,7 +33,7 @@ return {
 	-- Search
 	--  fzf {{{2
 	{ "junegunn/fzf", tag = "0.50.0", pin = true, build = "./install --all --xdg" },
-	{
+	{ -- fzf-lua
 		"ibhagwan/fzf-lua",
 		branch = "main",
 		event = "VimEnter",
@@ -489,7 +489,7 @@ return {
 			},
 		}, -- for default options, refer to the configuration section for custom setup.
 	}, -- }}}
-	{
+	{ -- cbochs/grapple.nvim {{{2
 		"cbochs/grapple.nvim",
 		opts = {
 			scope = "git", -- also try out "git_branch"
@@ -505,7 +505,7 @@ return {
 			{ "<leader>n", "<cmd>Grapple cycle_tags next<cr>", desc = "Grapple cycle next tag" },
 			{ "<leader>p", "<cmd>Grapple cycle_tags prev<cr>", desc = "Grapple cycle previous tag" },
 		},
-	},
+	}, -- }}}
 	{ -- ethanholz/nvim-lastplace {{{2
 		"ethanholz/nvim-lastplace",
 		config = function()

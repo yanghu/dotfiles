@@ -132,6 +132,7 @@ return {
 						},
 					},
 					"diagnostics",
+					"grapple",
 				},
 				lualine_c = {
 					"filename",
