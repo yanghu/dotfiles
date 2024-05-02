@@ -1,6 +1,6 @@
 return {
 	{ "numToStr/Comment.nvim", opts = {}, lazy = false },
-	{
+	{ -- ggandor/leap.nvim {{{2
 		"ggandor/leap.nvim",
 		keys = {
 			{ "s", "<Plug>(leap)", desc = "Leap" },
@@ -22,7 +22,7 @@ return {
 				prev_group = "<backspace>",
 			},
 		},
-	},
+	}, -- }}}
 	{ -- hop.nvim {{{2
 		"smoka7/hop.nvim",
 		version = "*",

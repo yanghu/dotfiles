@@ -36,6 +36,7 @@ return {
 	{
 		"ibhagwan/fzf-lua",
 		branch = "main",
+		event = "VimEnter",
 		-- stylua: ignore
 		keys = {
 			{ "<Leader>F", function() require("fzf-lua").builtin() end, desc = "Fzf: builtin"},
@@ -341,6 +342,7 @@ return {
 			pcall(require("telescope").load_extension, "ui-select")
 			pcall(require("telescope").load_extension, "persisted")
 			pcall(require("telescope").load_extension, "live_grep_args")
+			pcall(require("telescope").load_extension, "grapple")
 
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
@@ -476,7 +478,20 @@ return {
 			},
 		}, -- for default options, refer to the configuration section for custom setup.
 	}, -- }}}
-
+	{
+		"cbochs/grapple.nvim",
+		opts = {
+			scope = "git", -- also try out "git_branch"
+		},
+		event = { "BufReadPost", "BufNewFile" },
+		cmd = "Grapple",
+		keys = {
+			{ "<leader>m", ":Grapple toggle name=", desc = "Grapple toggle tag" },
+			{ "<leader>M", "<cmd>Grapple toggle_tags<cr>", desc = "Grapple open tags window" },
+			{ "<leader>n", "<cmd>Grapple cycle_tags next<cr>", desc = "Grapple cycle next tag" },
+			{ "<leader>p", "<cmd>Grapple cycle_tags prev<cr>", desc = "Grapple cycle previous tag" },
+		},
+	},
 	{ -- ethanholz/nvim-lastplace {{{2
 		"ethanholz/nvim-lastplace",
 		config = function()
