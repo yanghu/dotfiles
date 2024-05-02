@@ -487,11 +487,14 @@ return {
 		"cbochs/grapple.nvim",
 		opts = {
 			scope = "git", -- also try out "git_branch"
+			quick_select = "asdfghweop",
 		},
 		event = { "BufReadPost", "BufNewFile" },
 		cmd = "Grapple",
 		keys = {
-			{ "<leader>m", ":Grapple toggle name=", desc = "Grapple toggle tag" },
+			{ "<leader>ma", ":Grapple tag name=", desc = "Grapple tag" },
+			{ "<leader>md", "<cmd>Grapple untag<CR>", desc = "Grapple untag" },
+			{ "<leader>mk", "<cmd>Grapple toggle_tags<cr>", desc = "Grapple open tags window" },
 			{ "<leader>M", "<cmd>Grapple toggle_tags<cr>", desc = "Grapple open tags window" },
 			{ "<leader>n", "<cmd>Grapple cycle_tags next<cr>", desc = "Grapple cycle next tag" },
 			{ "<leader>p", "<cmd>Grapple cycle_tags prev<cr>", desc = "Grapple cycle previous tag" },

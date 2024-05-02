@@ -249,7 +249,7 @@ return {
 			{ "r",         mode = "o",               function() require("flash").remote() end,desc = "Remote Flash" },
 			{ "R",         mode = { "n", "o", "x" }, function() require("flash").treesitter_search() end,desc = "Treesitter Search" },
 			-- jump to scope
-			{ "<leader>n", mode = { "n" }, function() require("flash").treesitter({ jump = { pos = "start" }, label = { after = false } }) end, desc = "Flash Treesitter" },
+			-- { "<leader>n", mode = { "n" }, function() require("flash").treesitter({ jump = { pos = "start" }, label = { after = false } }) end, desc = "Flash Treesitter" },
 		},
 	}, -- }}}
 	{ -- nvim-surround {{{
