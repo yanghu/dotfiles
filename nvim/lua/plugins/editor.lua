@@ -141,18 +141,26 @@ return {
 						["ctrl-d"] = "half-page-down",
 						["<C-f>"] = "preview-page-down",
 						["<C-b>"] = "preview-page-up",
-						["<C-q>"] = "select-all+accept",
+						["<C-a>"] = "toggle-all",
+						-- ["<C-q>"] = "",
 					},
 					fzf = {
 						["ctrl-u"] = "half-page-up",
 						["ctrl-d"] = "half-page-down",
 						["ctrl-f"] = "preview-page-down",
 						["ctrl-b"] = "preview-page-up",
-						["ctrl-q"] = "select-all+accept",
+						["ctrl-a"] = "toggle-all",
+						-- ["ctrl-q"] = "select-all+accept",
 					},
 				},
 				winopts = bottom_row,
 				file_ignore_patterns = {},
+				blines = {
+					fzf_opts = {
+						["--no-multi"] = false,
+						["--multi"] = true,
+					},
+				},
 				builtin = {
 					winopts = right_column,
 				},
@@ -197,7 +205,13 @@ return {
 					-- },
 					formatter = "path.filename_first",
 					actions = {
-						["ctrl-q"] = actions.sef_qflist,
+						["ctrl-q"] = actions.file_sel_to_qf,
+					},
+				},
+				grep_curbuf = {
+					fzf_opts = {
+						["--no-multi"] = false,
+						["--multi"] = true,
 					},
 				},
 				highlights = {
@@ -206,6 +220,21 @@ return {
 				keymaps = {
 					actions = {
 						["default"] = require("fzf-lua.actions").keymap_edit,
+					},
+				},
+				lgrep_curbuf = {
+					fzf_opts = {
+						["--no-multi"] = false,
+						["--multi"] = true,
+					},
+				},
+				lines = {
+					fzf_opts = {
+						["--no-multi"] = false,
+						["--multi"] = true,
+					},
+					actions = {
+						["ctrl-q"] = actions.file_sel_to_qf,
 					},
 				},
 				spell_suggest = {
