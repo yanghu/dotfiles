@@ -50,7 +50,7 @@ return {
 
 			{ '<Leader>b', function() require('fzf-lua').buffers() end, desc = '[B]uffers' },
 			-- Grep keymaps
-			--   live grep
+			--   live grep: Use "keyword -- glob" to filter files. (support negative patterns)
 			{ "<Leader>/", function() require("fzf-lua").live_grep_glob() end,
 				desc = "live grep all files", },
 			-- Grep word
@@ -82,7 +82,7 @@ return {
 
 			-- Git
 			--   Search file in git. If CWD is not in a git repo, search in CWD.
-			{ "<Leader>gf", function() require("utils.fzf").files_git_or_cwd() end, 
+			{ "<Leader>gf", function() require("utils.fzf").files_git_or_cwd() end,
 				desc = "git files", },
 			{ "<Leader>g/", function() require("fzf-lua").live_grep_glob({cwd=require("fzf-lua.path").git_root()}) end, desc = "git files", },
 			{ "<Leader>gg", function() require("fzf-lua").live_grep_glob({cwd=require("fzf-lua.path").git_root()}) end, desc = "git files", },
