@@ -17,7 +17,7 @@ return {
 				},
 			},
 			layout = {
-				height = { max = 5 },
+				height = { max = 7 },
 			},
 			triggers_blacklist = {
 				n = { "gf", "gT", "gt", "gc" },
