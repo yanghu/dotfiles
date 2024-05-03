@@ -68,6 +68,50 @@ return {
 						["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
 					},
 				},
+				routes = {
+					{ -- route long messages to split
+						filter = {
+							event = "msg_show",
+							any = { { min_height = 5 }, { min_width = 200 } },
+							["not"] = {
+								kind = { "confirm", "confirm_sub", "return_prompt", "quickfix", "search_count" },
+							},
+							blocking = false,
+						},
+						view = "messages",
+						opts = { stop = true },
+					},
+					{ -- route long messages to split
+						filter = {
+							event = "msg_show",
+							any = { { min_height = 5 }, { min_width = 200 } },
+							["not"] = {
+								kind = { "confirm", "confirm_sub", "return_prompt", "quickfix", "search_count" },
+							},
+							blocking = true,
+						},
+						view = "mini",
+					},
+					{ -- hide `written` message
+						filter = {
+							event = "msg_show",
+							kind = "",
+							find = "written",
+						},
+						opts = { skip = true },
+					},
+					{ -- send annoying msgs to mini
+						filter = {
+							event = "msg_show",
+							any = {
+								{ find = "; after #%d+" },
+								{ find = "; before #%d+" },
+								{ find = "fewer lines" },
+							},
+						},
+						view = "mini",
+					},
+				},
 				-- you can enable a preset for easier configuration
 				presets = {
 					bottom_search = true, -- use a classic bottom cmdline for search
@@ -106,6 +150,7 @@ return {
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons", "folke/noice.nvim" },
 		lazy = false,
+
 		opts = {
 			options = {
 				theme = "catppuccin",
