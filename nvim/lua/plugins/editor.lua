@@ -82,15 +82,8 @@ return {
 
 			-- Git
 			--   Search file in git. If CWD is not in a git repo, search in CWD.
-			{ "<Leader>gf", function() 
-					-- version 1: uses files for both git and cwd
-				-- See https://github.com/ibhagwan/fzf-lua/issues/140#issuecomment-920966786
-					local opts = {}
-					opts.cwd = require("fzf-lua.path").git_root(vim.loop.cwd(), true) or vim.loop.cwd()
-					opts.fzf_cli_args = ('--header="cwd = %s"'):format(vim.fn.shellescape(opts.cwd))
-					require("fzf-lua").files(opts)
-				end, desc = "git files", },
-
+			{ "<Leader>gf", function() require("utils.fzf").files_git_or_cwd() end, 
+				desc = "git files", },
 			{ "<Leader>g/", function() require("fzf-lua").live_grep_glob({cwd=require("fzf-lua.path").git_root()}) end, desc = "git files", },
 			{ "<Leader>gg", function() require("fzf-lua").live_grep_glob({cwd=require("fzf-lua.path").git_root()}) end, desc = "git files", },
 
@@ -143,6 +136,19 @@ return {
 
 			fzf_lua.setup({
 				global_resume = true,
+				previewers = {
+					builtin = {
+						title_fnamemodify = function(t, width)
+							local min_left_padding = 4
+							local min_right_padding = 4
+							local max_text_width = width - min_left_padding - min_right_padding
+							if #t > max_text_width then
+								return "..." .. t:sub(#t - max_text_width + 3 + 1, #t)
+							end
+							return t
+						end,
+					},
+				},
 				keymap = {
 					builtin = {
 						["ctrl-u"] = "half-page-up",
