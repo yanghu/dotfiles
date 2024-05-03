@@ -128,37 +128,8 @@ return {
 			local feedkeys = require("cmp.utils.feedkeys")
 			local keymap = require("cmp.utils.keymap")
 			luasnip.config.setup({})
-			local cmd_mapping = {
-				-- Select the [n]ext item
-				["<C-j>"] = {
-					c = function()
-						if cmp.visible() then
-							cmp.select_next_item()
-						else
-							feedkeys.call(keymap.t("<C-z>"), "n")
-						end
-					end,
-				},
-				["<C-k>"] = {
-					c = function()
-						if cmp.visible() then
-							cmp.select_prev_item()
-						else
-							feedkeys.call(keymap.t("<C-z>"), "n")
-						end
-					end,
-				},
-				["<C-y>"] = cmp.mapping.confirm({ select = true }),
-			}
-			cmp.setup.cmdline("/", {
-				mapping = cmp.mapping.preset.cmdline(cmd_mapping),
-				sources = {
-					{ name = "buffer" },
-				},
-			})
 			cmp.setup.cmdline(":", {
-				-- mapping = cmd_mapping,
-				mapping = cmp.mapping.preset.cmdline(cmd_mapping),
+				mapping = cmp.mapping.preset.cmdline(),
 				sources = cmp.config.sources({
 					{ name = "path" },
 				}, {

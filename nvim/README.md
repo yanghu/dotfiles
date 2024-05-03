@@ -10,6 +10,19 @@
 
 ## Keymaps
 
+### Cheatsheet
+
+- **Treesitter Text objects**: With treesitter text objects, you can use motion
+  on code objects like "argument", "assignment (left)", etc. Examples
+  - `cr=`: [C]hange [R]hs of [=]
+  - `caa`: [C]hange a [A]rgument
+  - `cii`: [C]hange [i]n [I]f: This is very useful, depending on cursor position.
+    It selects the "if" condition, or selects the conditional body when cursor
+    is inside the body.
+  - `cil`: similar, but works on [L]oops.
+
+### Text objects
+
 ### Diagnostics
 
 ### Misc
