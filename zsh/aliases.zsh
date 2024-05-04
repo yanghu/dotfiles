@@ -5,9 +5,7 @@ fi
 
 alias cdr='cd $(git rev-parse --show-toplevel)'
 alias fn='find . -name'
-if which fdfind >/dev/null 2>%1; then
-  alias fd='fdfind'
-fi
+(( $+commands[fdfind] )) ||(( $+commands[fd] )) || alias fd='find . -type d -name'
 alias g='git'
 alias gg='git grep'
 alias ggi='git grep -i'
