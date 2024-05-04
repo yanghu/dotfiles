@@ -80,6 +80,9 @@ o.inccommand = "split"
 -- Minimal number of screen lines to keep above and below the cursor.
 o.scrolloff = 5
 
+-- Full width status line always at bottom
+o.laststatus = 3
+
 -- Ruler
 o.ruler = true
 o.colorcolumn = "80"
