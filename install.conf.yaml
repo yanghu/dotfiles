@@ -13,7 +13,7 @@
     ~/.config/nvim:
       force: true
       create: true
-      path: vim/
+      path: nvim/
     ~/.vimrc_minimal: vimrc_minimal
     ~/.oh-my-zsh: zsh/ohmyzsh/
     ~/.zshrc: zshrc
