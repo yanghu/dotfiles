@@ -21,10 +21,17 @@ end
 -- ==============================================
 local wk = require("which-key")
 wk.register({
-	["<leader>e"] = { name = "easymotion" },
 	["<leader>w"] = { name = "[W]orkspace" },
 	["<leader>d"] = { name = "[D]iagnostics" },
+	["<leader>sn"] = { name = "[N]oice" },
+	["<leader>u"] = { name = "Toggle options" },
 })
+
+-- ==============================================
+-- [[ Toggle options ]]
+-- ==============================================
+-- stylua: ignore
+nmap("<leader>uw", function() vim.wo.wrap = not vim.wo.wrap end, { desc = "Toggle Wrap" })
 
 -- ==============================================
 -- [[ Basic Keymaps ]]

@@ -8,24 +8,15 @@ require("config.options")
 require("config.autocmds")
 require("config.keymaps")
 
-require("bufferline").setup({
-	highlights = require("catppuccin.groups.integrations.bufferline").get(),
-	options = {
-		numbers = "bufer_id",
-		diagnostics = "nvim_lsp",
-	},
-})
-
 -- TODO: setup telescope grep keymappings for:
 --   * grep current project
 --   * grep current buffer's dir
 --   * glob grep?
 --   * grep current buffer lines
+--   * grep Git commits/bcommits,etc.
+--   * Find file in git project
 --
 --   Grapple/Harpoon?
 --
---   Setup snippets
---
 --   nvim outline
---   nvim lightbulb
 --

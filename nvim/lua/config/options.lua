@@ -80,6 +80,9 @@ o.inccommand = "split"
 -- Minimal number of screen lines to keep above and below the cursor.
 o.scrolloff = 5
 
+-- Full width status line always at bottom
+o.laststatus = 3
+
 -- Ruler
 o.ruler = true
 o.colorcolumn = "80"
@@ -91,11 +94,9 @@ o.showmode = false
 vim.filetype.add({
 	extension = {
 		bean = "beancount",
+		keymap = "c",
 	},
 })
 
 -- Themes
 vim.o.background = "dark" -- or "light" for light mode
-
-vim.cmd([[hi TreesitterContextBottom gui=underline guisp=Grey]])
-vim.cmd([[hi TreesitterContextLineNumberBottom gui=underline guisp=Grey]])

@@ -1,5 +1,29 @@
 return {
 	{ "numToStr/Comment.nvim", opts = {}, lazy = false },
+	{ -- ggandor/leap.nvim {{{2
+		"ggandor/leap.nvim",
+		keys = {
+			{ "s", "<Plug>(leap)", desc = "Leap", mode = { "n", "x" } },
+			{ "z", "<Plug>(leap)", desc = "Leap", mode = { "o" } },
+			{ "gs", "<Plug>(leap-from-window)", desc = "Leap from window" },
+		},
+		opts = {
+			-- case_sensitive = false,
+			equivalence_classes = { " \t\r\n", "([{", ")]}", "'\"`" },
+			max_phase_one_targets = nil,
+			highlight_unlabeled_phase_one_targets = true,
+			max_highlighted_traversal_targets = 10,
+			substitute_chars = {},
+			safe_labels = "sfnut/SFNLHMUGTZ?",
+			labels = "sfnjklhodweimbuyvrgtaqpcxz/SFNJKLHODWEIMBUYVRGTAQPCXZ?",
+			special_keys = {
+				next_target = "<enter>",
+				prev_target = "<backspace>",
+				next_group = "<space>",
+				prev_group = "<backspace>",
+			},
+		},
+	}, -- }}}
 	{ -- hop.nvim {{{2
 		"smoka7/hop.nvim",
 		version = "*",
@@ -43,17 +67,13 @@ return {
 				end,
 				desc = "Hop Words",
 			},
-			{
-				"s",
-				function()
-					require("hop").hint_char2({})
-				end,
-				desc = "Hop 2char",
-			},
-			-- { "f", function () require('hop').hint_char1({direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only=true}) end, desc= "Hop f" },
-			-- { "F", function () require('hop').hint_char1({direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only=true}) end, desc= "Hop F" },
-			-- { "t", function () require('hop').hint_char1({direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only=true, hint_offset = -1}) end, desc= "Hop t" },
-			-- { "T", function () require('hop').hint_char1({direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only=true, hint_offset = -1}) end, desc= "Hop T" },
+			-- {
+			-- 	"s",
+			-- 	function()
+			-- 		require("hop").hint_char2({})
+			-- 	end,
+			-- 	desc = "Hop 2char",
+			-- },
 		},
 	}, -- }}}
 
@@ -62,8 +82,8 @@ return {
 		event = "InsertEnter",
 		dependencies = {
 			-- Snippet Engine & its associated nvim-cmp source
-			{
-				"L3MON4D3/LuaSnip", -- {{{
+			{ -- luasnip {{{
+				"L3MON4D3/LuaSnip",
 				config = function()
 					require("luasnip.loaders.from_lua").load({ paths = { "~/.config/nvim/lua/snippets/" } })
 				end,
@@ -87,15 +107,17 @@ return {
 						end,
 					},
 					{ "benfowler/telescope-luasnip.nvim" },
-				}, -- }}}
-			},
+				},
+			}, -- }}}
 			"saadparwaiz1/cmp_luasnip",
 
+			"hrsh7th/cmp-cmdline",
 			-- Adds other completion capabilities.
 			--  nvim-cmp does not ship with all sources by default. They are split
 			--  into multiple repos for maintenance purposes.
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-buffer",
 			-- Adds pictograms to neovim built-in lsp
 			"onsails/lspkind.nvim",
 		},
@@ -103,8 +125,22 @@ return {
 			-- See `:help cmp`
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
+			local feedkeys = require("cmp.utils.feedkeys")
+			local keymap = require("cmp.utils.keymap")
 			luasnip.config.setup({})
-
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = "path" },
+				}, {
+					{
+						name = "cmdline",
+						option = {
+							ignore_cmds = { "Man", "!" },
+						},
+					},
+				}),
+			})
 			cmp.setup({
 				snippet = {
 					expand = function(args)
@@ -117,7 +153,7 @@ return {
 				-- chosen, you will need to read `:help ins-completion`
 				--
 				-- No, but seriously. Please read `:help ins-completion`, it is really good!
-				mapping = cmp.mapping.preset.insert({
+				mapping = cmp.mapping.preset.insert({ -- {{{
 					-- Select the [n]ext item
 					["<C-j>"] = cmp.mapping.select_next_item(),
 					-- Select the [p]revious item
@@ -166,11 +202,12 @@ return {
 					end, { "i", "s" }),
 					-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
 					--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
-				}),
+				}), -- }}}
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 					{ name = "path" },
+					{ name = "buffer" },
 				},
 				formatting = {
 					format = require("lspkind").cmp_format({
@@ -216,6 +253,7 @@ return {
 		opts = {
 			modes = {
 				search = { enabled = false },
+				char = { enabled = false },
 			},
 			label = {
 				rainbow = {
@@ -223,16 +261,14 @@ return {
 				},
 			},
 		},
-    -- stylua: ignore
-    keys = {
-      -- { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
-      -- jump to scope
-      { "<leader>n",   mode = { "n" }, function() require("flash").treesitter({jump={pos="start"}, label={after=false}}) end,  desc = "Flash Treesitter" },
-    },
+		-- stylua: ignore
+		keys = {
+			{ "S",         mode = { "n", "x", "o" }, function() require("flash").treesitter() end,desc = "Flash Treesitter" },
+			{ "r",         mode = "o",               function() require("flash").remote() end,desc = "Remote Flash" },
+			{ "R",         mode = { "n", "o", "x" }, function() require("flash").treesitter_search() end,desc = "Treesitter Search" },
+			-- jump to scope
+			-- { "<leader>n", mode = { "n" }, function() require("flash").treesitter({ jump = { pos = "start" }, label = { after = false } }) end, desc = "Flash Treesitter" },
+		},
 	}, -- }}}
 	{ -- nvim-surround {{{
 		"kylechui/nvim-surround",
@@ -245,56 +281,8 @@ return {
 		end,
 	}, -- }}}
 	{ "tpope/vim-unimpaired", lazy = false },
-	{
-		"tpope/vim-repeat",
-		keys = {
-			{ "." },
-		},
-	},
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = true,
-		-- use opts = {} for passing setup options
-		-- this is equalent to setup({}) function
-		-- See https://github.com/windwp/nvim-autopairs?tab=readme-ov-file#override-default-values
-	},
-
-	-- Formatting
-	{
-		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
-		cmd = { "ConformInfo" },
-		keys = {
-			{
-				"<localleader>f",
-				function()
-					require("conform").format({ async = true, lsp_fallback = true })
-				end,
-				mode = "",
-				desc = "Format buffer",
-			},
-		},
-		opts = {
-			-- Define your formatters
-			formatters_by_ft = {
-				lua = { "stylua" },
-				python = { "isort", "black" },
-				javascript = { { "prettierd", "prettier" } },
-			},
-			-- Set up format-on-save
-			format_on_save = { timeout_ms = 500, lsp_fallback = true },
-			-- Customize formatters
-			formatters = {
-				shfmt = {
-					prepend_args = { "-i", "2" },
-				},
-			},
-		},
-		init = function()
-			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-		end,
-	},
+	{ "tpope/vim-repeat", keys = { { "." } } },
+	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
 }
 
 -- vim: foldmethod=marker foldlevel=1
