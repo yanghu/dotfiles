@@ -72,7 +72,7 @@ return {
 			{ "<Leader>dd", function() require("fzf-lua").lsp_document_symbols() end, desc = "Document Symbols", },
 
 			-- Help content
-			{ '<Leader>h', function() require('fzf-lua').help_tags() end, desc = "Help" },
+			{ '<Leader>sh', function() require('fzf-lua').help_tags() end, desc = "Help" },
 			{ '<Leader>sm', function() require('fzf-lua').man_pages() end, desc = "[S]earch [M]an pages" },
 			{ '<Leader>sk', function() require('fzf-lua').keymaps() end, desc = "Keymaps" },
 

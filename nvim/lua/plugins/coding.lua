@@ -281,6 +281,19 @@ return {
 	{ "tpope/vim-unimpaired", lazy = false },
 	{ "tpope/vim-repeat", keys = { { "." } } },
 	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
+	-- VCS
+	{
+		"rbong/vim-flog",
+		lazy = true,
+		cmd = { "Flog", "Flogsplit", "Floggit" },
+		dependencies = {
+			{
+				"tpope/vim-fugitive",
+				lazy = false,
+				dependencies = { "tpope/vim-rhubarb" },
+			},
+		},
+	},
 }
 
 -- vim: foldmethod=marker foldlevel=1
