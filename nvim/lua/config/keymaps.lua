@@ -71,7 +71,7 @@ nmap("XX", vim.cmd.update)
 
 imap("jk", "<Esc>")
 
-nmap("[c", function()
+nmap("[x", function()
 	require("treesitter-context").go_to_context(vim.v.count1)
 end)
 

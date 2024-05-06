@@ -125,8 +125,6 @@ return {
 			-- See `:help cmp`
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
-			local feedkeys = require("cmp.utils.feedkeys")
-			local keymap = require("cmp.utils.keymap")
 			luasnip.config.setup({})
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
