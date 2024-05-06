@@ -211,11 +211,37 @@ return {
 					vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
 				end
 
+				-- Navigation
+				map("n", "]h", function()
+					if vim.wo.diff then
+						vim.cmd.normal({ "]h", bang = true })
+					else
+						gs.nav_hunk("next")
+					end
+				end)
+
+				map("n", "[h", function()
+					if vim.wo.diff then
+						vim.cmd.normal({ "[h", bang = true })
+					else
+						gs.nav_hunk("prev")
+					end
+				end)
+
+				-- Actions
+				map("n", "<leader>hs", gs.stage_hunk)
+				map("n", "<leader>hr", gs.reset_hunk)
+				map("v", "<leader>hs", function()
+					gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end)
+				map("v", "<leader>hr", function()
+					gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end)
+				-- map("n", "<leader>hp", gitsigns.preview_hunk)
+				map("n", "<leader>tb", gs.toggle_current_line_blame)
+				map("n", "<leader>td", gs.toggle_deleted)
+
 				-- stylua: ignore start
-				map("n", "]h", gs.next_hunk, "Next Hunk")
-				map("n", "[h", gs.prev_hunk, "Prev Hunk")
-				map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-				map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
 				map("n", "<leader>hS", gs.stage_buffer, "Stage Buffer")
 				map("n", "<leader>hu", gs.undo_stage_hunk, "Undo Stage Hunk")
 				map("n", "<leader>hR", gs.reset_buffer, "Reset Buffer")

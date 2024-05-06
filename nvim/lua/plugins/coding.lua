@@ -291,6 +291,10 @@ return {
 				"tpope/vim-fugitive",
 				lazy = false,
 				dependencies = { "tpope/vim-rhubarb" },
+				keys = {
+					{ "<leader>gg", ":Git ", desc = "Git command (Fugitive)" },
+					{ "<leader>gs", ":Git<CR>", desc = "git status (Fugitive)" },
+				},
 			},
 		},
 	},

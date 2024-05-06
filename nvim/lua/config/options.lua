@@ -82,6 +82,7 @@ o.scrolloff = 5
 
 -- Full width status line always at bottom
 o.laststatus = 3
+-- vim.go.laststatus = "3"
 
 -- Ruler
 o.ruler = true
@@ -100,3 +101,4 @@ vim.filetype.add({
 
 -- Themes
 vim.o.background = "dark" -- or "light" for light mode
+vim.cmd([[set laststatus=3]])
