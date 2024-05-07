@@ -34,6 +34,13 @@ return {
 				shfmt = {
 					prepend_args = { "-i", "2" },
 				},
+				-- Always wrap markdown files to text width
+				prettierd = {
+					env = {
+						PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("~/.config/nvim/utils/linter-config/.prettierrc.toml"),
+					},
+					-- args = { "--prose-wrap", "always" },
+				},
 			},
 		},
 		init = function()
