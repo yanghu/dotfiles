@@ -187,6 +187,9 @@ return {
 				files = {
 					prompt = "Files❯ ",
 					path_shorten = 4,
+					actions = {
+						["ctrl-e"] = actions.file_edit,
+					},
 				},
 				filetypes = {
 					winopts = {
