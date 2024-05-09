@@ -11,6 +11,10 @@ return {
 				options = {
 					numbers = "bufer_id",
 					diagnostics = "nvim_lsp",
+					indicator = { style = "underline" },
+					show_buffer_close_icons = false,
+					show_close_icon = false,
+					separator_style = "slant",
 				},
 			})
 		end,
@@ -218,7 +222,7 @@ return {
 					else
 						gs.nav_hunk("next")
 					end
-				end)
+				end, "Next hunk")
 
 				map("n", "[h", function()
 					if vim.wo.diff then
@@ -226,20 +230,20 @@ return {
 					else
 						gs.nav_hunk("prev")
 					end
-				end)
+				end, "Prev hunk")
 
 				-- Actions
-				map("n", "<leader>hs", gs.stage_hunk)
-				map("n", "<leader>hr", gs.reset_hunk)
+				map("n", "<leader>hs", gs.stage_hunk, "Stage hunk")
+				map("n", "<leader>hr", gs.reset_hunk, "Reset hunk")
 				map("v", "<leader>hs", function()
 					gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-				end)
+				end, "Stage hunk")
 				map("v", "<leader>hr", function()
 					gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-				end)
+				end, "Reset hunk")
 				-- map("n", "<leader>hp", gitsigns.preview_hunk)
-				map("n", "<leader>tb", gs.toggle_current_line_blame)
-				map("n", "<leader>td", gs.toggle_deleted)
+				map("n", "<leader>htb", gs.toggle_current_line_blame, "Toggle line blame")
+				map("n", "<leader>htd", gs.toggle_deleted, "Toggle delete hunk view")
 
 				-- stylua: ignore start
 				map("n", "<leader>hS", gs.stage_buffer, "Stage Buffer")
@@ -255,7 +259,9 @@ return {
 			end,
 		},
 	}, -- }}}
-	{
+	{ -- b0o/incline.nvim {{{2
+		-- Displays a mini "winbar" on top right of a window.
+		-- Type icon and filename are displayed. More can be added
 		"b0o/incline.nvim",
 		config = function()
 			local helpers = require("incline.helpers")
@@ -286,7 +292,7 @@ return {
 		branch = "main",
 		-- Optional: Lazy load Incline
 		event = "VeryLazy",
-	},
+	}, -- }}}
 }
 
 -- vim: foldmethod=marker foldlevel=1

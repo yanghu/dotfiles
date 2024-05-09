@@ -21,10 +21,27 @@ end
 -- ==============================================
 local wk = require("which-key")
 wk.register({
-	["<leader>w"] = { name = "[W]orkspace" },
+	-- ["<leader>w"] = { name = "[W]orkspace" },
+	["<leader>c"] = { name = "...code action" },
 	["<leader>d"] = { name = "[D]iagnostics" },
+	["<leader>g"] = { name = "Git" },
+	["<leader>h"] = { name = "[H]unk gitsigns" },
+	["<leader>ht"] = { name = "[T]oggle hunk visibilities" },
+	["<leader>m"] = { name = "Grapple" },
+	["<leader>r"] = { name = "...rename" },
+	["<leader>s"] = { name = "Search" },
 	["<leader>sn"] = { name = "[N]oice" },
 	["<leader>u"] = { name = "Toggle options" },
+	["<leader>x"] = { name = "Trouble" },
+	-- Do not show some keys
+	--   switch paste mode
+	["<leader>M"] = { name = "which_key_ignore" },
+	["<leader>W"] = { name = "which_key_ignore" },
+	["<leader>e"] = { name = "which_key_ignore" },
+	["<leader>j"] = { name = "which_key_ignore" },
+	["<leader>k"] = { name = "which_key_ignore" },
+	["<leader>p"] = { name = "which_key_ignore" },
+	["<leader>w"] = { name = "which_key_ignore" },
 })
 
 -- ==============================================
@@ -86,6 +103,11 @@ nmap("<c-m>", "<cmd>MatchupWhereAmI??<CR>")
 vim.api.nvim_create_user_command("CP", [[let @+ = expand("%:.")]], {})
 vim.api.nvim_create_user_command("CF", [[let @+ = expand("%:p")]], {})
 vim.api.nvim_create_user_command("CN", [[let @+ = expand("%:t")]], {})
+
+-- change pwd to buffer cwd
+nmap("<leader>cd", function()
+	vim.api.nvim_set_current_dir(vim.fn.expand("%:h"))
+end)
 
 -- Plugins
 -- Noice LSP hover scroll

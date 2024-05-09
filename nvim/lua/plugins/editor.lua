@@ -39,7 +39,7 @@ return {
 		event = "VimEnter",
 		-- stylua: ignore
 		keys = {
-			{ "<Leader>F", function() require("fzf-lua").builtin() end, desc = "builtin"},
+			-- { "<Leader>F", function() require("fzf-lua").builtin() end, desc = "builtin"},
 			{ "<Leader>ss", function() require("fzf-lua").builtin() end, desc = "builtin"},
 			-- Files
 			{ '<Leader>f', function() require('fzf-lua').files() end, desc = 'files' },
@@ -48,7 +48,7 @@ return {
 			{ '<Leader>s.', function() require('fzf-lua').files({ cwd = vim.fn.expand("%:p:h") }) end, desc = 'Files in buffer dir' },
 			{ '<Leader>sf', ":FzfLua files cwd=" .. vim.fn.expand("%:p:h"), desc = 'Files any dir' },
 
-			{ '<Leader>b', function() require('fzf-lua').buffers() end, desc = '[B]uffers' },
+			{ '<Leader>b', function() require('fzf-lua').buffers() end, desc = 'which_key_ignore' },
 			-- Grep keymaps
 			--   live grep: Use "keyword -- glob" to filter files. (support negative patterns)
 			{ "<Leader>/", function() require("fzf-lua").live_grep_glob() end,
@@ -62,7 +62,8 @@ return {
 				desc = "Grep vislau selection", mode="v"},
 
 			-- Buffer lines
-			{ "<Leader>sb", function() require("fzf-lua").lgrep_curbuf() end, desc = "current buffer lines", },
+			-- { "<Leader>sb", function() require("fzf-lua").lgrep_curbuf() end, desc = "current buffer lines", },
+			{ "<Leader>sb", function() require("fzf-lua").blines() end, desc = "current buffer lines", },
 			{ "<Leader>so", function() require("fzf-lua").lines() end, desc = "Lines of open buffers", },
 
 			-- LSP related (diagnostics)
@@ -602,16 +603,6 @@ return {
 		end,
 		lazy = false,
 		-- enabled = false,
-	}, -- }}}
-	{ -- mhinz/vim-startify {{{2
-		"mhinz/vim-startify",
-		enabled = false,
-		lazy = false,
-		config = function()
-			-- Do not auto change dir to file opened from startify
-			vim.g.startify_change_to_dir = false
-			vim.g.startify_change_to_vcs_root = true
-		end,
 	}, -- }}}
 
 	-- Misc
