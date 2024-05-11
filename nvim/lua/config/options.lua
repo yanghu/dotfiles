@@ -81,8 +81,12 @@ o.inccommand = "split"
 o.scrolloff = 5
 
 -- Full width status line always at bottom
-o.laststatus = 3
--- vim.go.laststatus = "3"
+-- o.laststatus = 3
+-- Need to set vim.go, because otherwise lualine will try to set it to 2.
+-- See: https://www.reddit.com/r/neovim/comments/1clx1cu/comment/l2xza81/
+-- The following would work though.
+-- vim.cmd([[set laststatus=3]])
+vim.go.laststatus = 3
 
 -- Ruler
 o.ruler = true
@@ -101,4 +105,3 @@ vim.filetype.add({
 
 -- Themes
 vim.o.background = "dark" -- or "light" for light mode
-vim.cmd([[set laststatus=3]])

@@ -53,6 +53,7 @@ augroup("close_with_q", function(g)
 		pattern = {
 			"PlenaryTestPopup",
 			"aerial",
+			"floggraph",
 			"help",
 			"lspinfo",
 			"notify",
@@ -83,7 +84,8 @@ augroup("wrap_spell_text", function(g)
 	aucmd("FileType", {
 		pattern = {
 			"gitcommit",
-			"markdown",
+			-- Do not wrap markdown, as we always format it within 80 columns.
+			-- "markdown",
 		},
 		group = g,
 		callback = function()

@@ -8,13 +8,16 @@ return {
 		keys = {
 			{ "<localleader>f", function() require("conform").format({ async = true, lsp_fallback = true }) end,
 				mode = "", desc = "Format buffer", },
-			{ "<localleader>cF", function() require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 }) end,
+			{ "<localleader>mf", function() require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 }) end,
 				mode = { "n", "v" }, desc = "Format injected code blocks", },
 		},
 
 		opts = {
 			-- Define your formatters
 			formatters_by_ft = {
+				c = { "clang-format" },
+				cpp = { "clang-format" },
+				go = { "goimports", "gofmt" },
 				lua = { "stylua" },
 				python = { "isort", "black" },
 				javascript = { { "prettierd", "prettier" } },
@@ -33,6 +36,12 @@ return {
 			formatters = {
 				shfmt = {
 					prepend_args = { "-i", "2" },
+				},
+				-- Always wrap markdown files to text width
+				prettierd = {
+					env = {
+						PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("~/.config/nvim/utils/linter-config/.prettierrc.toml"),
+					},
 				},
 			},
 		},

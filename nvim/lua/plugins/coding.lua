@@ -222,6 +222,7 @@ return {
 	}, -- }}}
 	--
 	{ -- aerial.nvim {{{2
+		-- Displays outline
 		"stevearc/aerial.nvim",
 		opts = {},
 		-- Optional dependencies
@@ -241,7 +242,9 @@ return {
 		end,
 		keys = {
 			{ "<leader>a", "<cmd>AerialToggle!<CR>", desc = "Toggle Aerial" },
-			{ "<leader>A", "<cmd>AerialToggle<CR>", desc = "Toggle Aerial and stay in Aerial window" },
+			{ "<leader>A", "<cmd>AerialToggle<CR>", desc = "which_key_ignore" },
+			{ "<leader>{", "<cmd>AerialPrev<CR>", desc = "which_key_ignore" },
+			{ "<leader>}", "<cmd>AerialNext<CR>", desc = "which_key_ignore" },
 		},
 	}, -- }}}
 	{ -- flash.nvim {{{
