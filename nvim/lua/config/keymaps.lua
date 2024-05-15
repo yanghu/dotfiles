@@ -63,10 +63,12 @@ nmap("QQ", "<cmd>qa<CR>")
 nmap("<C-y>", "3<C-y>")
 nmap("<C-e>", "3<C-e>")
 
--- Quickfix list
-nmap("<c-j>", ":cnext<CR>")
-nmap("<c-k>", ":cprev<CR>")
--- nmap('<leader>qs', vim.diagnostic.setqflist)
+-- Window movements
+nmap("<C-h>", "<C-w>h")
+nmap("<C-j>", "<C-w>j")
+nmap("<C-k>", "<C-w>k")
+nmap("<C-l>", "<C-w>l")
+
 -- Switch buffers
 nmap("<C-n>", vim.cmd.bnext)
 nmap("<C-p>", vim.cmd.bprev)
