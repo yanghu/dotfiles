@@ -612,6 +612,32 @@ return {
 		end,
 	}, -- }}}
 
+	-- File browser
+	{
+		"nvim-tree/nvim-tree.lua",
+		enabled = false,
+		config = function()
+			require("nvim-tree").setup({})
+		end,
+	},
+	{
+		"stevearc/oil.nvim",
+		lazy = false,
+		opts = {
+			keymaps = {
+				["gq"] = "actions.close",
+			},
+		},
+		config = function()
+			require("oil").setup({
+				keymaps = {
+					["gq"] = "actions.close",
+				},
+			})
+		end,
+		-- Optional dependencies
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 	-- Dashboard
 	{ -- goolord/alpha-nvim {{{2
 		"goolord/alpha-nvim",

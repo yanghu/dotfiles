@@ -56,6 +56,7 @@ augroup("close_with_q", function(g)
 			"floggraph",
 			"help",
 			"lspinfo",
+			"netrw",
 			"notify",
 			"qf",
 			"query",
