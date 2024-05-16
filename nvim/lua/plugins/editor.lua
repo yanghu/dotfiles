@@ -594,10 +594,10 @@ return {
 					end
 					for _, buf in ipairs(vim.api.nvim_list_bufs()) do
 						-- Don't save while there's any 'nofile' buffer open.
-						if
-							vim.api.nvim_get_option_value("buftype", { buf = buf }) == ""
-							and vim.api.nvim_buf_get_name(buf) == ""
-						then
+						local buftype = vim.api.nvim_get_option_value("buftype", { buf = buf })
+						local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
+						local bufname = vim.api.nvim_buf_get_name(buf)
+						if buftype == "" and bufname == "" or filetype == "oil" then
 							return false
 						end
 					end
