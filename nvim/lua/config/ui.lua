@@ -146,7 +146,7 @@ M.alpha_config = function()
 		startify.button("s", "󰪺 > Restore Session For Current Directory", "<cmd>SessionLoad<CR>"),
 		startify.button("l", "󰖲 > Restore Last Session", "<cmd>SessionLoadLast<CR>"),
 		startify.button("p", "󰖲 > Recent Sessions", "<cmd>Telescope persisted<CR>"),
-		startify.button("t", "󰙅 > Toggle file explorer", "<cmd>Neotree toggle current reveal_force_cwd<CR>"),
+		startify.button("t", "󰙅 > Toggle file explorer", "<cmd>Oil .<CR>"),
 	}
 
 	-- Send config to alpha

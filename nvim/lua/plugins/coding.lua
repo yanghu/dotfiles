@@ -125,8 +125,6 @@ return {
 			-- See `:help cmp`
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
-			local feedkeys = require("cmp.utils.feedkeys")
-			local keymap = require("cmp.utils.keymap")
 			luasnip.config.setup({})
 			cmp.setup.cmdline(":", {
 				mapping = cmp.mapping.preset.cmdline(),
@@ -224,6 +222,7 @@ return {
 	}, -- }}}
 	--
 	{ -- aerial.nvim {{{2
+		-- Displays outline
 		"stevearc/aerial.nvim",
 		opts = {},
 		-- Optional dependencies
@@ -243,7 +242,9 @@ return {
 		end,
 		keys = {
 			{ "<leader>a", "<cmd>AerialToggle!<CR>", desc = "Toggle Aerial" },
-			{ "<leader>A", "<cmd>AerialToggle<CR>", desc = "Toggle Aerial and stay in Aerial window" },
+			{ "<leader>A", "<cmd>AerialToggle<CR>", desc = "which_key_ignore" },
+			{ "<leader>{", "<cmd>AerialPrev<CR>", desc = "which_key_ignore" },
+			{ "<leader>}", "<cmd>AerialNext<CR>", desc = "which_key_ignore" },
 		},
 	}, -- }}}
 	{ -- flash.nvim {{{
@@ -283,6 +284,23 @@ return {
 	{ "tpope/vim-unimpaired", lazy = false },
 	{ "tpope/vim-repeat", keys = { { "." } } },
 	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
+	-- VCS
+	{
+		"rbong/vim-flog",
+		lazy = true,
+		cmd = { "Flog", "Flogsplit", "Floggit" },
+		dependencies = {
+			{
+				"tpope/vim-fugitive",
+				lazy = false,
+				dependencies = { "tpope/vim-rhubarb" },
+				keys = {
+					{ "<leader>gg", ":Git ", desc = "Git command (Fugitive)" },
+					{ "<leader>gs", ":Git<CR>", desc = "git status (Fugitive)" },
+				},
+			},
+		},
+	},
 }
 
 -- vim: foldmethod=marker foldlevel=1

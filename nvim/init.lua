@@ -3,11 +3,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 vim.loader.enable()
 
-require("config.lazy")
 require("config.options")
+require("config.lazy")
 require("config.autocmds")
 require("config.keymaps")
-
 -- TODO: setup telescope grep keymappings for:
 --   * grep current project
 --   * grep current buffer's dir

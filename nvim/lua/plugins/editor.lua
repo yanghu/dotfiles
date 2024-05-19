@@ -39,7 +39,7 @@ return {
 		event = "VimEnter",
 		-- stylua: ignore
 		keys = {
-			{ "<Leader>F", function() require("fzf-lua").builtin() end, desc = "builtin"},
+			-- { "<Leader>F", function() require("fzf-lua").builtin() end, desc = "builtin"},
 			{ "<Leader>ss", function() require("fzf-lua").builtin() end, desc = "builtin"},
 			-- Files
 			{ '<Leader>f', function() require('fzf-lua').files() end, desc = 'files' },
@@ -48,7 +48,7 @@ return {
 			{ '<Leader>s.', function() require('fzf-lua').files({ cwd = vim.fn.expand("%:p:h") }) end, desc = 'Files in buffer dir' },
 			{ '<Leader>sf', ":FzfLua files cwd=" .. vim.fn.expand("%:p:h"), desc = 'Files any dir' },
 
-			{ '<Leader>b', function() require('fzf-lua').buffers() end, desc = '[B]uffers' },
+			{ '<Leader>b', function() require('fzf-lua').buffers() end, desc = 'which_key_ignore' },
 			-- Grep keymaps
 			--   live grep: Use "keyword -- glob" to filter files. (support negative patterns)
 			{ "<Leader>/", function() require("fzf-lua").live_grep_glob() end,
@@ -62,7 +62,8 @@ return {
 				desc = "Grep vislau selection", mode="v"},
 
 			-- Buffer lines
-			{ "<Leader>sb", function() require("fzf-lua").lgrep_curbuf() end, desc = "current buffer lines", },
+			-- { "<Leader>sb", function() require("fzf-lua").lgrep_curbuf() end, desc = "current buffer lines", },
+			{ "<Leader>sb", function() require("fzf-lua").blines() end, desc = "current buffer lines", },
 			{ "<Leader>so", function() require("fzf-lua").lines() end, desc = "Lines of open buffers", },
 
 			-- LSP related (diagnostics)
@@ -72,7 +73,7 @@ return {
 			{ "<Leader>dd", function() require("fzf-lua").lsp_document_symbols() end, desc = "Document Symbols", },
 
 			-- Help content
-			{ '<Leader>h', function() require('fzf-lua').help_tags() end, desc = "Help" },
+			{ '<Leader>sh', function() require('fzf-lua').help_tags() end, desc = "Help" },
 			{ '<Leader>sm', function() require('fzf-lua').man_pages() end, desc = "[S]earch [M]an pages" },
 			{ '<Leader>sk', function() require('fzf-lua').keymaps() end, desc = "Keymaps" },
 
@@ -85,14 +86,14 @@ return {
 			{ "<Leader>gf", function() require("utils.fzf").files_git_or_cwd() end,
 				desc = "git files", },
 			{ "<Leader>g/", function() require("fzf-lua").live_grep_glob({cwd=require("fzf-lua.path").git_root()}) end, desc = "git files", },
-			{ "<Leader>gg", function() require("fzf-lua").live_grep_glob({cwd=require("fzf-lua.path").git_root()}) end, desc = "git files", },
+			-- { "<Leader>gg", function() require("fzf-lua").live_grep_glob({cwd=require("fzf-lua.path").git_root()}) end, desc = "git files", },
+			-- { "<Leader>gs", function() require("fzf-lua").git_status() end,
+			-- 	desc = "git status", },
 
 			{ "<Leader>gb", function() require("fzf-lua").git_bcommits() end,
 				desc = "git buffer commits", },
 			{ "<Leader>gc", function() require("fzf-lua").git_commits() end,
 				desc = "git commits", },
-			{ "<Leader>gs", function() require("fzf-lua").git_status() end,
-				desc = "git status", },
 			-- { "<Leader>gg", function() require("fzf-lua").grep() end, desc = "grep", },
 			-- { '<Leader>fc', function() require('fzf-lua').command_history() end, desc = 'command history' },
 			-- { '<Leader>fh', function() require('fzf-lua').highlights() end, desc = 'highlights' },
@@ -187,6 +188,9 @@ return {
 				files = {
 					prompt = "Files❯ ",
 					path_shorten = 4,
+					actions = {
+						["ctrl-e"] = actions.file_edit,
+					},
 				},
 				filetypes = {
 					winopts = {
@@ -559,6 +563,24 @@ return {
 	}, -- }}}
 	{ "tpope/vim-sleuth", lazy = false },
 
+	{ -- alexghergh/nvim-tmux-navigation {{{2
+		"alexghergh/nvim-tmux-navigation",
+		config = function()
+			local nvim_tmux_nav = require("nvim-tmux-navigation")
+
+			nvim_tmux_nav.setup({
+				disable_when_zoomed = true, -- defaults to false
+			})
+
+			vim.keymap.set("n", "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
+			vim.keymap.set("n", "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+			vim.keymap.set("n", "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
+			vim.keymap.set("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
+			vim.keymap.set("n", "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
+			-- vim.keymap.set("n", "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
+		end,
+		event = "VeryLazy",
+	}, -- }}}
 	-- Sessions
 	{ -- olimorris/persisted.nvim {{{
 		"olimorris/persisted.nvim",
@@ -572,10 +594,10 @@ return {
 					end
 					for _, buf in ipairs(vim.api.nvim_list_bufs()) do
 						-- Don't save while there's any 'nofile' buffer open.
-						if
-							vim.api.nvim_get_option_value("buftype", { buf = buf }) == ""
-							and vim.api.nvim_buf_get_name(buf) == ""
-						then
+						local buftype = vim.api.nvim_get_option_value("buftype", { buf = buf })
+						local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
+						local bufname = vim.api.nvim_buf_get_name(buf)
+						if buftype == "" and bufname == "" or filetype == "oil" then
 							return false
 						end
 					end
@@ -590,6 +612,32 @@ return {
 		end,
 	}, -- }}}
 
+	-- File browser
+	{
+		"nvim-tree/nvim-tree.lua",
+		enabled = false,
+		config = function()
+			require("nvim-tree").setup({})
+		end,
+	},
+	{
+		"stevearc/oil.nvim",
+		lazy = false,
+		opts = {
+			keymaps = {
+				["gq"] = "actions.close",
+			},
+		},
+		config = function()
+			require("oil").setup({
+				keymaps = {
+					["gq"] = "actions.close",
+				},
+			})
+		end,
+		-- Optional dependencies
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 	-- Dashboard
 	{ -- goolord/alpha-nvim {{{2
 		"goolord/alpha-nvim",
@@ -599,16 +647,6 @@ return {
 		end,
 		lazy = false,
 		-- enabled = false,
-	}, -- }}}
-	{ -- mhinz/vim-startify {{{2
-		"mhinz/vim-startify",
-		enabled = false,
-		lazy = false,
-		config = function()
-			-- Do not auto change dir to file opened from startify
-			vim.g.startify_change_to_dir = false
-			vim.g.startify_change_to_vcs_root = true
-		end,
 	}, -- }}}
 
 	-- Misc
