@@ -20,6 +20,8 @@ require("lazy").setup({
 	},
 	spec = {
 		import = "plugins",
+		-- If work plugin files exist, load them
+		-- require("plugins.work").work_plugins,
 	},
 	git = {
 		timeout = 24,

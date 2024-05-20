@@ -1,4 +1,5 @@
 local icons = require("config.ui").icons
+local env = require("utils.env")
 return {
 	-- Keymap helper
 	-- {{{2 which-key.nvim
@@ -279,6 +280,7 @@ return {
 	-- }}}2
 	{ -- Telescope(files, lsp, etc) {{{2
 		"nvim-telescope/telescope.nvim",
+		cond = not env.at_work(),
 		event = "VimEnter",
 		branch = "0.1.x",
 		dependencies = {
@@ -402,26 +404,7 @@ return {
 			local utils = require("telescope.utils")
 			local telescope = require("telescope")
 			local lga_shortcuts = require("telescope-live-grep-args.shortcuts")
-			-- Single-key maps
-			-- vim.keymap.set("n", "<leader>o", builtin.oldfiles, { desc = "[O]ld files" })
-			-- vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "Find open [B]uffers" })
-			-- vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Search cwd [F]iles" })
-			-- vim.keymap.set("n", "<leader>h", builtin.help_tags, { desc = "[H]elp" })
-
-			-- vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
-			-- vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-			-- vim.keymap.set("n", "<leader>sf", function()
-			-- 	builtin.find_files({ cwd = utils.buffer_dir() })
-			-- end, { desc = "[S]earch [F]iles in buffer dir" })
-			-- Find sibling files (in current folder of the buffer)
-			-- vim.keymap.set("n", "<leader>s.", function()
-			-- 	builtin.find_files({ cwd = vim.fn.expand("%:p:h") })
-			-- end)
 			vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
-			-- vim.keymap.set( "n", "<leader>sw", lga_shortcuts.grep_word_under_cursor,
-			-- 	{ desc = "[S]earch current [W]ord" })
-			-- vim.keymap.set("v", "<leader>sw", lga_shortcuts.grep_visual_selection, { desc = "[S]earch current [W]ord" })
-			-- vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
 			vim.keymap.set(
 				"n",
 				"<leader>sg",
