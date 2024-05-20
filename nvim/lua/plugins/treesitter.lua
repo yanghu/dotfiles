@@ -195,6 +195,9 @@ return {
 					"query",
 					"go",
 					"python",
+					"toml",
+					"yaml",
+					"json",
 				},
 				indent = {
 					enable = true,
