@@ -293,6 +293,22 @@ return {
 		-- Optional: Lazy load Incline
 		event = "VeryLazy",
 	}, -- }}}
+	{
+		"nvim-tree/nvim-web-devicons",
+		config = function()
+			local sign = function(hl, icon)
+				vim.fn.sign_define(hl, {
+					texthl = hl,
+					text = icon,
+					numhl = "",
+				})
+			end
+			sign("DiagnosticSignError", "󰅚") -- \udb80\udd5a nf-md-close_circle_outline
+			sign("DiagnosticSignWarn", "󰀪") -- \udb80\udc2a nf-md-alert_outline
+			sign("DiagnosticSignHint", "󰌶") -- \udb80\udf36 nf-md-lightbulb_outline
+			sign("DiagnosticSignInfo", "") -- \uf449 nf-oct-info
+		end,
+	},
 }
 
 -- vim: foldmethod=marker foldlevel=1
