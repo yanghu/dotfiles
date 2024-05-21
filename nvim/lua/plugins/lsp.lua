@@ -1,7 +1,9 @@
+local env = require("utils.env")
 return {
 	{ -- LSP Configuration & Plugins{{{2
 		"neovim/nvim-lspconfig",
 		event = "BufReadPre",
+		cond = not env.at_work(),
 		dependencies = {
 			-- Automatically install LSPs and related tools to stdpath for Neovim
 			"williamboman/mason.nvim",
