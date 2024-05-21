@@ -152,9 +152,9 @@ return {
 	}, -- }}}
 	{ -- nvim-lualine/lualine.nvim {{{2
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons", "folke/noice.nvim" },
-		lazy = false,
-
+		dependencies = { "nvim-tree/nvim-web-devicons", "folke/noice.nvim", "nvimdev/lspsaga.nvim" },
+		-- lazy = false,
+		event = "VeryLazy",
 		opts = {
 			options = {
 				theme = "catppuccin",
@@ -185,11 +185,11 @@ return {
 				},
 				lualine_c = {
 					"filename",
-					{
-						"navic",
-						color_correction = nil,
-						navic_opts = nil,
-					},
+					-- {
+					-- 	"navic",
+					-- 	color_correction = nil,
+					-- 	navic_opts = nil,
+					-- },
 				},
 			},
 			extensions = { "aerial", "quickfix", "trouble" },
