@@ -1,9 +1,10 @@
 local env = require("utils.env")
-return {
-	{ -- LSP Configuration & Plugins{{{2
+
+local local_lsp = function ()
+	-- if not env.at_work() then
+		return {
 		"neovim/nvim-lspconfig",
 		event = "BufReadPre",
-		cond = not env.at_work(),
 		dependencies = {
 			-- Automatically install LSPs and related tools to stdpath for Neovim
 			"williamboman/mason.nvim",
@@ -234,7 +235,14 @@ return {
 				},
 			})
 		end,
-	}, -- }}}
+		}
+-- end
+	-- code
+	-- return nil
+end
+
+return {
+	local_lsp(),
 	{ -- nvimdev/lspsaga.nvim {{{2
 		"nvimdev/lspsaga.nvim",
 		dependencies = {
@@ -315,27 +323,27 @@ return {
 				desc = "Peek definition",
 			},
 			{
-				",gd",
+				"gd",
 				"<cmd>Lspsaga goto_definition<cr>",
 				desc = "Goto definition",
 			},
 			{
-				",gY",
+				"gY",
 				"<cmd>Lspsaga goto_type_definition<cr>",
 				desc = "Goto itype definition",
 			},
 			{
-				",gy",
+				"gy",
 				"<cmd>Lspsaga peek_type_definition<cr>",
 				desc = "Peek type definition",
 			},
 			{
-				",gr",
+				"gr",
 				"<cmd>Lspsaga finder<cr>",
 				desc = "Show references",
 			},
 			{
-				",gI",
+				"gI",
 				"<cmd>Lspsaga finder imp<cr>",
 			},
 			{

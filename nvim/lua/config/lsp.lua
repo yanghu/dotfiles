@@ -42,6 +42,10 @@ M.local_servers = {
 	vimls = {},
 }
 
-M.servers = M.local_servers
+if not require("utils.env").at_work() then
+	M.servers = M.local_servers
+else
+	M.servers = {}
+end
 
 return M
