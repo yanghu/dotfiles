@@ -1,7 +1,7 @@
 local env = require("utils.env")
 
 local local_lsp = function ()
-	-- if not env.at_work() then
+	if not env.at_work() then
 		return {
 		"neovim/nvim-lspconfig",
 		event = "BufReadPre",
@@ -236,7 +236,9 @@ local local_lsp = function ()
 			})
 		end,
 		}
--- end
+	else
+		return {}
+  end
 	-- code
 	-- return nil
 end
@@ -249,8 +251,7 @@ return {
 			"nvim-tree/nvim-web-devicons",
 			"nvim-treesitter/nvim-treesitter",
 		},
-		lazy = false,
-		-- event = "VeryLazy",
+		event = "VeryLazy",
 		cmd = "Lspsaga",
 		opts = {
 			scroll_preview = {

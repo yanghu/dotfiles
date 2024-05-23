@@ -208,7 +208,7 @@ return {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 					{ name = "path" },
-					{ name = "buffer" },
+					{ name = "buffer", max_item_count = 5 },
 				},
 				formatting = {
 					format = {
