@@ -152,7 +152,7 @@ return {
 	}, -- }}}
 	{ -- nvim-lualine/lualine.nvim {{{2
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons", "folke/noice.nvim", "nvimdev/lspsaga.nvim" },
+		dependencies = { "nvim-tree/nvim-web-devicons", "folke/noice.nvim" },
 		-- lazy = false,
 		event = "VeryLazy",
 		opts = {

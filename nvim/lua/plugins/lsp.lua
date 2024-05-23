@@ -251,8 +251,7 @@ return {
 			"nvim-tree/nvim-web-devicons",
 			"nvim-treesitter/nvim-treesitter",
 		},
-		lazy = false,
-		-- event = "VeryLazy",
+		event = "VeryLazy",
 		cmd = "Lspsaga",
 		opts = {
 			scroll_preview = {
