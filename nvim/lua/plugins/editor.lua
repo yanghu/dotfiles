@@ -28,6 +28,20 @@ return {
 			-- or leave it empty to use the default settings
 			-- refer to the configuration section below
 		},
+		config = function(_, opts)
+			require("which-key").setup(opts)
+			-- from https://github.com/folke/which-key.nvim/issues/476#issuecomment-1986782731
+			-- Which-key doesn't show menu for localleader key when it's set to ","
+			-- This is the workaround that fixes the issue
+			vim.api.nvim_create_autocmd("FileType", {
+				desc = "Set up localleader Which-Key descriptions",
+				group = vim.api.nvim_create_augroup("whichkey_localleader_descriptions", { clear = true }),
+				pattern = "*",
+				callback = function()
+					vim.keymap.set("n", "<localleader>", function() require("which-key").show "," end, { buffer = true })
+				end,
+				})
+	  end
 	},
 	-- }}}2
 
