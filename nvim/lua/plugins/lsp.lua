@@ -1,9 +1,10 @@
 local env = require("utils.env")
-return {
-	{ -- LSP Configuration & Plugins{{{2
+
+local local_lsp = function ()
+	if not env.at_work() then
+		return {
 		"neovim/nvim-lspconfig",
 		event = "BufReadPre",
-		cond = not env.at_work(),
 		dependencies = {
 			-- Automatically install LSPs and related tools to stdpath for Neovim
 			"williamboman/mason.nvim",
@@ -50,29 +51,7 @@ return {
 			-- 	vim.lsp.with(vim.lsp.handlers.signature_help, { border = require("config.ui").borders })
 			-- vim.lsp.handlers["textDocument/hover"] =
 			-- 	vim.lsp.with(vim.lsp.handlers.hover, { border = require("config.ui").borders })
-
-			-- diagnostic icons
-			local diagnostic_signs = require("config.ui").icons.diagnostics
-			local diagnostic_severity_fullnames = { "Error", "Warning", "Information", "Hint", "Ok" }
-			local diagnostic_severity_shortnames = { "Error", "Warn", "Info", "Hint", "Ok" }
-			for index, icon in ipairs(diagnostic_signs) do
-				local fullname = diagnostic_severity_fullnames[index]
-				local shortname = diagnostic_severity_shortnames[index]
-
-				vim.fn.sign_define("DiagnosticSign" .. shortname, {
-					text = icon,
-					texthl = "Diagnostic" .. shortname,
-					linehl = "",
-					numhl = "",
-				})
-
-				vim.fn.sign_define("LspDiagnosticsSign" .. fullname, {
-					text = icon,
-					texthl = "LspDiagnosticsSign" .. fullname,
-					linehl = "",
-					numhl = "",
-				})
-			end
+			--
 
 			local function toggle_diagnostics()
 				local enabled = not vim.diagnostic.is_disabled(0)
@@ -161,7 +140,7 @@ return {
 
 					-- Execute a code action, usually your cursor needs to be on top of an error
 					-- or a suggestion from your LSP for this to activate.
-					nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+					-- nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
 					-- Opens a popup that displays documentation about the word under your cursor
 					--  See `:help K` for why this keymap.
@@ -256,7 +235,150 @@ return {
 				},
 			})
 		end,
+		}
+	else
+		return {}
+  end
+	-- code
+	-- return nil
+end
+
+return {
+	local_lsp(),
+	{ -- nvimdev/lspsaga.nvim {{{2
+		"nvimdev/lspsaga.nvim",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		event = "VeryLazy",
+		cmd = "Lspsaga",
+		opts = {
+			scroll_preview = {
+				scroll_down = "<c-d>",
+				scroll_up = "<c-u>",
+			},
+			ui = {
+				border = "rounded",
+			},
+			code_action = {
+				keys = {
+					quit = { "q", "<esc>" },
+				},
+			},
+			symbol_in_winbar = {
+				enable = false,
+				hide_keyword = true,
+				respect_root = true,
+			},
+			path_display = function(path, root)
+				local pwd = vim.loop.cwd()
+				if root and path:sub(1, #root) == root then
+					root = root
+				elseif path:sub(1, #pwd) == pwd then
+					root = pwd
+				else
+					root = vim.env.HOME
+				end
+				local path_sep = require("lspsaga.util").path_sep
+				if root ~= "" then
+					root = root:sub(#root - #path_sep + 1) == path_sep and root or root .. path_sep
+					path = path:sub(#root + 1)
+				end
+				return path
+			end,
+		},
+		config = function(_, opts)
+			require("lspsaga").setup(opts)
+			if type(opts.path_display) == "function" then
+				require("lspsaga.util").path_sub = opts.path_display
+			end
+			-- This is used in markdown files, but seems to be unique to CiderLSP.
+			require("lspsaga.lspkind").kind[0] = { "Heading", "# ", "Heading" }
+			-- Setup lualine
+			local lualine_c = require("lualine").get_config().sections.lualine_c
+			local merged_line = { { require("lspsaga.symbol.winbar").get_bar } }
+			require("lualine").setup({
+				sections = {
+					lualine_c = merged_line,
+				},
+			})
+		end,
 	}, -- }}}
+	{
+		"neovim/nvim-lspconfig",
+		keys = {
+			{
+				"gk",
+				"<cmd>Lspsaga hover_doc<cr>",
+				desc = "LSP hover",
+			},
+			{
+				"<leader>ca",
+				"<cmd>Lspsaga code_action<cr>",
+				desc = "Code Actions",
+			},
+			{
+				"gp",
+				"<cmd>Lspsaga peek_definition<cr>",
+				desc = "Peek definition",
+			},
+			{
+				"gd",
+				"<cmd>Lspsaga goto_definition<cr>",
+				desc = "Goto definition",
+			},
+			{
+				"gY",
+				"<cmd>Lspsaga goto_type_definition<cr>",
+				desc = "Goto itype definition",
+			},
+			{
+				"gy",
+				"<cmd>Lspsaga peek_type_definition<cr>",
+				desc = "Peek type definition",
+			},
+			{
+				"gr",
+				"<cmd>Lspsaga finder<cr>",
+				desc = "Show references",
+			},
+			{
+				"gI",
+				"<cmd>Lspsaga finder imp<cr>",
+			},
+			{
+				"<leader>go",
+				"<cmd>Lspsaga outline<cr>",
+				desc = "Show outline",
+			},
+			{
+				"[d",
+				"<cmd>Lspsaga diagnostic_jump_prev<cr>",
+				desc = "Goto previous diagnostic",
+			},
+			{
+				"]d",
+				"<cmd>Lspsaga diagnostic_jump_next<cr>",
+				desc = "Goto next diagnostic",
+			},
+			{
+				"[D",
+				"<cmd>lua require('lspsaga.diagnostic'):goto_prev({ severity = vim.diagnostic.severity.ERROR })<cr>",
+				desc = "Goto previous diagnostic error",
+			},
+			{
+				"]D",
+				"<cmd>lua require('lspsaga.diagnostic'):goto_next({ severity = vim.diagnostic.severity.ERROR })<cr>",
+				desc = "Goto next diagnostic error",
+			},
+			{
+				"<leader>sl",
+				"<cmd>Lspsaga show_line_diagnostics ++unfocus<cr>",
+				desc = "Show line diagnostics",
+			},
+		},
+	},
 }
 
 -- vim: foldmethod=marker foldlevel=1

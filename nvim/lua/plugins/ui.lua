@@ -153,8 +153,8 @@ return {
 	{ -- nvim-lualine/lualine.nvim {{{2
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons", "folke/noice.nvim" },
-		lazy = false,
-
+		-- lazy = false,
+		event = "VeryLazy",
 		opts = {
 			options = {
 				theme = "catppuccin",
@@ -185,11 +185,11 @@ return {
 				},
 				lualine_c = {
 					"filename",
-					{
-						"navic",
-						color_correction = nil,
-						navic_opts = nil,
-					},
+					-- {
+					-- 	"navic",
+					-- 	color_correction = nil,
+					-- 	navic_opts = nil,
+					-- },
 				},
 			},
 			extensions = { "aerial", "quickfix", "trouble" },
@@ -293,6 +293,22 @@ return {
 		-- Optional: Lazy load Incline
 		event = "VeryLazy",
 	}, -- }}}
+	{
+		"nvim-tree/nvim-web-devicons",
+		config = function()
+			local sign = function(hl, icon)
+				vim.fn.sign_define(hl, {
+					texthl = hl,
+					text = icon,
+					numhl = "",
+				})
+			end
+			sign("DiagnosticSignError", "󰅚") -- \udb80\udd5a nf-md-close_circle_outline
+			sign("DiagnosticSignWarn", "󰀪") -- \udb80\udc2a nf-md-alert_outline
+			sign("DiagnosticSignHint", "󰌶") -- \udb80\udf36 nf-md-lightbulb_outline
+			sign("DiagnosticSignInfo", "") -- \uf449 nf-oct-info
+		end,
+	},
 }
 
 -- vim: foldmethod=marker foldlevel=1

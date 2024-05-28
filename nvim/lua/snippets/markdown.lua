@@ -1,3 +1,4 @@
+local k = require("luasnip.nodes.key_indexer").new_key
 return {
 	-- Hugo shortcode
 	-- Expands to {{< codename params >}} [inner] {{< /codename >}}
