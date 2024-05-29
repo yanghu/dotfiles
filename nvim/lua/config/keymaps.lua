@@ -55,7 +55,7 @@ nmap("<leader>uw", function() vim.wo.wrap = not vim.wo.wrap end, { desc = "Toggl
 -- ==============================================
 
 -- Use space to cancel search highlight
-nmap("<CR>", "<cmd>nohlsearch<CR>")
+nmap("<CR>", require('notify').dismiss)
 -- Avoid going into ex mode
 nmap("Q", "<Nop>")
 nmap("QQ", "<cmd>qa<CR>")

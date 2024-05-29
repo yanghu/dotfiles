@@ -32,6 +32,7 @@ fi
 
 # set default editor (probably my lightweight vim masquerading as vi)
 export EDITOR="vim -u ~/.vimrc_minimal"
+# export EDITOR=$(which nvim)
 # Reduce delay for switching to normal mode with ESC
 export KEYTIMEOUT=20
 

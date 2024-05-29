@@ -1,4 +1,7 @@
 return {
+	-- Still use comment.nvim over Neovim 0.10's built-in commenting: 
+	-- The built-in one can only toggle comments on lines. This plugin allows
+	-- in-line commenting toggle. (comment a word, etc.)
 	{ "numToStr/Comment.nvim", opts = {}, lazy = false },
 	{ -- ggandor/leap.nvim {{{2
 		"ggandor/leap.nvim",

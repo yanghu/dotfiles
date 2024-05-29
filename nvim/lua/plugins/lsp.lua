@@ -36,23 +36,8 @@ local local_lsp = function ()
 			},
 		},
 		config = function()
-			-- LSP provides Neovim with features like:
-			--  - Go to definition
-			--  - Find references
-			--  - Autocompletion
-			--  - Symbol Search
-			--  - and more!
-			--
 			require("lspconfig.ui.windows").default_options.border = require("config.ui").borders
 			-- Diagnostics Display
-
-			-- LSP handlers (handled by noice, do not need these lines)
-			-- vim.lsp.handlers["textDocument/signatureHelp"] =
-			-- 	vim.lsp.with(vim.lsp.handlers.signature_help, { border = require("config.ui").borders })
-			-- vim.lsp.handlers["textDocument/hover"] =
-			-- 	vim.lsp.with(vim.lsp.handlers.hover, { border = require("config.ui").borders })
-			--
-
 			local function toggle_diagnostics()
 				local enabled = not vim.diagnostic.is_disabled(0)
 				if not enabled then
@@ -91,6 +76,7 @@ local local_lsp = function ()
 					source = "always",
 				},
 			})
+
 			--  This function gets run when an LSP attaches to a particular buffer.
 			--    That is to say, every time a new file is opened that is associated with
 			--    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
@@ -307,6 +293,11 @@ return {
 	}, -- }}}
 	{
 		"neovim/nvim-lspconfig",
+		dependencies = {
+			-- Automatically install LSPs and related tools to stdpath for Neovim
+			"williamboman/mason.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
+		},
 		keys = {
 			{
 				"gk",
