@@ -1,6 +1,6 @@
 -- Formatting
 return {
-	{
+	{ -- stevearc/conform.nvim {{{2
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
@@ -71,5 +71,7 @@ return {
 				desc = "Re-enable autoformat-on-save",
 			})
 		end,
-	},
+	}, -- }}}
 }
+
+-- vim: foldmethod=marker foldlevel=1
