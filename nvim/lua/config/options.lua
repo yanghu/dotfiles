@@ -100,6 +100,7 @@ vim.filetype.add({
 	extension = {
 		bean = "beancount",
 		keymap = "c",
+		bundle = "pbtxt",
 	},
 })
 

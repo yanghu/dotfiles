@@ -306,6 +306,7 @@ return {
 			-- Automatically install LSPs and related tools to stdpath for Neovim
 			"williamboman/mason.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			{ "folke/neodev.nvim", opts = {} },
 		},
 		keys = {
 			{
