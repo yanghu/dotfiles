@@ -1,5 +1,9 @@
 local M = {}
 
+M.optional_servers = {
+	beancount = require("config.servers.beancount").config,
+}
+
 M.local_servers = {
 	bashls = {
 		filetypes = {
@@ -21,7 +25,6 @@ M.local_servers = {
 	-- But for many setups, the LSP (`tsserver`) will work just fine
 	-- tsserver = {},
 	--
-	beancount = require("config.servers.beancount").config,
 	jsonls = {},
 
 	lua_ls = {

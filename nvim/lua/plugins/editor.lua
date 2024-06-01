@@ -38,10 +38,12 @@ return {
 				group = vim.api.nvim_create_augroup("whichkey_localleader_descriptions", { clear = true }),
 				pattern = "*",
 				callback = function()
-					vim.keymap.set("n", "<localleader>", function() require("which-key").show "," end, { buffer = true })
+					vim.keymap.set("n", "<localleader>", function()
+						require("which-key").show(",")
+					end, { buffer = true })
 				end,
-				})
-	  end
+			})
+		end,
 	},
 	-- }}}2
 
@@ -343,7 +345,7 @@ return {
 						if type(path_display) == "function" then
 							path = path_display(path_opts, path)
 						end
-            return path
+						return path
 					end,
 
 					mappings = {
@@ -400,10 +402,24 @@ return {
 			})
 		end,
 		keys = {
-			{ "<leader>sp",  "<cmd>Telescope persisted<CR>", mode="n", desc = "Search Projects" },
-			{ "<leader>dd", function() builtin.diagnostics({ bufnr = 0 }) end , mode="n", desc = "Document Diagnostics" },
-			{ "<leader>dw", function() builtin.diagnostics() end , mode="n", desc = "Workspace Diagnostics" },
-		}
+			{ "<leader>sp", "<cmd>Telescope persisted<CR>", mode = "n", desc = "Search Projects" },
+			{
+				"<leader>dd",
+				function()
+					builtin.diagnostics({ bufnr = 0 })
+				end,
+				mode = "n",
+				desc = "Document Diagnostics",
+			},
+			{
+				"<leader>dw",
+				function()
+					builtin.diagnostics()
+				end,
+				mode = "n",
+				desc = "Workspace Diagnostics",
+			},
+		},
 	}, -- }}}
 	-- Browsing: diagnostics, lists, locations
 	{ -- folke/trouble.nvim {{{2
@@ -598,7 +614,6 @@ return {
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 		ft = { "markdown" },
-		config = true,
 		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
