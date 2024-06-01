@@ -212,7 +212,6 @@ local local_lsp = function()
 				vim.list_extend(ensure_installed, {
 					"stylua", -- Used to format Lua code
 				})
-				print(vim.inspect(ensure_installed))
 				require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 				vim.list_extend(servers, require("config.lsp").optional_servers)
