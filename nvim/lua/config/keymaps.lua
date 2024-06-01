@@ -22,6 +22,7 @@ end
 local wk = require("which-key")
 wk.register({
 	-- ["<leader>w"] = { name = "[W]orkspace" },
+	["<localleader>cc"] = { name = "... copy file path" },
 	["<leader>c"] = { name = "...code action" },
 	["<leader>d"] = { name = "[D]iagnostics" },
 	["<leader>g"] = { name = "Git" },
@@ -55,7 +56,7 @@ nmap("<leader>uw", function() vim.wo.wrap = not vim.wo.wrap end, { desc = "Toggl
 -- ==============================================
 
 -- Use space to cancel search highlight
-nmap("<CR>", require('notify').dismiss)
+nmap("<CR>", require("notify").dismiss)
 -- Avoid going into ex mode
 nmap("Q", "<Nop>")
 nmap("QQ", "<cmd>qa<CR>")
@@ -105,6 +106,27 @@ nmap("<c-m>", "<cmd>MatchupWhereAmI??<CR>")
 vim.api.nvim_create_user_command("CP", [[let @+ = expand("%:.")]], {})
 vim.api.nvim_create_user_command("CF", [[let @+ = expand("%:p")]], {})
 vim.api.nvim_create_user_command("CN", [[let @+ = expand("%:t")]], {})
+
+-- Yanks the current file path to " and + registers
+-- If "g" or "d" are used as argument, include the depot or google3 portion of the path.
+vim.api.nvim_create_user_command("GCF", function(opts)
+	local prefix_to_remove = "^//depot/google3/"
+	if opts.args ~= "" then
+		if string.match(opts.fargs[1], "^g") then
+			prefix_to_remove = "^//depot/"
+		elseif string.match(opts.fargs[1], "^d") then
+			prefix_to_remove = ""
+		end
+	end
+	local depot_path = vim.fn["piperlib#GetDepotPath"](vim.fn.expand("%:p")):gsub(prefix_to_remove, "")
+	vim.fn.setreg("+", depot_path)
+	vim.fn.setreg('"', depot_path)
+end, { desc = "Return relative path in workspace", nargs = "?" })
+
+-- Keymaps to copy file paths
+nmap("<localleader>ccf", "<cmd>GCF<CR>", { desc = "copy file path" })
+nmap("<localleader>ccg", "<cmd>GCF g3<CR>", { desc = "copy file path including g3" })
+nmap("<localleader>ccd", "<cmd>GCF depot<CR>", { desc = "copy depot file path" })
 
 -- change pwd to buffer cwd
 nmap("<leader>cd", function()
