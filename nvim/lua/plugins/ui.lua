@@ -52,7 +52,66 @@ return {
 		-- event = "VeryLazy",
 		lazy = false,
 		opts = {
-			-- add any options here
+			lsp = {
+				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+				override = {
+					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+					["vim.lsp.util.stylize_markdown"] = true,
+					["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+				},
+			},
+			routes = {
+				{ -- route long messages to split
+					filter = {
+						event = "msg_show",
+						any = { { min_height = 5 }, { min_width = 200 } },
+						["not"] = {
+							kind = { "confirm", "confirm_sub", "return_prompt", "quickfix", "search_count" },
+						},
+						blocking = false,
+					},
+					view = "messages",
+					opts = { stop = true },
+				},
+				{ -- route long messages to split
+					filter = {
+						event = "msg_show",
+						any = { { min_height = 5 }, { min_width = 200 } },
+						["not"] = {
+							kind = { "confirm", "confirm_sub", "return_prompt", "quickfix", "search_count" },
+						},
+						blocking = true,
+					},
+					view = "mini",
+				},
+				{ -- hide `written` message
+					filter = {
+						event = "msg_show",
+						kind = "",
+						find = "written",
+					},
+					opts = { skip = true },
+				},
+				{ -- send annoying msgs to mini
+					filter = {
+						event = "msg_show",
+						any = {
+							{ find = "; after #%d+" },
+							{ find = "; before #%d+" },
+							{ find = "fewer lines" },
+						},
+					},
+					view = "mini",
+				},
+			},
+			-- you can enable a preset for easier configuration
+			presets = {
+				bottom_search = true, -- use a classic bottom cmdline for search
+				command_palette = true, -- position the cmdline and popupmenu together
+				long_message_to_split = true, -- long messages will be sent to a split
+				inc_rename = false, -- enables an input dialog for inc-rename.nvim
+				lsp_doc_border = true, -- add a border to hover docs and signature help
+			},
 		},
 		dependencies = {
 			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
@@ -62,69 +121,8 @@ return {
 			--   If not available, we use `mini` as the fallback
 			"rcarriga/nvim-notify",
 		},
-		config = function()
-			require("noice").setup({
-				lsp = {
-					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-					override = {
-						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-						["vim.lsp.util.stylize_markdown"] = true,
-						["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-					},
-				},
-				routes = {
-					{ -- route long messages to split
-						filter = {
-							event = "msg_show",
-							any = { { min_height = 5 }, { min_width = 200 } },
-							["not"] = {
-								kind = { "confirm", "confirm_sub", "return_prompt", "quickfix", "search_count" },
-							},
-							blocking = false,
-						},
-						view = "messages",
-						opts = { stop = true },
-					},
-					{ -- route long messages to split
-						filter = {
-							event = "msg_show",
-							any = { { min_height = 5 }, { min_width = 200 } },
-							["not"] = {
-								kind = { "confirm", "confirm_sub", "return_prompt", "quickfix", "search_count" },
-							},
-							blocking = true,
-						},
-						view = "mini",
-					},
-					{ -- hide `written` message
-						filter = {
-							event = "msg_show",
-							kind = "",
-							find = "written",
-						},
-						opts = { skip = true },
-					},
-					{ -- send annoying msgs to mini
-						filter = {
-							event = "msg_show",
-							any = {
-								{ find = "; after #%d+" },
-								{ find = "; before #%d+" },
-								{ find = "fewer lines" },
-							},
-						},
-						view = "mini",
-					},
-				},
-				-- you can enable a preset for easier configuration
-				presets = {
-					bottom_search = true, -- use a classic bottom cmdline for search
-					command_palette = true, -- position the cmdline and popupmenu together
-					long_message_to_split = true, -- long messages will be sent to a split
-					inc_rename = false, -- enables an input dialog for inc-rename.nvim
-					lsp_doc_border = true, -- add a border to hover docs and signature help
-				},
-			})
+		config = function(_, opts)
+			require("noice").setup(opts)
 			local lualine_x = require("lualine").get_config().sections.lualine_x
 			local merged_line = vim.tbl_deep_extend("force", lualine_x, {
 				{

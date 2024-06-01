@@ -1,6 +1,7 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "master",
 		build = ":TSUpdate",
 		event = "BufReadPre",
 		dependencies = {
@@ -21,6 +22,7 @@ return {
 			}, -- }}}
 			{ -- HiPhish/rainbow-delimiters.nvim {{{
 				"HiPhish/rainbow-delimiters.nvim",
+				branch = "master",
 				event = "VeryLazy",
 				config = function()
 					vim.g.rainbow_delimiters = {

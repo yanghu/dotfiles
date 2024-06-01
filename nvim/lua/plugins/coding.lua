@@ -1,5 +1,5 @@
 return {
-	-- Still use comment.nvim over Neovim 0.10's built-in commenting: 
+	-- Still use comment.nvim over Neovim 0.10's built-in commenting:
 	-- The built-in one can only toggle comments on lines. This plugin allows
 	-- in-line commenting toggle. (comment a word, etc.)
 	{ "numToStr/Comment.nvim", opts = {}, lazy = false },
@@ -82,6 +82,7 @@ return {
 
 	{ -- Autocompletion (nvim-cmp, luasnip, etc.) {{{2
 		"hrsh7th/nvim-cmp",
+		branch = "main",
 		event = "InsertEnter",
 		dependencies = {
 			-- Snippet Engine & its associated nvim-cmp source
@@ -116,8 +117,9 @@ return {
 
 			{
 				"hrsh7th/cmp-cmdline",
+				branch = "main",
 				dependencies = { "hrsh7th/nvim-cmp" },
-				keys = { "/", "?", ":" },
+				keys = { ":" },
 				config = function()
 					local cmp = require("cmp")
 					-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
@@ -208,7 +210,7 @@ return {
 					--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 				}), -- }}}
 				sources = {
-					{ name = "nvim_lsp" , max_item_count = 8 },
+					{ name = "nvim_lsp", max_item_count = 8 },
 					{ name = "luasnip" },
 					{ name = "path" },
 					{ name = "buffer", max_item_count = 5 },
