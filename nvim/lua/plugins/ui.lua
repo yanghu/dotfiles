@@ -146,6 +146,7 @@ return {
 		event = "VeryLazy",
 		opts = {
 			-- options = { theme = "catppuccin" },
+			options = { theme = "gruvbox-material" },
 			sections = {
 				lualine_a = {
 					-- Paste indicator

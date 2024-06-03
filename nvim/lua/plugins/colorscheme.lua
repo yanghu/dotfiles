@@ -10,6 +10,17 @@ return {
 		opts = {},
 	},
 	-- }}}2
+	{
+		"sainnhe/gruvbox-material",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.g.gruvbox_material_enable_italic = true
+			vim.g.gruvbox_material_enable_bold = true
+			vim.g.gruvbox_material_dim_inactive_windows = true
+			vim.g.gruvbox_material_better_performance = true
+		end,
+	},
 	{ "rebelot/kanagawa.nvim", enabled = false },
 	{ -- catppuccin {{{2
 		"catppuccin/nvim",
