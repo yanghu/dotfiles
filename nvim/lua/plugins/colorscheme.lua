@@ -2,10 +2,12 @@ return {
 	-- {{{2 gruvbox.nvim
 	{
 		"ellisonleao/gruvbox.nvim",
+		branch = "main",
 		priority = 1000,
 		config = true,
-		enabled = false,
-		opts = ...,
+		enabled = true,
+		lazy = false,
+		opts = {},
 	},
 	-- }}}2
 	{ "rebelot/kanagawa.nvim", enabled = false },
@@ -26,7 +28,6 @@ return {
 					},
 				},
 			})
-			vim.cmd.colorscheme("catppuccin")
 		end,
 		lazy = false,
 	}, -- }}}

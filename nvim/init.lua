@@ -7,6 +7,8 @@ require("config.options")
 require("config.lazy")
 require("config.autocmds")
 require("config.keymaps")
+
+vim.cmd.colorscheme("gruvbox")
 -- TODO: setup telescope grep keymappings for:
 --   * grep current project
 --   * grep current buffer's dir

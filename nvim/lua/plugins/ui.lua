@@ -7,7 +7,7 @@ return {
 		dependencies = "nvim-tree/nvim-web-devicons",
 		config = function()
 			require("bufferline").setup({
-				highlights = require("catppuccin.groups.integrations.bufferline").get(),
+				-- highlights = require("catppuccin.groups.integrations.bufferline").get(),
 				options = {
 					numbers = "bufer_id",
 					diagnostics = "nvim_lsp",
@@ -123,19 +123,6 @@ return {
 		},
 		config = function(_, opts)
 			require("noice").setup(opts)
-			local lualine_x = require("lualine").get_config().sections.lualine_x
-			local merged_line = vim.tbl_deep_extend("force", lualine_x, {
-				{
-					require("noice").api.statusline.mode.get,
-					cond = require("noice").api.statusline.mode.has,
-					color = { fg = "#ff9e64" },
-				},
-			})
-			require("lualine").setup({
-				sections = {
-					lualine_x = merged_line,
-				},
-			})
 		end,
 		-- stylua: ignore
 		keys = {
@@ -150,13 +137,15 @@ return {
 	}, -- }}}
 	{ -- nvim-lualine/lualine.nvim {{{2
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons", "folke/noice.nvim" },
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"folke/noice.nvim",
+			"nvimdev/lspsaga.nvim",
+		},
 		-- lazy = false,
 		event = "VeryLazy",
 		opts = {
-			options = {
-				theme = "catppuccin",
-			},
+			-- options = { theme = "catppuccin" },
 			sections = {
 				lualine_a = {
 					-- Paste indicator
@@ -193,6 +182,19 @@ return {
 			extensions = { "aerial", "quickfix", "trouble" },
 			winbar = {},
 		},
+		config = function(_, opts)
+			-- Setup lualine
+			opts.sections.lualine_c = { { require("lspsaga.symbol.winbar").get_bar } }
+
+			opts.sections.lualine_x = {
+				{
+					require("noice").api.statusline.mode.get,
+					cond = require("noice").api.statusline.mode.has,
+					color = { fg = "#ff9e64" },
+				},
+			}
+			require("lualine").setup(opts)
+		end,
 	}, -- }}}
 	{ -- gitsigns.nvim {{{2
 		"lewis6991/gitsigns.nvim",

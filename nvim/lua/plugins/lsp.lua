@@ -289,14 +289,6 @@ return {
 			end
 			-- This is used in markdown files, but seems to be unique to CiderLSP.
 			require("lspsaga.lspkind").kind[0] = { "Heading", "# ", "Heading" }
-			-- Setup lualine
-			local lualine_c = require("lualine").get_config().sections.lualine_c
-			local merged_line = { { require("lspsaga.symbol.winbar").get_bar } }
-			require("lualine").setup({
-				sections = {
-					lualine_c = merged_line,
-				},
-			})
 		end,
 	}, -- }}}
 	{
