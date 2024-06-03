@@ -5,9 +5,9 @@ return {
 		branch = "main",
 		priority = 1000,
 		config = true,
-		enabled = true,
+		enabled = false,
 		lazy = false,
-		opts = {},
+		opts = ...,
 	},
 	-- }}}2
 	{
