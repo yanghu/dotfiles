@@ -5,7 +5,8 @@
 cmap w!! w !sudo tee > /dev/null %
 
 " Default is \, I prefer ,.
-let mapleader=","
+" let mapleader=","
+let mapleader="<space>"
 imap jk <Esc>
 
 " Avoid going to ex mode
