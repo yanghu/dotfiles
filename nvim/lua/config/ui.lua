@@ -141,7 +141,7 @@ M.alpha_config = function()
 		-- startify.button("f", "󰈞 > Find File", "<cmd>Telescope find_files<CR>"),
 		-- startify.button("f", "󰈞 > Find Files in Git repo", "<leader>gf"), -- use fzf which is faster
 		startify_button("f", "󰈞 > Find Files in Git repo", M.git_files), -- use fzf which is faster
-		startify.button("o", " > Recent Files", "<cmd>FzfLua oldfiles stat_file=false<CR>"),
+		startify.button("o", " > Recent Files", "<cmd>FzfLua oldfiles<CR>"),
 		startify.button("g", "󱎸 > Live Grep", "<cmd>FzfLua live_grep_glob<CR>"),
 		startify.button("s", "󰪺 > Restore Session For Current Directory", "<cmd>SessionLoad<CR>"),
 		startify.button("l", "󰖲 > Restore Last Session", "<cmd>SessionLoadLast<CR>"),
