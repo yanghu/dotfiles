@@ -101,6 +101,7 @@ vim.filetype.add({
 		bean = "beancount",
 		keymap = "c",
 		bundle = "pbtxt",
+		pi = "piccolo",
 	},
 })
 

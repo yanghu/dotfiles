@@ -7,7 +7,7 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-refactor",
 			"windwp/nvim-ts-autotag",
-			"andymass/vim-matchup",
+			-- "andymass/vim-matchup",
 			{ -- nvim-treesitter/nvim-treesitter-context {{{
 				"nvim-treesitter/nvim-treesitter-context",
 				config = function()

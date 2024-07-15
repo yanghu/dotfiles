@@ -20,9 +20,10 @@ return {
 			layout = {
 				height = { max = 7 },
 			},
-			triggers_blacklist = {
-				n = { "gf", "gT", "gt", "gc" },
-			},
+			-- deprecated in v3. Need to find out how to do this in the new format.
+			-- triggers_blacklist = {
+			-- 	n = { "gf", "gT", "gt", "gc" },
+			-- },
 
 			-- your configuration comes here
 			-- or leave it empty to use the default settings
@@ -424,7 +425,7 @@ return {
 	-- Browsing: diagnostics, lists, locations
 	{ -- folke/trouble.nvim {{{2
 		"folke/trouble.nvim",
-		branch = "dev", -- IMPORTANT! v3
+		branch = "main", -- IMPORTANT! v3
 		keys = {
 			{
 				"<leader>xx",
@@ -626,6 +627,8 @@ return {
 			},
 		},
 	}, -- }}}
+
+	{"stevearc/profile.nvim"}
 }
 
 -- vim: foldmethod=marker foldlevel=1
