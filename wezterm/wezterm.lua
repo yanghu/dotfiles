@@ -23,11 +23,14 @@ end
 -- Color scheme, Wezterm has 100s of them you can see here:
 -- https://wezfurlong.org/wezterm/colorschemes/index.html
 -- config.color_scheme = "Oceanic Next (Gogh)"
-config.color_scheme = "Catppuccin Macchiato"
+-- config.color_scheme = "Catppuccin Macchiato"
+config.color_scheme = "Gruvbox Material (Gogh)"
+-- config.color_scheme = "Google Dark (Gogh)"
 -- config.font = wezterm.font("JetBrains Mono")
+config.font = wezterm.font("JetBrainsMono Nerd Font")
 -- config.font = wezterm.font("FiraCode Nerd Font")
-config.font = wezterm.font("Fira Code")
-config.font_size = 12
+-- config.font = wezterm.font("Fira Code")
+config.font_size = 16
 config.launch_menu = launch_menu
 config.window_padding = {
 	left = 0,
@@ -41,7 +44,7 @@ config.window_padding = {
 --
 --
 --
--- config.disable_default_key_bindings = true
+config.disable_default_key_bindings = true
 -- this adds the ability to use ctrl+v to paste the system clipboard
 -- config.keys = { { key = "V", mods = "CTRL", action = act.PasteFrom("Clipboard") } }
 -- timeout_milliseconds defaults to 1000 and can be omitted
@@ -70,28 +73,28 @@ mouse_bindings = {
 		end),
 	},
 }
-
--- This is used to make my foreground (text, etc) brighter than my background
-config.foreground_text_hsb = {
-	hue = 1.0,
-	saturation = 1.2,
-	brightness = 1.5,
-}
 --
--- -- This is used to set an image as my background
--- config.background = {
--- 	{
--- 		source = { File = { path = "C:/Users/hueyh/Downloads/wp4615523-terminal-wallpapers.png", speed = 0.2 } },
--- 		opacity = 0.4,
--- 		hue = 1.0,
--- 		saturation = 1.0,
--- 		width = "100%",
--- 		hsb = { brightness = 0.2 },
--- 	},
+-- -- This is used to make my foreground (text, etc) brighter than my background
+-- config.foreground_text_hsb = {
+-- 	hue = 1.0,
+-- 	saturation = 1.2,
+-- 	brightness = 1.5,
 -- }
+-- --
+-- -- -- This is used to set an image as my background
+-- -- config.background = {
+-- -- 	{
+-- -- 		source = { File = { path = "C:/Users/hueyh/Downloads/wp4615523-terminal-wallpapers.png", speed = 0.2 } },
+-- -- 		opacity = 0.4,
+-- -- 		hue = 1.0,
+-- -- 		saturation = 1.0,
+-- -- 		width = "100%",
+-- -- 		hsb = { brightness = 0.2 },
+-- -- 	},
+-- -- }
 
-config.window_background_opacity = 0.5
-config.win32_system_backdrop = "Acrylic"
+-- config.window_background_opacity = 0.5
+-- config.win32_system_backdrop = "Acrylic"
 config.hide_tab_bar_if_only_one_tab = true
 
 config.wsl_domains = {
@@ -124,7 +127,7 @@ config.wsl_domains = {
 }
 -- IMPORTANT: Sets WSL2 UBUNTU as the defualt when opening Wezterm
 -- config.default_domain = "WSL:Ubuntu-22.04"
-config.default_domain = "WSL:Ubuntu"
+-- config.default_domain = "WSL:Ubuntu"
 
 config.default_cwd = "~"
 return config
