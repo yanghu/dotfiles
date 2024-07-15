@@ -41,6 +41,30 @@ M.keymaps = {
 		mods = "LEADER|CTRL",
 		action = act.SendKey({ key = "a", mods = "CTRL" }),
 	},
+	{
+		key = "c",
+		mods = "CMD",
+		action = wezterm.action.CopyTo("ClipboardAndPrimarySelection"),
+	},
+	{
+		key = "v",
+		mods = "CMD",
+		action = wezterm.action.PasteFrom("Clipboard"),
+	},
+	{
+		key = "r",
+		mods = "CMD",
+		action = wezterm.action.ReloadConfiguration,
+	},
 }
+
+for i = 1, 8 do
+	-- CTRL+ALT + number to activate that tab
+	table.insert(M.keymaps, {
+		key = tostring(i),
+		mods = "CMD",
+		action = act.ActivateTab(i - 1),
+	})
+end
 
 return M

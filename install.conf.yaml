@@ -10,6 +10,10 @@
       force: true
       path: vim/
     ~/.vimrc: vimrc
+    ~/.config/wezterm:
+      force: true
+      create: true
+      path: wezterm/
     ~/.config/nvim:
       force: true
       create: true
@@ -19,9 +23,6 @@
     ~/.zshrc: zshrc
     ~/.zsh: zsh/
     ~/.config/base16-shell: zsh/base16-shell/
-    ~/.config/nvim/init.vim:
-      create: true
-      path: vimrc
     ~/.rgignore: rgignore
     ~/.gitconfig: gitconfig
     #~/.bash: bash/

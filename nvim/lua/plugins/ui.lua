@@ -49,6 +49,7 @@ return {
 	{ "echasnovski/mini.indentscope", version = "*", config = true, ft = { "lua", "python", "c", "go", "java" } },
 	{ -- noice.nvim {{{
 		"folke/noice.nvim",
+		-- enabled = false,
 		-- event = "VeryLazy",
 		lazy = false,
 		opts = {
@@ -56,7 +57,7 @@ return {
 				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-					["vim.lsp.util.stylize_markdown"] = true,
+					-- ["vim.lsp.util.stylize_markdown"] = true,
 					["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
 				},
 			},
@@ -115,7 +116,7 @@ return {
 		},
 		dependencies = {
 			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-			"MunifTanjim/nui.nvim",
+			{ "MunifTanjim/nui.nvim", branch = "main" },
 			-- OPTIONAL:
 			--   `nvim-notify` is only needed, if you want to use the notification view.
 			--   If not available, we use `mini` as the fallback
@@ -309,6 +310,11 @@ return {
 			sign("DiagnosticSignHint", "󰌶") -- \udb80\udf36 nf-md-lightbulb_outline
 			sign("DiagnosticSignInfo", "") -- \uf449 nf-oct-info
 		end,
+	},
+	{
+		"NStefan002/screenkey.nvim",
+		lazy = false,
+		version = "*", -- or branch = "dev", to use the latest commit
 	},
 }
 

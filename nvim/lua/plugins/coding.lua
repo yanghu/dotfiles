@@ -83,6 +83,7 @@ return {
 	{ -- Autocompletion (nvim-cmp, luasnip, etc.) {{{2
 		"hrsh7th/nvim-cmp",
 		branch = "main",
+		commit = "7e348da6e5085ac447144a2ef4b637220ba27209",
 		event = "InsertEnter",
 		dependencies = {
 			-- Snippet Engine & its associated nvim-cmp source
