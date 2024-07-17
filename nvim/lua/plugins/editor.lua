@@ -61,7 +61,7 @@ return {
 			{ "<Leader>ss", function() require("fzf-lua").builtin() end, desc = "builtin"},
 			-- Files
 			{ '<Leader>f', function() require('fzf-lua').files() end, desc = 'files' },
-			{ '<Leader>o', function() require('fzf-lua').oldfiles({stat_file = false}) end, desc = 'oldfiles' },
+			{ '<Leader>o', function() require('fzf-lua').oldfiles() end, desc = 'oldfiles' },
 			-- Files files in same folder of current buffer
 			{ '<Leader>s.', function() require('fzf-lua').files({ cwd = vim.fn.expand("%:p:h") }) end, desc = 'Files in buffer dir' },
 			{ '<Leader>sf', ":FzfLua files cwd=" .. vim.fn.expand("%:p:h"), desc = 'Files any dir' },
@@ -273,6 +273,11 @@ return {
 					actions = {
 						["ctrl-q"] = actions.file_sel_to_qf,
 					},
+				},
+				oldfiles = {
+					-- To avoid high latency on remote files in history.
+					-- See https://github.com/ibhagwan/fzf-lua/issues/1336
+					stat_file = false,
 				},
 				spell_suggest = {
 					winopts = {
