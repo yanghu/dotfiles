@@ -629,6 +629,20 @@ return {
 	}, -- }}}
 
 	{ "stevearc/profile.nvim" },
+	{
+		"mistricky/codesnap.nvim",
+		build = "make",
+		lazy = false,
+		opts = {
+			code_font_family = "JetBrains Mono",
+			-- bg_x_padding = 122,
+			-- bg_y_padding = 82,
+			bg_x_padding = 80,
+			bg_y_padding = 40,
+			-- bg_padding = 0,
+			watermark = "",
+		},
+	},
 }
 
 -- vim: foldmethod=marker foldlevel=1
