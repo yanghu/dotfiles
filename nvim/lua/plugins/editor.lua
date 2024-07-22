@@ -17,9 +17,10 @@ return {
 					operators = false,
 				},
 			},
-			layout = {
-				height = { max = 7 },
-			},
+			preset = "helix",
+			-- layout = {
+			-- 	height = { max = 7 },
+			-- },
 			-- deprecated in v3. Need to find out how to do this in the new format.
 			-- triggers_blacklist = {
 			-- 	n = { "gf", "gT", "gt", "gc" },
@@ -34,16 +35,16 @@ return {
 			-- from https://github.com/folke/which-key.nvim/issues/476#issuecomment-1986782731
 			-- Which-key doesn't show menu for localleader key when it's set to ","
 			-- This is the workaround that fixes the issue
-			vim.api.nvim_create_autocmd("FileType", {
-				desc = "Set up localleader Which-Key descriptions",
-				group = vim.api.nvim_create_augroup("whichkey_localleader_descriptions", { clear = true }),
-				pattern = "*",
-				callback = function()
-					vim.keymap.set("n", "<localleader>", function()
-						require("which-key").show(",")
-					end, { buffer = true })
-				end,
-			})
+			-- vim.api.nvim_create_autocmd("FileType", {
+			-- 	desc = "Set up localleader Which-Key descriptions",
+			-- 	group = vim.api.nvim_create_augroup("whichkey_localleader_descriptions", { clear = true }),
+			-- 	pattern = "*",
+			-- 	callback = function()
+			-- 		vim.keymap.set("n", "<localleader>", function()
+			-- 			require("which-key").show(",")
+			-- 		end, { buffer = true })
+			-- 	end,
+			-- })
 		end,
 	},
 	-- }}}2
