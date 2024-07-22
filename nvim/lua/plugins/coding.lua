@@ -215,6 +215,7 @@ return {
 					{ name = "luasnip" },
 					{ name = "path" },
 					{ name = "buffer", max_item_count = 5 },
+					{ name = "lazydev", group_index = 0},
 				},
 				formatting = {
 					format = {
