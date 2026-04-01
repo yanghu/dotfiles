@@ -10,6 +10,7 @@
       force: true
       path: vim/
     ~/.vimrc: vimrc
+    ~/.hammerspoon: hammerspoon
     ~/.config/wezterm:
       force: true
       create: true
