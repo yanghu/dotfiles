@@ -125,6 +125,32 @@ config.wsl_domains = {
 		-- default_prog = {"fish"}
 	},
 }
+
+config.hyperlink_rules = {
+	-- Default URL rule (adjust or replace as needed)
+	-- This regex tries to match common URL patterns.
+	{
+		regex = "\\b\\w+://(?:[\\w\\d-]+(?:\\.[\\w\\d-]+)*|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})(?::\\d+)?(?:/[^\\s()<>]*)?",
+		format = "$0",
+	},
+
+	-- Rule to handle URLs surrounded by parentheses
+	{
+		regex = "\\((\\b\\w+://[^\\s()<>]+)\\)",
+		format = "$1",
+	},
+
+	-- Rule for naked links like cl/123456, b/123456, go/link
+	{
+		regex = "\\b(cl|cr|b|go)/([a-zA-Z0-9/_.-]+)\\b",
+		format = "http://$1/$2",
+	},
+
+	-- Add other custom rules if needed
+
+	-- wezterm.default_hyperlink_rules(), -- You can optionally include default rules
+}
+
 -- IMPORTANT: Sets WSL2 UBUNTU as the defualt when opening Wezterm
 -- config.default_domain = "WSL:Ubuntu-22.04"
 -- config.default_domain = "WSL:Ubuntu"
