@@ -634,6 +634,22 @@ return {
 		},
 	}, -- }}}
 
+	{
+		"MeanderingProgrammer/markdown.nvim",
+		-- name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
+		keys = {
+			-- { "<Leader>F", function() require("fzf-lua").builtin() end, desc = "builtin"},
+			{ "<Leader>um", "<cmd>RenderMarkdownToggle<cr>", desc = "toggle Markdown mode" },
+		},
+		ft = "markdown",
+		config = function()
+			require("render-markdown").setup({
+				latex = { enabled = false },
+				-- log_level = "debug",
+			})
+		end,
+	},
 	{ "stevearc/profile.nvim" },
 	{
 		"mistricky/codesnap.nvim",
