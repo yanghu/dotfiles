@@ -5,7 +5,7 @@ sudo apt-get install \
   cmake \
   colordiff \
   curl \
-  exuberant-ctags \
+  universal-ctags \
   fzf \
   gawk \
   git \
@@ -14,7 +14,6 @@ sudo apt-get install \
   nodejs \
   npm \
   perl \
-  python-dev \
   python3-dev \
   ripgrep \
   shellcheck \

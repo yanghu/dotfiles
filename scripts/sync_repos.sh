@@ -10,7 +10,7 @@ has_uncommitted_changes() {
 
 is_on_master() {
   branch=$(git symbolic-ref HEAD 2>/dev/null | cut -d'/' -f3)
-  if [ "$branch" == "master" ]; then
+  if [ "$branch" == "master" ] || [ "$branch" == "main" ]; then
     return 0
   else
     return 1
