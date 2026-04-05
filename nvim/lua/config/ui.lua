@@ -108,7 +108,7 @@ M.git_files = function()
 	-- version 1: uses files for both git and cwd
 	-- See https://github.com/ibhagwan/fzf-lua/issues/140#issuecomment-920966786
 	local opts = {}
-	opts.cwd = require("fzf-lua.path").git_root(vim.loop.cwd(), true) or vim.loop.cwd()
+	opts.cwd = require("fzf-lua.path").git_root(vim.uv.cwd(), true) or vim.uv.cwd()
 	opts.fzf_cli_args = ('--header="cwd = %s"'):format(vim.fn.shellescape(opts.cwd))
 	require("fzf-lua").files(opts)
 end

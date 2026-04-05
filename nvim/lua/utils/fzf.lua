@@ -14,7 +14,7 @@ function M.git_files_cwd_aware(opts)
 	if not git_root then
 		return
 	end
-	local relative = fzf_lua.path.relative_to(vim.loop.cwd(), git_root)
+	local relative = fzf_lua.path.relative_to(vim.uv.cwd(), git_root)
 	opts.fzf_opts = { ["--query"] = git_root ~= relative and relative or nil }
 	return fzf_lua.git_files(opts)
 end
@@ -22,7 +22,7 @@ end
 function M.files_git_or_cwd(opts)
 	-- version 2: uses `git ls-files` for git dirs
 	-- change to `false` if you'd like to see a message when not in a git repo
-	if require("fzf-lua.path").is_git_repo(vim.loop.cwd(), true) then
+	if require("fzf-lua.path").is_git_repo(vim.uv.cwd(), true) then
 		M.git_files_cwd_aware(opts)
 	else
 		require("fzf-lua").files(opts)
@@ -33,7 +33,7 @@ M.git_files_or_cwd = function(opts)
 	-- version 1: uses files for both git and cwd
 	-- See https://github.com/ibhagwan/fzf-lua/issues/140#issuecomment-920966786
 	opts = opts or {}
-	opts.cwd = require("fzf-lua.path").git_root(vim.loop.cwd(), true) or vim.loop.cwd()
+	opts.cwd = require("fzf-lua.path").git_root(vim.uv.cwd(), true) or vim.uv.cwd()
 	opts.fzf_cli_args = ('--header="cwd = %s"'):format(vim.fn.shellescape(opts.cwd))
 	require("fzf-lua").files(opts)
 end

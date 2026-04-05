@@ -413,7 +413,7 @@ return {
 			{
 				"<leader>dd",
 				function()
-					builtin.diagnostics({ bufnr = 0 })
+					require("telescope.builtin").diagnostics({ bufnr = 0 })
 				end,
 				mode = "n",
 				desc = "Document Diagnostics",
@@ -421,7 +421,7 @@ return {
 			{
 				"<leader>dw",
 				function()
-					builtin.diagnostics()
+					require("telescope.builtin").diagnostics()
 				end,
 				mode = "n",
 				desc = "Workspace Diagnostics",

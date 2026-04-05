@@ -7,7 +7,7 @@ return {
 		config = true,
 		enabled = false,
 		lazy = false,
-		opts = ...,
+		opts = {},
 	},
 	-- }}}2
 	{
@@ -40,7 +40,6 @@ return {
 				-- 	},
 				-- },
 			})
-			vim.cmd.colorscheme("catppuccin")
 		end,
 		lazy = false,
 	}, -- }}}

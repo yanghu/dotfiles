@@ -39,13 +39,12 @@ local local_lsp = function()
 				require("lspconfig.ui.windows").default_options.border = require("config.ui").borders
 				-- Diagnostics Display
 				local function toggle_diagnostics()
-					local enabled = not vim.diagnostic.is_disabled(0)
-					if not enabled then
-						vim.diagnostic.enable(0)
-						vim.notify("Diagnostics enabled", vim.log.levels.INFO, { title = "[LSP]" })
-					else
-						vim.diagnostic.disable(0)
+					local enabled = vim.diagnostic.is_enabled({ bufnr = 0 })
+					vim.diagnostic.enable(not enabled, { bufnr = 0 })
+					if enabled then
 						vim.notify("Diagnostics disabled", vim.log.levels.INFO, { title = "[LSP]" })
+					else
+						vim.notify("Diagnostics enabled", vim.log.levels.INFO, { title = "[LSP]" })
 					end
 				end
 				vim.keymap.set("n", "[d", function()
@@ -168,7 +167,7 @@ local local_lsp = function()
 						-- This may be unwanted, since they displace some of your code
 						if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
 							nmap("<leader>th", function()
-								vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+								vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
 							end, "[T]oggle Inlay [H]ints")
 						end
 
@@ -214,7 +213,7 @@ local local_lsp = function()
 				})
 				require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
-				vim.list_extend(servers, require("config.lsp").optional_servers)
+				servers = vim.tbl_extend("force", servers, require("config.lsp").optional_servers)
 				require("mason-lspconfig").setup({
 					handlers = {
 						function(server_name)
@@ -266,7 +265,7 @@ return {
 				respect_root = true,
 			},
 			path_display = function(path, root)
-				local pwd = vim.loop.cwd()
+				local pwd = vim.uv.cwd()
 				if root and path:sub(1, #root) == root then
 					root = root
 				elseif path:sub(1, #pwd) == pwd then
