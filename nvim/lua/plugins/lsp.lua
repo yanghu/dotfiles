@@ -23,14 +23,6 @@ local local_lsp = function()
 						})
 					end,
 				},
-				{
-					"kosayoda/nvim-lightbulb",
-					config = function()
-						require("nvim-lightbulb").setup({
-							autocmd = { enabled = true },
-						})
-					end,
-				},
 			},
 			config = function()
 				require("lspconfig.ui.windows").default_options.border = require("config.ui").borders
