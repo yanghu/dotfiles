@@ -15,9 +15,6 @@ local local_lsp = function()
 				-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 				{ "j-hui/fidget.nvim", opts = {} },
 
-				-- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-				-- used for completion, annotations and signatures of Neovim apis
-				{ "folke/neodev.nvim", opts = {} , enabled=false},
 				{
 					"SmiteshP/nvim-navic",
 					config = function()
@@ -214,19 +211,18 @@ local local_lsp = function()
 				require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 				servers = vim.tbl_extend("force", servers, require("config.lsp").optional_servers)
+				-- mason-lspconfig v2 removed `handlers`; use automatic_enable=false and
+				-- configure servers via vim.lsp.config (nvim 0.11+) to avoid the
+				-- deprecated require('lspconfig')[name].setup() framework.
 				require("mason-lspconfig").setup({
-					handlers = {
-						function(server_name)
-							local server = servers[server_name] or {}
-							-- This handles overriding only values explicitly passed
-							-- by the server configuration above. Useful when disabling
-							-- certain features of an LSP (for example, turning off formatting for tsserver)
-							server.capabilities =
-								vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-							require("lspconfig")[server_name].setup(server)
-						end,
-					},
+					automatic_enable = false,
 				})
+				for server_name, server_config in pairs(servers) do
+					server_config.capabilities =
+						vim.tbl_deep_extend("force", {}, capabilities, server_config.capabilities or {})
+					vim.lsp.config(server_name, server_config)
+					vim.lsp.enable(server_name)
+				end
 			end,
 		}
 	else
@@ -238,58 +234,6 @@ end
 
 return {
 	local_lsp(),
-	{ -- nvimdev/lspsaga.nvim {{{2
-		"nvimdev/lspsaga.nvim",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-			"nvim-treesitter/nvim-treesitter",
-		},
-		event = "VeryLazy",
-		cmd = "Lspsaga",
-		opts = {
-			scroll_preview = {
-				scroll_down = "<c-d>",
-				scroll_up = "<c-u>",
-			},
-			ui = {
-				border = "rounded",
-			},
-			code_action = {
-				keys = {
-					quit = { "q", "<esc>" },
-				},
-			},
-			symbol_in_winbar = {
-				enable = false,
-				hide_keyword = true,
-				respect_root = true,
-			},
-			path_display = function(path, root)
-				local pwd = vim.uv.cwd()
-				if root and path:sub(1, #root) == root then
-					root = root
-				elseif path:sub(1, #pwd) == pwd then
-					root = pwd
-				else
-					root = vim.env.HOME
-				end
-				local path_sep = require("lspsaga.util").path_sep
-				if root ~= "" then
-					root = root:sub(#root - #path_sep + 1) == path_sep and root or root .. path_sep
-					path = path:sub(#root + 1)
-				end
-				return path
-			end,
-		},
-		config = function(_, opts)
-			require("lspsaga").setup(opts)
-			if type(opts.path_display) == "function" then
-				require("lspsaga.util").path_sub = opts.path_display
-			end
-			-- This is used in markdown files, but seems to be unique to CiderLSP.
-			require("lspsaga.lspkind").kind[0] = { "Heading", "# ", "Heading" }
-		end,
-	}, -- }}}
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -306,77 +250,6 @@ return {
 						{ path = "luvit-meta/library", words = { "vim%.uv" } },
 					},
 				},
-			},
-		},
-		keys = {
-			{
-				"gk",
-				"<cmd>Lspsaga hover_doc<cr>",
-				desc = "LSP hover",
-			},
-			{
-				"<leader>ca",
-				"<cmd>Lspsaga code_action<cr>",
-				desc = "Code Actions",
-			},
-			{
-				"gp",
-				"<cmd>Lspsaga peek_definition<cr>",
-				desc = "Peek definition",
-			},
-			{
-				"gd",
-				"<cmd>Lspsaga goto_definition<cr>",
-				desc = "Goto definition",
-			},
-			{
-				"gY",
-				"<cmd>Lspsaga goto_type_definition<cr>",
-				desc = "Goto itype definition",
-			},
-			{
-				"gy",
-				"<cmd>Lspsaga peek_type_definition<cr>",
-				desc = "Peek type definition",
-			},
-			{
-				"gr",
-				"<cmd>Lspsaga finder<cr>",
-				desc = "Show references",
-			},
-			{
-				"gI",
-				"<cmd>Lspsaga finder imp<cr>",
-			},
-			{
-				"<leader>go",
-				"<cmd>Lspsaga outline<cr>",
-				desc = "Show outline",
-			},
-			{
-				"[d",
-				"<cmd>Lspsaga diagnostic_jump_prev<cr>",
-				desc = "Goto previous diagnostic",
-			},
-			{
-				"]d",
-				"<cmd>Lspsaga diagnostic_jump_next<cr>",
-				desc = "Goto next diagnostic",
-			},
-			{
-				"[D",
-				"<cmd>lua require('lspsaga.diagnostic'):goto_prev({ severity = vim.diagnostic.severity.ERROR })<cr>",
-				desc = "Goto previous diagnostic error",
-			},
-			{
-				"]D",
-				"<cmd>lua require('lspsaga.diagnostic'):goto_next({ severity = vim.diagnostic.severity.ERROR })<cr>",
-				desc = "Goto next diagnostic error",
-			},
-			{
-				"<leader>sl",
-				"<cmd>Lspsaga show_line_diagnostics ++unfocus<cr>",
-				desc = "Show line diagnostics",
 			},
 		},
 	},

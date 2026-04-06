@@ -141,7 +141,6 @@ return {
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 			"folke/noice.nvim",
-			"nvimdev/lspsaga.nvim",
 		},
 		-- lazy = false,
 		event = "VeryLazy",
@@ -186,7 +185,6 @@ return {
 		},
 		config = function(_, opts)
 			-- Setup lualine
-			opts.sections.lualine_c = { { require("lspsaga.symbol.winbar").get_bar } }
 
 			opts.sections.lualine_x = {
 				{

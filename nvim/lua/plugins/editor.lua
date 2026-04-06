@@ -651,8 +651,10 @@ return {
 		end,
 	},
 	{ "stevearc/profile.nvim" },
-	{
+	{ -- disabled: new version (2.0.1) fails to load generator.so at startup;
+		-- require("generator") can't resolve lua/libs/linux-x86_64_generator.so via cpath
 		"mistricky/codesnap.nvim",
+		enabled = false,
 		build = "make",
 		lazy = false,
 		opts = {

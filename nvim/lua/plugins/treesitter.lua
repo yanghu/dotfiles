@@ -5,7 +5,12 @@ return {
 		build = ":TSUpdate",
 		event = "BufReadPre",
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter-refactor",
+			-- nvim-treesitter-refactor was deprecated (incompatible with nvim-treesitter main).
+			-- nvim-treesitter-locals is the maintained replacement library.
+			-- highlight_definitions → covered by LSP documentHighlight (lsp.lua)
+			-- smart_rename → covered by vim.lsp.buf.rename (<leader>rn)
+			-- navigation → covered by LSP references / fzf-lua lsp_references
+			"nvim-treesitter/nvim-treesitter-locals",
 			"windwp/nvim-ts-autotag",
 			-- "andymass/vim-matchup",
 			{ -- nvim-treesitter/nvim-treesitter-context {{{
@@ -22,6 +27,7 @@ return {
 			}, -- }}}
 			{ -- HiPhish/rainbow-delimiters.nvim {{{
 				"HiPhish/rainbow-delimiters.nvim",
+				enabled = false,
 				branch = "master",
 				event = "VeryLazy",
 				config = function()
@@ -203,20 +209,6 @@ return {
 				},
 				indent = {
 					enable = true,
-				},
-				refactor = {
-					highlight_current_scope = {
-						enable = false,
-					},
-					highlight_definitions = {
-						enable = true,
-					},
-					navigation = {
-						enable = true,
-					},
-					smart_rename = {
-						enable = true,
-					},
 				},
 				matchup = {
 					enable = true, -- mandatory, false will disable the whole extension

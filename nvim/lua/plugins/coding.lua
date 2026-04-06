@@ -27,58 +27,7 @@ return {
 			},
 		},
 	}, -- }}}
-	{ -- hop.nvim {{{2
-		"smoka7/hop.nvim",
-		version = "*",
-		opts = {
-			keys = "etovxqpdygfblzhckisuran",
-			uppercase_labels = true,
-		},
-		keys = {
-			{
-				"<leader>j",
-				function()
-					require("hop").hint_lines({ direction = require("hop.hint").HintDirection.AFTER_CURSOR })
-				end,
-				desc = "Hop down lines",
-			},
-			{
-				"<leader>k",
-				function()
-					require("hop").hint_lines({ direction = require("hop.hint").HintDirection.BEFORE_CURSOR })
-				end,
-				desc = "Hop up lines",
-			},
-			{
-				"<leader>ee",
-				function()
-					require("hop").hint_camel_case({ current_line_only = true })
-				end,
-				desc = "Hop Camel Case",
-			},
-			{
-				"<leader>w",
-				function()
-					require("hop").hint_words({ direction = require("hop.hint").HintDirection.AFTER_CURSOR })
-				end,
-				desc = "Hop Words",
-			},
-			{
-				"<leader>W",
-				function()
-					require("hop").hint_words({ direction = require("hop.hint").HintDirection.BEFORE_CURSOR })
-				end,
-				desc = "Hop Words",
-			},
-			-- {
-			-- 	"s",
-			-- 	function()
-			-- 		require("hop").hint_char2({})
-			-- 	end,
-			-- 	desc = "Hop 2char",
-			-- },
-		},
-	}, -- }}}
+
 
 	{ -- Autocompletion (nvim-cmp, luasnip, etc.) {{{2
 		"hrsh7th/nvim-cmp",
