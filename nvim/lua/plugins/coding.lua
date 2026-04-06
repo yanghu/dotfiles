@@ -4,7 +4,7 @@ return {
 	-- in-line commenting toggle. (comment a word, etc.)
 	{ "numToStr/Comment.nvim", opts = {}, lazy = false },
 	{ -- ggandor/leap.nvim {{{2
-		"ggandor/leap.nvim",
+		url = "https://codeberg.org/andyg/leap.nvim",
 		keys = {
 			{ "s", "<Plug>(leap)", desc = "Leap", mode = { "n", "x" } },
 			{ "z", "<Plug>(leap)", desc = "Leap", mode = { "o" } },
@@ -28,7 +28,6 @@ return {
 		},
 	}, -- }}}
 
-
 	{ -- Autocompletion (blink.cmp) {{{2
 		"saghen/blink.cmp",
 		version = "*",
@@ -49,8 +48,6 @@ return {
 				preset = "default",
 				["<C-j>"] = { "select_next", "fallback" },
 				["<C-k>"] = { "select_prev", "fallback" },
-				["<Tab>"] = { "snippet_forward", "fallback" },
-				["<S-Tab>"] = { "snippet_backward", "fallback" },
 			},
 			appearance = {
 				use_nvim_cmp_as_default = true,
