@@ -6,6 +6,12 @@
 - [Locations management and jump](#locations-management-and-jump)
 <!--toc:end-->
 
+## 📖 Neovim Modern Workflow & Survival Guide
+For a comprehensive guide on modern Neovim workflows, essential keymaps, and how to use plugins like `fzf-lua`, `Trouble`, `Grapple`, and `nvim-surround`, please read the [Neovim Workflow & Survival Guide (2024+)](./neovim_workflow_guide.md).
+
+## ⚠️ Treesitter 0.10+ / 0.12+ Migration
+If you encounter `attempt to call method 'range' (a nil value)` or `GLIBC_2.39 not found` during `:TSUpdate`, please refer to the detailed [Treesitter Migration Guide](./treesitter_migration_guide.md).
+
 ## Plugins
 
 ## Keymaps
