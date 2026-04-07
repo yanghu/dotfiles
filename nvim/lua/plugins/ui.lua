@@ -341,7 +341,7 @@ return {
 				},
 			})
 			-- You can map a key to open the dropbar pick window, e.g.:
-			vim.keymap.set("n", "<Leader>xd", require("dropbar.api").pick, { desc = "Pick Dropbar" })
+			vim.keymap.set("n", "<Leader>;", require("dropbar.api").pick, { desc = "Pick Dropbar" })
 		end,
 	},
 }
