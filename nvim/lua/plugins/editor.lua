@@ -640,7 +640,7 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
 		keys = {
 			-- { "<Leader>F", function() require("fzf-lua").builtin() end, desc = "builtin"},
-			{ "<Leader>um", "<cmd>RenderMarkdownToggle<cr>", desc = "toggle Markdown mode" },
+			{ "<Leader>um", "<cmd>RenderMarkdown toggle<cr>", desc = "toggle Markdown mode" },
 		},
 		ft = "markdown",
 		config = function()
