@@ -107,3 +107,14 @@ vim.filetype.add({
 
 -- Themes
 vim.o.background = "dark" -- or "light" for light mode
+
+-- ==============================================
+--                      Folding (Treesitter)
+-- ==============================================
+-- Use Neovim 0.10+ native treesitter folding
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldtext = ""
+vim.o.foldlevel = 99 -- By default, do not fold anything when opening a file
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true -- Enable folding globally
