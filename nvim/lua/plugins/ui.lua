@@ -172,15 +172,9 @@ return {
 				},
 				lualine_c = {
 					"filename",
-					-- {
-					-- 	"navic",
-					-- 	color_correction = nil,
-					-- 	navic_opts = nil,
-					-- },
 				},
 			},
 			extensions = { "aerial", "quickfix", "trouble" },
-			winbar = {},
 		},
 		config = function(_, opts)
 			-- Setup lualine
@@ -312,6 +306,43 @@ return {
 		"NStefan002/screenkey.nvim",
 		lazy = false,
 		version = "*", -- or branch = "dev", to use the latest commit
+	},
+	{
+		"Bekaboo/dropbar.nvim",
+		event = "BufReadPre",
+		dependencies = {
+			"nvim-telescope/telescope-fzf-native.nvim",
+		},
+		config = function()
+			require("dropbar").setup({
+				-- Configure the general appearance and behavior
+				bar = {
+					enable = function(buf, win, _)
+						if
+							not vim.api.nvim_buf_is_valid(buf)
+							or not vim.api.nvim_win_is_valid(win)
+							or vim.fn.win_gettype(win) ~= ""
+							or vim.wo[win].winbar ~= ""
+							or vim.bo[buf].ft == "help"
+						then
+							return false
+						end
+						
+						-- Only enable dropbar for files that are not explicitly ignored
+						local stat = vim.uv.fs_stat(vim.api.nvim_buf_get_name(buf))
+						if stat and stat.size > 1024 * 1024 then -- disable in files > 1MB
+							return false
+						end
+
+						return vim.bo[buf].ft == "markdown"
+							or pcall(vim.treesitter.get_parser, buf)
+							or not vim.tbl_isempty(vim.lsp.get_clients({ bufnr = buf }))
+					end,
+				},
+			})
+			-- You can map a key to open the dropbar pick window, e.g.:
+			vim.keymap.set("n", "<Leader>xd", require("dropbar.api").pick, { desc = "Pick Dropbar" })
+		end,
 	},
 }
 

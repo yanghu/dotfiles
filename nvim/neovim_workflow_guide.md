@@ -127,8 +127,10 @@
 - `]z` -> 使用 Treesitter 语义精确跳转到下一个折叠
 - `[z` -> 使用 Treesitter 语义精确跳转到上一个折叠
 
-### 大纲与排错
+### 大纲、排错与路径导航
 - **Aerial (大纲)**：`<leader>a` 切换右侧结构树。使用 `<leader>{` 和 `<leader>}` 在结构树（如 YAML 同级节点、类方法）间快速上下跳跃。
+- **Dropbar (顶部面包屑)**：在窗口顶部自动显示当前所在的 `文件 > 类 > 方法`。
+  - `<leader>xd`：激活顶部面包屑的交互模式（Pick Dropbar）。激活后，你可以输入提示字母点击任意层级，它会像 VSCode 一样弹出一个下拉菜单，让你在同级的其他函数/变量之间快速跳转。
 - **Trouble (排错)**：`<leader>xx` 看工程报错，`<leader>xX` 看当前文件报错，`<leader>xq` 看 Quickfix 列表。
 
 ### Git 碎片化操作 (`gitsigns` & `Fugitive`)

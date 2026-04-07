@@ -159,10 +159,6 @@ local local_lsp = function()
 								vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
 							end, "[T]oggle Inlay [H]ints")
 						end
-
-						if client.server_capabilities.documentSymbolProvider then
-							require("nvim-navic").attach(client, event.buf)
-						end
 					end,
 				})
 				-- End of LSPAttach

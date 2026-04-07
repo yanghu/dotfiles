@@ -30,15 +30,6 @@ return {
 		config = function()
 			require("catppuccin").setup({
 				-- default_integrations = true,
-				-- integrations = {
-				-- 	aerial = true,
-				-- 	hop = true,
-				-- 	which_key = true,
-				-- 	navic = {
-				-- 		enabled = true,
-				-- 		custom_bg = "NONE",
-				-- 	},
-				-- },
 			})
 		end,
 		lazy = false,
