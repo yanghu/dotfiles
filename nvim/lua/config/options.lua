@@ -106,6 +106,7 @@ vim.filetype.add({
 })
 
 -- Themes
+vim.o.termguicolors = true
 vim.o.background = "dark" -- or "light" for light mode
 
 -- ==============================================
